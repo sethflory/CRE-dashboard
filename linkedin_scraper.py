@@ -583,11 +583,11 @@ class LinkedInScraper:
                 f.write(';')
 
             # Generate firms JS (with market assignment)
+            firms_js = []
             if os.path.exists('scraped_firms.json'):
                 with open('scraped_firms.json', 'r', encoding='utf-8') as f:
                     firms_raw = json.load(f)
 
-                firms_js = []
                 for firm in firms_raw:
                     name = firm['company_name']
                     # Assign market based on company name
@@ -617,6 +617,86 @@ class LinkedInScraper:
                     f.write('const firms = ')
                     json.dump(firms_js, f, indent=2)
                     f.write(';')
+
+            # Generate graph JSON (nodes + edges)
+            def slugify(value: str) -> str:
+                cleaned = ''.join(ch.lower() if ch.isalnum() else '-' for ch in value.strip())
+                while '--' in cleaned:
+                    cleaned = cleaned.replace('--', '-')
+                return cleaned.strip('-')
+
+            nodes = []
+            edges = []
+            node_ids = set()
+
+            def add_node(node_id: str, node_type: str, label: str, attributes=None):
+                if node_id in node_ids:
+                    return
+                node_ids.add(node_id)
+                nodes.append({
+                    'id': node_id,
+                    'type': node_type,
+                    'label': label,
+                    'attributes': attributes or {}
+                })
+
+            def add_edge(edge_type: str, from_id: str, to_id: str, attributes=None):
+                edge_id = f"{edge_type}:{from_id}->{to_id}"
+                edges.append({
+                    'id': edge_id,
+                    'type': edge_type,
+                    'from': from_id,
+                    'to': to_id,
+                    'attributes': attributes or {}
+                })
+
+            # Companies + Markets
+            for firm in firms_js:
+                company_id = f"company:{slugify(firm['company_name'])}"
+                add_node(company_id, 'Company', firm['company_name'], {
+                    'website': firm.get('website', ''),
+                    'services': firm.get('services', []),
+                    'specialties': firm.get('specialties', []),
+                    'market': firm.get('market', '')
+                })
+                if firm.get('market'):
+                    market_id = f"market:{slugify(firm['market'])}"
+                    add_node(market_id, 'Market', firm['market'])
+                    add_edge('operates_in', company_id, market_id)
+
+            # People + Groups + Universities
+            for key, person in contacts_js.items():
+                person_id = f"person:{slugify(key)}"
+                add_node(person_id, 'Person', person['name'], {
+                    'headline': person.get('headline', ''),
+                    'location': person.get('location', ''),
+                    'linkedin_url': person.get('linkedin_url', ''),
+                    'enriched': person.get('enriched', False)
+                })
+
+                company_name = person.get('current_company', '').strip()
+                if company_name:
+                    company_id = f"company:{slugify(company_name)}"
+                    add_node(company_id, 'Company', company_name)
+                    add_edge('employed_by', person_id, company_id)
+
+                for group in person.get('groups', []):
+                    if not group:
+                        continue
+                    group_id = f"group:{slugify(group)}"
+                    add_node(group_id, 'Group', group)
+                    add_edge('member_of', person_id, group_id)
+
+                for edu in person.get('education', []):
+                    school = edu.get('school', '').strip()
+                    if not school:
+                        continue
+                    uni_id = f"university:{slugify(school)}"
+                    add_node(uni_id, 'University', school)
+                    add_edge('educated_at', person_id, uni_id)
+
+            with open('graph.json', 'w', encoding='utf-8') as f:
+                json.dump({'nodes': nodes, 'edges': edges}, f, indent=2)
 
             self._log(f"Regenerated dashboard JS files ({len(contacts_js)} contacts)")
         except Exception as e:

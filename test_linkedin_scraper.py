@@ -6,6 +6,8 @@ Run with: pytest test_linkedin_scraper.py -v
 import pytest
 import json
 import os
+import shutil
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 from dataclasses import asdict
 
@@ -238,6 +240,74 @@ class TestHelperMethods:
         """Test UI text is skipped"""
         assert scraper._should_skip_name("Connect") is True
         assert scraper._should_skip_name("Show all posts") is True
+
+
+class TestDashboardExport:
+    """Tests for dashboard and graph export"""
+
+    @pytest.fixture
+    def scraper(self):
+        with patch.object(LinkedInScraper, '_load_data'):
+            scraper = LinkedInScraper(headless=True)
+        scraper.discovered_contacts = {}
+        return scraper
+
+    def test_graph_json_export(self, scraper):
+        """Graph export should include nodes and edges for core types"""
+        temp_dir = Path("._test_tmp_graph")
+        if temp_dir.exists():
+            shutil.rmtree(temp_dir, ignore_errors=True)
+        temp_dir.mkdir(parents=True, exist_ok=True)
+        original_cwd = os.getcwd()
+        os.chdir(temp_dir)
+
+        person = LinkedInPerson(
+            name="Alex Morgan",
+            linkedin_url="https://www.linkedin.com/in/alexm/",
+            current_company="TestCo Realty",
+            current_title="Analyst",
+            education=[{"school": "Ohio State University"}],
+            groups=["Association of CRE & Finance Professionals"],
+            headline="Analyst at TestCo Realty",
+            scraped_at="2025-12-22T10:00:00"
+        )
+        scraper.discovered_contacts["alexm"] = person
+
+        firms = [
+            {
+                "company_name": "TestCo Realty",
+                "website": "testco.com",
+                "services": ["Brokerage"],
+                "specialties": ["Office"]
+            }
+        ]
+        with open("scraped_firms.json", "w", encoding="utf-8") as f:
+            json.dump(firms, f)
+
+        try:
+            scraper._regenerate_dashboard_data()
+
+            assert os.path.exists("graph.json")
+            with open("graph.json", "r", encoding="utf-8") as f:
+                graph = json.load(f)
+
+            nodes = graph["nodes"]
+            edges = graph["edges"]
+
+            node_types = {n["type"] for n in nodes}
+            edge_types = {e["type"] for e in edges}
+
+            assert "Person" in node_types
+            assert "Company" in node_types
+            assert "Group" in node_types
+            assert "University" in node_types
+            assert "employed_by" in edge_types
+            assert "member_of" in edge_types
+            assert "educated_at" in edge_types
+        finally:
+            os.chdir(original_cwd)
+            shutil.rmtree(temp_dir, ignore_errors=True)
+
         assert scraper._should_skip_name("View profile") is True
 
     def test_should_skip_name_real_name(self, scraper):

@@ -1,0 +1,62 @@
+domain:
+  name: Relationship Network Builder
+  description: Generalized relationship intelligence for companies, people, and shared attributes.
+
+node_types:
+  Company:
+    color: "#0f766e"
+    icon: "building"
+  Person:
+    color: "#f97316"
+    icon: "user"
+  Market:
+    color: "#1f3a44"
+    icon: "map"
+  Group:
+    color: "#7c3aed"
+    icon: "users"
+  University:
+    color: "#b45309"
+    icon: "graduation-cap"
+
+edge_types:
+  employed_by:
+    from: Person
+    to: Company
+  operates_in:
+    from: Company
+    to: Market
+  member_of:
+    from: Person
+    to: Group
+  educated_at:
+    from: Person
+    to: University
+
+dimensions:
+  primary:
+    - Market
+    - Group
+    - University
+  secondary:
+    - Company
+    - Person
+
+enrichers:
+  default: linkedin
+  linkedin:
+    enabled: true
+    max_depth: 2
+    max_new_companies: 50
+    rate_limit_seconds: 2
+
+visuals:
+  - id: network_view
+    title: Network View
+    description: Expandable type-based network exploration.
+  - id: services_matrix
+    title: Services by Company
+    description: Compare configured attributes across companies.
+  - id: connections_by_market
+    title: Connections by Market
+    description: Show grouped clusters for shared attributes.
