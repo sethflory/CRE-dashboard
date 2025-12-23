@@ -41,9 +41,7 @@ discovered_firms.json
 enriched_contacts.json
 url_cache.json
 
-# Generated dashboard data (regenerated from scraped data)
-data_contacts.js
-data_firms.js
+# Note: data_contacts.js and data_firms.js are tracked for GitHub Pages dashboard
 
 # Misc
 nul
