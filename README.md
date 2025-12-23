@@ -9,9 +9,10 @@ View the interactive dashboard: [CRE Career Intelligence Dashboard](./cre_dashbo
 **Features:**
 - Interactive map of target markets with distance rings from Columbus
 - CRE transaction volume heatmap overlay (toggle view)
+- Expandable "network view" for Markets -> Firms -> Contact clusters
 - Services matrix showing what each firm offers
-- University and professional group connections for networking
-- Contact cards with LinkedIn links
+- University and professional group connections grouped by market
+- Collapsible people view grouped by target firm with enriched vs discovered clusters
 
 ## Components
 
@@ -128,11 +129,18 @@ pytest test_*.py -v
 
 123 tests covering all components.
 
+## Development Notes
+
+When running this repo in Codex CLI, set `sandbox_mode = "workspace-write"` and restart the session to allow file edits.
+
 ## Known Issues
 
 1. **Company field parsing** - LinkedIn scraper sometimes captures titles instead of company names
 2. **Celebrity contacts** - Some discovered "colleagues" are influencers, not actual employees
 3. **Location validation** - Need to filter contacts outside target geography
+4. **Manual gap fill** - Add a workflow-assisted step to fill missing titles/companies when scraping leaves blanks
+5. **Education data quality (TODO)** - Validate education values are universities, support multiple universities per person, and compute/visualize overlap (commonality) across contacts.
+6. **Group membership counts (TODO)** - Verify professional group counts reflect clusters within the same company and cross-firm membership among target firms; add checks for missing/underlinked groups.
 
 ## Legal Note
 

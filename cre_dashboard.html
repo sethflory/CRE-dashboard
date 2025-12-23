@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <!-- Leaflet CSS -->
@@ -15,18 +15,19 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         :root {
-            --primary: #0f172a;
-            --secondary: #1e3a5f;
-            --accent: #0ea5e9;
-            --accent-light: #e0f2fe;
-            --light: #f0f9ff;
-            --gray: #64748b;
-            --gray-light: #f1f5f9;
-            --dark: #1e293b;
-            --success: #10b981;
+            --primary: #0b1f2a;
+            --secondary: #1f3a44;
+            --accent: #f97316;
+            --accent-2: #0f766e;
+            --accent-light: #fff2e5;
+            --light: #fff7ed;
+            --gray: #5b6b7a;
+            --gray-light: #f4f6f8;
+            --dark: #111827;
+            --success: #16a34a;
             --warning: #f59e0b;
-            --danger: #ef4444;
-            --border: #e2e8f0;
+            --danger: #dc2626;
+            --border: #e4e7ec;
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
             --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
             --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -41,15 +42,28 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff4e8 0%, #f7fbfb 50%, #eef6f7 100%);
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
+            position: relative;
+            isolation: isolate;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -20% 0 0;
+            background:
+                radial-gradient(600px 240px at 10% 10%, rgba(249, 115, 22, 0.15), transparent 60%),
+                radial-gradient(520px 260px at 80% 0%, rgba(15, 118, 110, 0.16), transparent 60%),
+                radial-gradient(480px 220px at 60% 70%, rgba(15, 118, 110, 0.1), transparent 60%);
+            z-index: -1;
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #2563eb 100%);
+            background: linear-gradient(135deg, #0b1f2a 0%, #0f2f3a 45%, #0f766e 100%);
             color: white;
             padding: 3rem 2rem;
             text-align: center;
@@ -69,8 +83,8 @@
         }
 
         header h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2.5rem;
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: 2.7rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             position: relative;
@@ -90,13 +104,18 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.12);
             backdrop-filter: blur(10px);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.1rem;
             border-radius: 50px;
             font-size: 0.85rem;
             margin-top: 1rem;
             position: relative;
+        }
+
+        .header-badge .divider {
+            opacity: 0.6;
+            font-weight: 600;
         }
 
         .container {
@@ -122,6 +141,7 @@
             box-shadow: var(--shadow);
             text-align: center;
             border: 1px solid var(--border);
+            border-top: 3px solid var(--accent);
             transition: all 0.3s ease;
         }
 
@@ -133,7 +153,7 @@
         .stat-card .number {
             font-size: 2.25rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent), #6366f1);
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -155,19 +175,14 @@
             gap: 0.75rem;
             margin: 2.5rem 0 1.25rem;
             padding-bottom: 0.75rem;
-            border-bottom: 2px solid transparent;
-            background: linear-gradient(white, white) padding-box,
-                        linear-gradient(90deg, var(--accent), #6366f1) border-box;
-            border-bottom: 2px solid transparent;
-            background: none;
-            border-bottom: none;
+            border-bottom: 1px solid rgba(15, 118, 110, 0.2);
         }
 
         .section-header::before {
             content: '';
             width: 4px;
             height: 28px;
-            background: linear-gradient(180deg, var(--accent), #6366f1);
+            background: linear-gradient(180deg, var(--accent), var(--accent-2));
             border-radius: 4px;
         }
 
@@ -215,7 +230,7 @@
             align-items: center;
             gap: 0.875rem;
             padding: 0.875rem 1rem;
-            background: var(--gray-light);
+            background: #f6f7f9;
             border-radius: var(--radius-sm);
             margin-bottom: 0.625rem;
             cursor: pointer;
@@ -225,7 +240,7 @@
 
         .connection-item:hover {
             background: var(--accent-light);
-            border-color: var(--accent);
+            border-color: rgba(249, 115, 22, 0.4);
             transform: translateX(6px);
             box-shadow: var(--shadow-sm);
         }
@@ -240,6 +255,12 @@
             background: white;
             border-radius: 50%;
             box-shadow: var(--shadow-sm);
+        }
+
+        .connection-item .icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-2);
         }
 
         .connection-item .details {
@@ -262,7 +283,7 @@
         }
 
         .connection-item .count {
-            background: linear-gradient(135deg, var(--accent), #6366f1);
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             color: white;
             padding: 0.3rem 0.875rem;
             border-radius: 50px;
@@ -290,7 +311,7 @@
         }
 
         .matrix-table th {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--accent-2));
             color: white;
             padding: 0.875rem 0.625rem;
             text-align: left;
@@ -347,6 +368,7 @@
             text-align: center;
             color: var(--success);
             font-size: 1.1rem;
+            font-weight: 700;
         }
 
         .matrix-table .market {
@@ -354,6 +376,7 @@
             font-size: 0.75rem;
             font-weight: 500;
         }
+
 
         /* Filters */
         .filters {
@@ -383,7 +406,7 @@
         }
 
         .filter-btn.active {
-            background: linear-gradient(135deg, var(--accent), #6366f1);
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             color: white;
             border-color: transparent;
             box-shadow: var(--shadow);
@@ -391,9 +414,249 @@
 
         /* People Cards */
         .people-grid {
+            display: block;
+        }
+
+        .people-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        details.company-group {
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        details.company-group summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(90deg, rgba(15, 118, 110, 0.12), rgba(249, 115, 22, 0.08));
+            border-bottom: 1px solid var(--border);
+        }
+
+        details.company-group summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.company-group summary::after {
+            content: '+';
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+
+        details.company-group[open] summary::after {
+            content: '-';
+        }
+
+        details.company-group summary h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .company-count {
+            background: rgba(15, 118, 110, 0.16);
+            color: var(--secondary);
+            padding: 0.2rem 0.65rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .company-people {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 1rem;
+            padding: 1.25rem;
+            background: var(--gray-light);
+        }
+
+        details.other-companies {
+            background: white;
+            border-radius: var(--radius);
+            border: 1px dashed rgba(15, 118, 110, 0.4);
+            box-shadow: var(--shadow-sm);
+            padding: 0.5rem 0.75rem 1rem;
+        }
+
+        details.other-companies summary {
+            list-style: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--secondary);
+            padding: 0.5rem 0.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        details.other-companies summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.other-companies summary::after {
+            content: '+';
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+
+        details.other-companies[open] summary::after {
+            content: '-';
+        }
+
+        /* Network View */
+        .network-card {
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .network-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .network-canvas {
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border: 1px solid rgba(15, 118, 110, 0.12);
+            padding: 1rem;
+        }
+
+        .network-tree details {
+            border-left: 2px dashed rgba(15, 118, 110, 0.35);
+            margin: 0.4rem 0 0.4rem 0.85rem;
+            padding-left: 0.85rem;
+            position: relative;
+        }
+
+        .network-tree details::before {
+            content: '';
+            position: absolute;
+            left: -0.1rem;
+            top: 0.2rem;
+            bottom: 0.2rem;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(15, 118, 110, 0.4), rgba(249, 115, 22, 0.15));
+        }
+
+        .network-tree summary {
+            list-style: none;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.55rem 2.5rem 0.55rem 2.6rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(15, 118, 110, 0.2);
+            font-weight: 600;
+            color: var(--secondary);
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+        }
+
+        .network-tree summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .network-tree summary::before {
+            content: '';
+            position: absolute;
+            left: 0.8rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-2);
+            box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.15);
+        }
+
+        .network-tree details[open] > summary::before {
+            background: var(--accent);
+            box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.18);
+        }
+
+        .network-node-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .network-node-title {
+            font-weight: 600;
+        }
+
+        .network-badges {
+            display: inline-flex;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .network-badge {
+            padding: 0.15rem 0.55rem;
+            border-radius: 999px;
+            background: rgba(15, 118, 110, 0.12);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .network-toggle {
+            position: absolute;
+            right: 0.6rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .network-toggle::before {
+            content: '+';
+        }
+
+        .network-tree details[open] > summary .network-toggle::before {
+            content: '-';
+        }
+
+        .network-people {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 0.5rem;
+            padding: 0.5rem 0.25rem 0.5rem 0.75rem;
+        }
+
+        .network-person {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 0.5rem 0.7rem;
+            font-size: 0.85rem;
+            color: var(--dark);
         }
 
         .person-card {
@@ -484,13 +747,13 @@
         }
 
         .person-card .tag.university {
-            background: #f3e8ff;
-            color: #7c3aed;
+            background: #fff4d6;
+            color: #b45309;
         }
 
         .person-card .tag.group {
-            background: #ffedd5;
-            color: #c2410c;
+            background: #e7f7f4;
+            color: #0f766e;
         }
 
         /* Person Card Tooltip */
@@ -631,13 +894,13 @@
         }
 
         .leaflet-popup-content {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
         }
 
         .popup-title {
             font-weight: 600;
             font-size: 1.1rem;
-            color: #1a365d;
+            color: var(--secondary);
             margin-bottom: 0.5rem;
         }
 
@@ -651,7 +914,7 @@
         .popup-firms a {
             display: block;
             padding: 0.25rem 0;
-            color: #3182ce;
+            color: var(--accent-2);
             text-decoration: none;
         }
 
@@ -660,7 +923,7 @@
         }
 
         .market-marker {
-            background: #3182ce;
+            background: var(--accent-2);
             border: 3px solid white;
             border-radius: 50%;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
@@ -743,6 +1006,24 @@
             gap: 2rem;
             margin-top: 1rem;
         }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            animation: liftIn 0.6s ease forwards;
+            animation-delay: var(--delay, 0ms);
+        }
+
+        @keyframes liftIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -750,7 +1031,11 @@
         <h1>CRE Career Intelligence</h1>
         <p>Research target firms, discover networking connections, and break into commercial real estate</p>
         <div class="header-badge">
-            <span>44 Firms</span> · <span>8 Markets</span> · <span>149 Contacts</span>
+            <span>44 Firms</span>
+            <span class="divider">|</span>
+            <span>8 Markets</span>
+            <span class="divider">|</span>
+            <span>149 Contacts</span>
         </div>
     </header>
 
@@ -758,19 +1043,33 @@
         <!-- Stats -->
         <div class="stats-grid" id="stats-grid"></div>
 
+        <!-- Network View -->
+        <div class="section-header reveal">
+            <h2>Network View</h2>
+        </div>
+        <div class="network-card reveal">
+            <div class="network-meta">
+                <span>Expand nodes to explore markets, firms, and contact clusters.</span>
+                <span>Future: re-cluster by service, university, or groups.</span>
+            </div>
+            <div class="network-canvas">
+                <div class="network-tree" id="network-tree"></div>
+            </div>
+        </div>
+
         <!-- Find Your In -->
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Find Your Connection</h2>
         </div>
-        <div class="connection-section">
+        <div class="connection-section reveal">
             <div class="connection-grid" id="connection-grid"></div>
         </div>
 
         <!-- Market Map -->
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Target Markets</h2>
         </div>
-        <div class="map-container">
+        <div class="map-container reveal">
             <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
                 <button class="filter-btn active" id="btn-distance" onclick="setMapMode('distance')">Distance from Columbus</button>
                 <button class="filter-btn" id="btn-heatmap" onclick="setMapMode('heatmap')">CRE Transaction Volume</button>
@@ -778,15 +1077,15 @@
             <div id="market-map"></div>
             <div id="legend-distance" style="display:flex;gap:1.5rem;justify-content:center;margin-top:0.75rem;font-size:0.85rem;color:#4a5568;">
                 <div style="display:flex;align-items:center;gap:0.5rem;">
-                    <div style="width:20px;height:3px;background:#38a169;border-radius:2px;"></div>
+                    <div style="width:20px;height:3px;background:#0f766e;border-radius:2px;"></div>
                     <span>200 mi from Columbus</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:0.5rem;">
-                    <div style="width:20px;height:3px;background:#d69e2e;border-radius:2px;"></div>
+                    <div style="width:20px;height:3px;background:#f59e0b;border-radius:2px;"></div>
                     <span>400 mi</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:0.5rem;">
-                    <div style="width:20px;height:3px;background:#e53e3e;border-radius:2px;"></div>
+                    <div style="width:20px;height:3px;background:#dc2626;border-radius:2px;"></div>
                     <span>600 mi</span>
                 </div>
             </div>
@@ -807,21 +1106,21 @@
         </div>
 
         <!-- Services Matrix -->
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Services by Firm</h2>
         </div>
-        <div class="filters" id="market-filters"></div>
-        <div id="market-stats" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:1rem;margin-bottom:1rem;">
+        <div class="filters reveal" id="market-filters"></div>
+        <div class="reveal" id="market-stats" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:1rem;margin-bottom:1rem;">
         </div>
-        <div class="services-matrix">
+        <div class="services-matrix reveal">
             <table class="matrix-table" id="services-matrix"></table>
         </div>
 
         <!-- People -->
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>People at Target Firms</h2>
         </div>
-        <div class="legend">
+        <div class="legend reveal">
             <div class="legend-item">
                 <div class="legend-color enriched"></div>
                 <span>Enriched Profile</span>
@@ -831,7 +1130,7 @@
                 <span>Discovered Contact</span>
             </div>
         </div>
-        <div class="filters" id="people-filters"></div>
+        <div class="filters reveal" id="people-filters"></div>
         <div class="people-grid" id="people-grid"></div>
     </div>
 
@@ -864,68 +1163,151 @@
         // Render Stats
         function renderStats() {
             const enrichedCount = Object.values(contacts).filter(c => c.enriched).length;
-            const html = `
-                <div class="stat-card">
-                    <div class="number">${firms.length}</div>
-                    <div class="label">Target Firms</div>
+            const stats = [
+                { value: firms.length, label: 'Target Firms' },
+                { value: allMarkets.length, label: 'Markets' },
+                { value: Object.keys(contacts).length, label: 'People Discovered' },
+                { value: enrichedCount, label: 'Enriched Profiles' },
+                { value: Object.keys(allUniversities).length, label: 'Universities' },
+                { value: Object.keys(allGroups).length, label: 'Professional Groups' }
+            ];
+
+            const html = stats.map((stat, index) => `
+                <div class="stat-card reveal" style="--delay:${index * 70}ms">
+                    <div class="number">${stat.value}</div>
+                    <div class="label">${stat.label}</div>
                 </div>
-                <div class="stat-card">
-                    <div class="number">${allMarkets.length}</div>
-                    <div class="label">Markets</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">${Object.keys(contacts).length}</div>
-                    <div class="label">People Discovered</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">${enrichedCount}</div>
-                    <div class="label">Enriched Profiles</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">${Object.keys(allUniversities).length}</div>
-                    <div class="label">Universities</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">${Object.keys(allGroups).length}</div>
-                    <div class="label">Professional Groups</div>
-                </div>
-            `;
+            `).join('');
             document.getElementById('stats-grid').innerHTML = html;
         }
 
-        // Render Connection Points
-        function renderConnections() {
-            let uniHtml = '<div class="connection-box"><h3>Universities</h3>';
-            Object.entries(allUniversities).forEach(([school, people]) => {
-                uniHtml += `
-                    <div class="connection-item" onclick="filterByUniversity('${school}')">
-                        <span class="icon">🎓</span>
-                        <div class="details">
-                            <div class="name">${school}</div>
-                            <div class="meta">${people.map(p => p.name).join(', ')}</div>
-                        </div>
-                        <span class="count">${people.length}</span>
-                    </div>
-                `;
-            });
-            uniHtml += '</div>';
+        function getMarketForContact(person) {
+            const company = normalizeCompanyName(person.current_company);
+            if (!company) return 'Other / Unknown';
+            const firm = firms.find(f => normalizeCompanyName(f.company_name) === company);
+            return firm ? firm.market : 'Other / Unknown';
+        }
 
-            let groupHtml = '<div class="connection-box"><h3>Professional Groups & Associations</h3>';
-            Object.entries(allGroups).forEach(([group, people]) => {
-                groupHtml += `
-                    <div class="connection-item" onclick="filterByGroup('${group}')">
-                        <span class="icon">🤝</span>
-                        <div class="details">
-                            <div class="name">${group}</div>
-                            <div class="meta">${people.map(p => p.name).join(', ')}</div>
-                        </div>
-                        <span class="count">${people.length}</span>
-                    </div>
-                `;
+        // Render Connection Points grouped by market
+        function renderConnections() {
+            const markets = [...allMarkets, 'Other / Unknown'];
+            const universitiesByMarket = {};
+            const groupsByMarket = {};
+
+            markets.forEach(m => {
+                universitiesByMarket[m] = {};
+                groupsByMarket[m] = {};
             });
-            groupHtml += '</div>';
+
+            Object.values(contacts).forEach(person => {
+                const market = getMarketForContact(person);
+                if (person.education) {
+                    person.education.forEach(e => {
+                        if (!universitiesByMarket[market][e.school]) {
+                            universitiesByMarket[market][e.school] = [];
+                        }
+                        universitiesByMarket[market][e.school].push(person);
+                    });
+                }
+                if (person.groups) {
+                    person.groups.forEach(g => {
+                        if (!groupsByMarket[market][g]) {
+                            groupsByMarket[market][g] = [];
+                        }
+                        groupsByMarket[market][g].push(person);
+                    });
+                }
+            });
+
+            const renderLeafPeople = (people) => `
+                <div class="network-people">
+                    ${people.map(p => `
+                        <div class="network-person">
+                            <div><strong>${p.name}</strong></div>
+                            <div>${p.current_company || ''}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            let uniHtml = '<div class="connection-box"><h3>Universities by Market</h3><div class="network-tree">';
+            markets.forEach((market, marketIndex) => {
+                const entries = Object.entries(universitiesByMarket[market]);
+                if (!entries.length) return;
+                const delay = Math.min(marketIndex, 6) * 70;
+                uniHtml += `
+                    <details class="reveal" style="--delay:${delay}ms">
+                        <summary>
+                            <span class="network-node-content">
+                                <span class="network-node-title">${market}</span>
+                                <span class="network-badges">
+                                    <span class="network-badge">${entries.length} universities</span>
+                                </span>
+                            </span>
+                            <span class="network-toggle"></span>
+                        </summary>
+                `;
+                entries.forEach(([school, people]) => {
+                    uniHtml += `
+                        <details>
+                            <summary onclick="filterByUniversity('${school}')">
+                                <span class="network-node-content">
+                                    <span class="network-node-title">${school}</span>
+                                    <span class="network-badges">
+                                        <span class="network-badge">${people.length}</span>
+                                    </span>
+                                </span>
+                                <span class="network-toggle"></span>
+                            </summary>
+                            ${renderLeafPeople(people)}
+                        </details>
+                    `;
+                });
+                uniHtml += '</details>';
+            });
+            uniHtml += '</div></div>';
+
+            let groupHtml = '<div class="connection-box"><h3>Professional Groups & Associations by Market</h3><div class="network-tree">';
+            markets.forEach((market, marketIndex) => {
+                const entries = Object.entries(groupsByMarket[market]);
+                if (!entries.length) return;
+                const delay = Math.min(marketIndex, 6) * 70;
+                groupHtml += `
+                    <details class="reveal" style="--delay:${delay}ms">
+                        <summary>
+                            <span class="network-node-content">
+                                <span class="network-node-title">${market}</span>
+                                <span class="network-badges">
+                                    <span class="network-badge">${entries.length} groups</span>
+                                </span>
+                            </span>
+                            <span class="network-toggle"></span>
+                        </summary>
+                `;
+                entries.forEach(([group, people]) => {
+                    groupHtml += `
+                        <details>
+                            <summary onclick="filterByGroup('${group}')">
+                                <span class="network-node-content">
+                                    <span class="network-node-title">${group}</span>
+                                    <span class="network-badges">
+                                        <span class="network-badge">${people.length}</span>
+                                    </span>
+                                </span>
+                                <span class="network-toggle"></span>
+                            </summary>
+                            ${renderLeafPeople(people)}
+                        </details>
+                    `;
+                });
+                groupHtml += '</details>';
+            });
+            groupHtml += '</div></div>';
 
             document.getElementById('connection-grid').innerHTML = uniHtml + groupHtml;
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         }
 
         // Render Services Matrix
@@ -945,7 +1327,7 @@
                     <td class="firm-name"><a href="${firm.website}" target="_blank" class="firm-name-link">${firm.company_name}</a></td>
                     <td class="market">${firm.market}</td>`;
                 topServices.forEach(s => {
-                    html += `<td class="check">${firm.services.includes(s) ? '✓' : ''}</td>`;
+                    html += `<td class="check">${firm.services.includes(s) ? 'x' : ''}</td>`;
                 });
                 html += '</tr>';
             });
@@ -989,7 +1371,6 @@
 
             // Count contacts in these markets
             const marketCompanies = new Set(filteredFirms.map(f => {
-                // Normalize company names for matching
                 const name = f.company_name.toLowerCase();
                 if (name.includes('jll')) return 'jll';
                 if (name.includes('cushman')) return 'cushman & wakefield';
@@ -998,45 +1379,55 @@
             }));
 
             let contactCount = 0;
-            Object.values(contacts).forEach(c => {
-                const company = (c.current_company || '').toLowerCase();
-                if (marketCompanies.has(company) ||
-                    (company.includes('jll') && marketCompanies.has('jll')) ||
-                    (company.includes('cushman') && marketCompanies.has('cushman & wakefield')) ||
-                    (company.includes('avison') && marketCompanies.has('avison young'))) {
-                    contactCount++;
-                }
-            });
+            if (!marketFilter) {
+                contactCount = Object.keys(contacts).length;
+            } else {
+                Object.values(contacts).forEach(c => {
+                    const company = (c.current_company || '').toLowerCase();
+                    if (marketCompanies.has(company) ||
+                        (company.includes('jll') && marketCompanies.has('jll')) ||
+                        (company.includes('cushman') && marketCompanies.has('cushman & wakefield')) ||
+                        (company.includes('avison') && marketCompanies.has('avison young'))) {
+                        contactCount++;
+                    }
+                });
+            }
 
             // Get single market data if filtered
             const singleMarketData = marketFilter ? creMarketData.find(d => d.city === marketFilter) : null;
 
-            const html = `
-                <div class="stat-card" style="padding:1rem;">
-                    <div class="number" style="font-size:1.8rem;">${filteredFirms.length}</div>
-                    <div class="label">Target Firms</div>
+            const marketStats = [
+                { value: filteredFirms.length, label: 'Target Firms' },
+                { value: `$${totalVolume.toFixed(1)}B`, label: 'CRE Volume (2023)' },
+                { value: `#${singleMarketData ? singleMarketData.rank : avgRank}`, label: marketFilter ? 'US Ranking' : 'Avg. Ranking' },
+                { value: marketFilter ? 1 : allMarkets.length, label: marketFilter ? 'Market' : 'Markets' },
+                { value: contactCount > 0 ? contactCount : '0', label: 'Contacts Found' }
+            ];
+
+            const html = marketStats.map((stat, index) => `
+                <div class="stat-card reveal" style="padding:1rem;--delay:${index * 70}ms">
+                    <div class="number" style="font-size:1.8rem;">${stat.value}</div>
+                    <div class="label">${stat.label}</div>
                 </div>
-                <div class="stat-card" style="padding:1rem;">
-                    <div class="number" style="font-size:1.8rem;">$${totalVolume.toFixed(1)}B</div>
-                    <div class="label">CRE Volume (2023)</div>
-                </div>
-                <div class="stat-card" style="padding:1rem;">
-                    <div class="number" style="font-size:1.8rem;">#${singleMarketData ? singleMarketData.rank : avgRank}</div>
-                    <div class="label">${marketFilter ? 'US Ranking' : 'Avg. Ranking'}</div>
-                </div>
-                <div class="stat-card" style="padding:1rem;">
-                    <div class="number" style="font-size:1.8rem;">${marketFilter ? 1 : allMarkets.length}</div>
-                    <div class="label">${marketFilter ? 'Market' : 'Markets'}</div>
-                </div>
-                <div class="stat-card" style="padding:1rem;">
-                    <div class="number" style="font-size:1.8rem;">${contactCount > 0 ? contactCount : '—'}</div>
-                    <div class="label">Contacts Found</div>
-                </div>
-            `;
+            `).join('');
             document.getElementById('market-stats').innerHTML = html;
         }
 
-        // Render People
+        function normalizeCompanyName(name) {
+            const normalized = (name || '').toLowerCase().trim();
+            if (!normalized) return '';
+            if (normalized.includes('jll')) return 'jll';
+            if (normalized.includes('cushman')) return 'cushman & wakefield';
+            if (normalized.includes('avison')) return 'avison young';
+            return normalized;
+        }
+
+        function isTargetCompany(company) {
+            if (!company) return false;
+            const normalizedCompany = normalizeCompanyName(company);
+            return firms.some(f => normalizeCompanyName(f.company_name) === normalizedCompany);
+        }
+
         function renderPeople(filter = null) {
             let filteredContacts = Object.values(contacts);
 
@@ -1050,45 +1441,207 @@
                 );
             }
 
-            // Sort: enriched first
-            filteredContacts.sort((a, b) => (b.enriched ? 1 : 0) - (a.enriched ? 1 : 0));
+            const targetGroups = {};
+            const otherGroups = {};
 
-            let html = '';
             filteredContacts.forEach(person => {
-                const tags = [];
-                if (person.education) {
-                    person.education.forEach(e => tags.push({type: 'university', text: e.school}));
+                const company = person.current_company || 'Unknown Company';
+                const key = normalizeCompanyName(company) || 'unknown company';
+                const groupMap = isTargetCompany(company) ? targetGroups : otherGroups;
+                if (!groupMap[key]) {
+                    groupMap[key] = { name: company, people: [] };
                 }
-                if (person.groups) {
-                    person.groups.slice(0, 3).forEach(g => tags.push({type: 'group', text: g}));
-                }
-
-                const aboutText = person.about ? person.about.substring(0, 250) + (person.about.length > 250 ? '...' : '') : '';
-
-                html += `
-                    <div class="person-card ${person.enriched ? 'enriched' : ''}">
-                        ${aboutText ? `
-                            <div class="tooltip">
-                                <div class="tooltip-label">About</div>
-                                ${aboutText}
-                            </div>
-                        ` : ''}
-                        <div class="header">
-                            <div class="name"><a href="${person.linkedin_url}" target="_blank">${person.name}</a></div>
-                            <span class="badge">${person.enriched ? 'Enriched' : 'Discovered'}</span>
-                        </div>
-                        ${person.headline ? `<div class="headline">${person.headline}</div>` : ''}
-                        <div class="company">${person.current_company || ''}</div>
-                        ${tags.length > 0 ? `
-                            <div class="tags">
-                                ${tags.map(t => `<span class="tag ${t.type}">${t.text}</span>`).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
+                groupMap[key].people.push(person);
             });
 
+            function renderPeopleCards(people) {
+                return people.sort((a, b) => (b.enriched ? 1 : 0) - (a.enriched ? 1 : 0)).map((person, index) => {
+                    const delay = Math.min(index, 10) * 40;
+                    const tags = [];
+                    if (person.education) {
+                        person.education.forEach(e => tags.push({type: 'university', text: e.school}));
+                    }
+                    if (person.groups) {
+                        person.groups.slice(0, 3).forEach(g => tags.push({type: 'group', text: g}));
+                    }
+
+                    const aboutText = person.about ? person.about.substring(0, 250) + (person.about.length > 250 ? '...' : '') : '';
+
+                    return `
+                        <div class="person-card ${person.enriched ? 'enriched' : ''} reveal" style="--delay:${delay}ms">
+                            ${aboutText ? `
+                                <div class="tooltip">
+                                    <div class="tooltip-label">About</div>
+                                    ${aboutText}
+                                </div>
+                            ` : ''}
+                            <div class="header">
+                                <div class="name"><a href="${person.linkedin_url}" target="_blank">${person.name}</a></div>
+                                <span class="badge">${person.enriched ? 'Enriched' : 'Discovered'}</span>
+                            </div>
+                            ${person.headline ? `<div class="headline">${person.headline}</div>` : ''}
+                            <div class="company">${person.current_company || ''}</div>
+                            ${tags.length > 0 ? `
+                                <div class="tags">
+                                    ${tags.map(t => `<span class="tag ${t.type}">${t.text}</span>`).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            function renderCompanyGroup(group) {
+                return `
+                    <details class="company-group reveal">
+                        <summary>
+                            <h3>${group.name}</h3>
+                            <span class="company-count">${group.people.length} contacts</span>
+                        </summary>
+                        <div class="company-people">
+                            ${renderPeopleCards(group.people)}
+                        </div>
+                    </details>
+                `;
+            }
+
+            const targetHtml = Object.values(targetGroups)
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map(renderCompanyGroup)
+                .join('');
+
+            const otherGroupsArray = Object.values(otherGroups)
+                .sort((a, b) => a.name.localeCompare(b.name));
+
+            const otherHtml = otherGroupsArray.length ? `
+                <details class="other-companies reveal">
+                    <summary>Other Companies (${otherGroupsArray.length})</summary>
+                    <div class="people-section">
+                        ${otherGroupsArray.map(renderCompanyGroup).join('')}
+                    </div>
+                </details>
+            ` : '';
+
+            const html = `
+                <div class="people-section">
+                    ${targetHtml}
+                    ${otherHtml}
+                </div>
+            `;
+
             document.getElementById('people-grid').innerHTML = html;
+        }
+
+        function renderNetworkView() {
+            const tree = document.getElementById('network-tree');
+            if (!tree) return;
+
+            const firmsByMarket = {};
+            firms.forEach(firm => {
+                if (!firmsByMarket[firm.market]) firmsByMarket[firm.market] = [];
+                firmsByMarket[firm.market].push(firm);
+            });
+
+            const contactsByCompany = {};
+            Object.values(contacts).forEach(person => {
+                const company = person.current_company || 'Unknown Company';
+                const normalized = normalizeCompanyName(company) || company.toLowerCase();
+                if (!contactsByCompany[normalized]) {
+                    contactsByCompany[normalized] = { name: company, enriched: [], discovered: [] };
+                }
+                if (person.enriched) {
+                    contactsByCompany[normalized].enriched.push(person);
+                } else {
+                    contactsByCompany[normalized].discovered.push(person);
+                }
+            });
+
+            const marketNodes = Object.keys(firmsByMarket).sort().map(market => {
+                const marketFirms = firmsByMarket[market].sort((a, b) => a.company_name.localeCompare(b.company_name));
+                const marketData = creMarketData.find(d => d.city === market);
+                const volumeLabel = marketData ? `${marketData.volume}B` : 'n/a';
+
+                const firmNodes = marketFirms.map(firm => {
+                    const normalized = normalizeCompanyName(firm.company_name);
+                    const contactBucket = contactsByCompany[normalized] || { name: firm.company_name, enriched: [], discovered: [] };
+                    const enrichedCount = contactBucket.enriched.length;
+                    const discoveredCount = contactBucket.discovered.length;
+
+                    const peopleNode = (people, label) => `
+                        <details>
+                            <summary>
+                                <span class="network-node-content">
+                                    <span class="network-node-title">${label}</span>
+                                    <span class="network-badges">
+                                        <span class="network-badge">${people.length}</span>
+                                    </span>
+                                </span>
+                                <span class="network-toggle"></span>
+                            </summary>
+                            <div class="network-people">
+                                ${people.map(p => `
+                                    <div class="network-person">
+                                        <div><strong>${p.name}</strong></div>
+                                        <div>${p.current_title || ''}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </details>
+                    `;
+
+                    return `
+                        <details>
+                            <summary>
+                                <span class="network-node-content">
+                                    <span class="network-node-title">${firm.company_name}</span>
+                                    <span class="network-badges">
+                                        <span class="network-badge">${enrichedCount + discoveredCount} contacts</span>
+                                    </span>
+                                </span>
+                                <span class="network-toggle"></span>
+                            </summary>
+                            ${peopleNode(contactBucket.enriched, 'Enriched Contacts')}
+                            ${peopleNode(contactBucket.discovered, 'Other Contacts')}
+                        </details>
+                    `;
+                }).join('');
+
+                return `
+                    <details>
+                        <summary>
+                            <span class="network-node-content">
+                                <span class="network-node-title">${market}</span>
+                                <span class="network-badges">
+                                    <span class="network-badge">${marketFirms.length} firms</span>
+                                    <span class="network-badge">${volumeLabel}</span>
+                                </span>
+                            </span>
+                            <span class="network-toggle"></span>
+                        </summary>
+                        ${firmNodes}
+                    </details>
+                `;
+            }).join('');
+
+            const totalVolume = creMarketData
+                .filter(d => Object.keys(firmsByMarket).includes(d.city))
+                .reduce((sum, d) => sum + d.volume, 0);
+
+            tree.innerHTML = `
+                <details>
+                    <summary>
+                        <span class="network-node-content">
+                            <span class="network-node-title">Markets</span>
+                            <span class="network-badges">
+                                <span class="network-badge">${Object.keys(firmsByMarket).length} markets</span>
+                                <span class="network-badge">${totalVolume.toFixed(1)}B volume</span>
+                            </span>
+                        </span>
+                        <span class="network-toggle"></span>
+                    </summary>
+                    ${marketNodes}
+                </details>
+            `;
         }
 
         // Filter functions
@@ -1170,9 +1723,9 @@
             if (currentMapMode === 'distance') {
                 // Distance mode - show rings from Columbus
                 const distances = [
-                    { radius: 321869, label: '200 mi', color: '#38a169' },
-                    { radius: 643738, label: '400 mi', color: '#d69e2e' },
-                    { radius: 965606, label: '600 mi', color: '#e53e3e' }
+                    { radius: 321869, label: '200 mi', color: '#0f766e' },
+                    { radius: 643738, label: '400 mi', color: '#f59e0b' },
+                    { radius: 965606, label: '600 mi', color: '#dc2626' }
                 ];
 
                 distances.forEach(d => {
@@ -1189,8 +1742,8 @@
                 // Columbus center marker
                 L.circleMarker(columbusCoords, {
                     radius: 8,
-                    color: '#1a365d',
-                    fillColor: '#1a365d',
+                    color: '#0b1f2a',
+                    fillColor: '#0b1f2a',
                     fillOpacity: 1,
                     weight: 2
                 }).addTo(currentMap).bindTooltip('Columbus (Home Base)', { permanent: false });
@@ -1211,7 +1764,7 @@
 
                     const icon = L.divIcon({
                         className: 'market-marker',
-                        html: `<div style="width:${size}px;height:${size}px;background:#3182ce;border:3px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:14px;box-shadow:0 2px 5px rgba(0,0,0,0.3);">${count}</div>`,
+                        html: `<div style="width:${size}px;height:${size}px;background:var(--accent-2);border:3px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:14px;box-shadow:0 2px 5px rgba(0,0,0,0.3);">${count}</div>`,
                         iconSize: [size, size],
                         iconAnchor: [size/2, size/2]
                     });
@@ -1241,15 +1794,15 @@
 
                     L.circleMarker([market.lat, market.lng], {
                         radius: size / 2,
-                        color: isTarget ? '#1a365d' : color,
+                        color: isTarget ? '#0b1f2a' : color,
                         fillColor: color,
                         fillOpacity: 0.7,
                         weight: isTarget ? 3 : 1
                     }).addTo(currentMap).bindPopup(`
                         <div class="popup-title">${market.city}, ${market.state}</div>
-                        <div style="font-size:1.1rem;font-weight:600;color:#2c5282;margin:0.5rem 0;">$${market.volume}B</div>
+                        <div style="font-size:1.1rem;font-weight:600;color:var(--accent-2);margin:0.5rem 0;">$${market.volume}B</div>
                         <div style="font-size:0.85rem;color:#718096;">Rank #${market.rank} in US</div>
-                        ${isTarget ? '<div style="margin-top:0.5rem;padding:0.25rem 0.5rem;background:#ebf8ff;border-radius:4px;font-size:0.8rem;color:#2c5282;">Target Market</div>' : ''}
+                        ${isTarget ? '<div style="margin-top:0.5rem;padding:0.25rem 0.5rem;background:rgba(15, 118, 110, 0.12);border-radius:4px;font-size:0.8rem;color:#0f766e;">Target Market</div>' : ''}
                     `, { maxWidth: 200 });
                 });
 
@@ -1260,6 +1813,7 @@
         // Initialize
         renderStats();
         renderConnections();
+        renderNetworkView();
         renderMap();
         renderMarketFilters();
         renderServicesMatrix();
@@ -1272,10 +1826,10 @@
     </script>
 
     <footer>
-        <div>Built for CRE career seekers · Data sourced from public websites and LinkedIn</div>
+        <div>Built for CRE career seekers | Data sourced from public websites and LinkedIn</div>
         <div class="footer-links">
             <a href="https://github.com/sethflory/CRE-dashboard" target="_blank">GitHub</a>
-            <span>·</span>
+            <span>|</span>
             <span>Last updated: December 2024</span>
         </div>
     </footer>
