@@ -1,0 +1,111 @@
+{
+  "seed": 42,
+  "markets": [
+    { "name": "Columbus", "state": "OH" },
+    { "name": "Cincinnati", "state": "OH" },
+    { "name": "Cleveland", "state": "OH" },
+    { "name": "Indianapolis", "state": "IN" },
+    { "name": "Chicago", "state": "IL" },
+    { "name": "Pittsburgh", "state": "PA" },
+    { "name": "Charlotte", "state": "NC" },
+    { "name": "Savannah", "state": "GA" }
+  ],
+  "firm_count_per_market": 5,
+  "contacts_per_firm": 15,
+  "enriched_rate": 0.45,
+  "extra_education_rate": 0.35,
+  "group_count_choices": [1, 2, 3],
+  "company_name_prefixes": [
+    "Summit",
+    "Crescent",
+    "Ironwood",
+    "Rivergate",
+    "Pioneer",
+    "Atlas",
+    "Meridian",
+    "Oakline"
+  ],
+  "company_name_suffixes": [
+    "Realty",
+    "Commercial",
+    "Advisors",
+    "Partners",
+    "Properties",
+    "Capital"
+  ],
+  "services_pool": [
+    "Brokerage",
+    "Capital Markets",
+    "Leasing",
+    "Property Management",
+    "Development",
+    "Tenant Representation",
+    "Advisory",
+    "Investment Sales",
+    "Valuation",
+    "Research"
+  ],
+  "specialties_pool": [
+    "Office",
+    "Industrial",
+    "Retail",
+    "Multifamily",
+    "Healthcare",
+    "Hospitality",
+    "Student Housing",
+    "Data Center",
+    "Mixed-Use"
+  ],
+  "universities_by_market": {
+    "Columbus": ["Ohio State University", "Ohio University", "Miami University"],
+    "Cincinnati": ["University of Cincinnati", "Xavier University", "Miami University"],
+    "Cleveland": ["Case Western Reserve University", "Cleveland State University"],
+    "Indianapolis": ["Indiana University", "Purdue University"],
+    "Chicago": ["University of Chicago", "Northwestern University", "UIC"],
+    "Pittsburgh": ["University of Pittsburgh", "Carnegie Mellon University"],
+    "Charlotte": ["UNC Charlotte", "Duke University"],
+    "Savannah": ["Savannah State University", "Georgia Tech"]
+  },
+  "cross_market_universities": [
+    "Indiana University",
+    "Purdue University",
+    "University of Michigan",
+    "Penn State University"
+  ],
+  "professional_groups": [
+    "ULI",
+    "NAIOP",
+    "BOMA",
+    "CCIM Institute",
+    "SIOR",
+    "ICSC",
+    "CREW Network",
+    "Association of CRE & Finance Professionals"
+  ],
+  "first_names": [
+    "Alex", "Jordan", "Taylor", "Morgan", "Casey",
+    "Riley", "Avery", "Parker", "Quinn", "Reese",
+    "Cameron", "Drew", "Logan", "Harper", "Sage",
+    "Blake", "Jamie", "Rowan", "Emerson", "Sawyer"
+  ],
+  "last_names": [
+    "Johnson", "Smith", "Lee", "Brown", "Clark",
+    "Davis", "Wilson", "Moore", "Miller", "Garcia",
+    "Harris", "Young", "Allen", "King", "Wright",
+    "Scott", "Green", "Baker", "Adams", "Nelson"
+  ],
+  "headline_pool": [
+    "Brokerage Associate",
+    "Capital Markets Analyst",
+    "Leasing Manager",
+    "Investment Advisor",
+    "Research Associate",
+    "Senior Broker"
+  ],
+  "about_text": "Commercial real estate professional focused on market growth.",
+  "outputs": {
+    "firms_js": "data_firms.js",
+    "contacts_js": "data_contacts.js",
+    "graph_json": "graph.json"
+  }
+}

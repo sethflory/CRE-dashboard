@@ -113,3 +113,17 @@ For each Company:
 3) Refactor LinkedIn enrichment into a modular enricher interface.
 4) Update the dashboard to render from config + graph outputs.
 5) Create a synthetic dataset with strong clustering to showcase the network builder.
+
+## Synthetic Dataset Generator
+
+Use the built-in generator to create clustered demo data:
+
+```bash
+python scripts/generate_synthetic_data.py
+```
+
+Configure inputs in `config/synthetic.json`:
+- markets, firm_count_per_market, contacts_per_firm
+- universities_by_market + cross_market_universities
+- professional_groups and enrichment rates
+- output file paths for JS and graph JSON
