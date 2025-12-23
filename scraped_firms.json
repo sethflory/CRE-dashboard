@@ -1,0 +1,2342 @@
+[
+  {
+    "company_name": "JLL Columbus",
+    "website": "https://www.us.jll.com/en/locations/midwest/columbus",
+    "scraped_at": "2025-12-22T23:23:13.825682",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Brokerage",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.us.jll.com/en/locations/midwest/columbus",
+      "https://www.us.jll.com/team",
+      "https://www.us.jll.com/services",
+      "https://www.us.jll.com/en-us/locations"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Cushman & Wakefield Columbus",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/columbus",
+    "scraped_at": "2025-12-22T23:23:23.964628",
+    "main_phone": "(952) 544-1117",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Flex",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.cushmanwakefield.com/en/united-states/offices/columbus",
+      "https://www.cushmanwakefield.com/en/united-states/services/valuation-and-advisory",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Avison Young Columbus",
+    "website": "https://www.avisonyoung.us/web/columbus",
+    "scraped_at": "2025-12-22T23:23:38.959191",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "200 Portland Street",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Asset Management",
+      "Brokerage",
+      "Capital Markets",
+      "Construction Management",
+      "Consulting",
+      "Development",
+      "Facility Management",
+      "Investment Sales",
+      "Landlord Representation",
+      "Leasing",
+      "Occupier Services",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Mixed-Use",
+      "Multifamily",
+      "Net Lease",
+      "Office",
+      "Retail",
+      "Self-Storage",
+      "Senior Housing",
+      "Warehouse"
+    ],
+    "office_locations": [
+      "200 Portland Street"
+    ],
+    "pages_scraped": [
+      "https://www.avisonyoung.us/web/columbus",
+      "https://www.avisonyoung.us/leadership",
+      "https://www.avisonyoung.us/managed-retail-listings",
+      "https://www.avisonyoung.us/office"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Marcus & Millichap Columbus",
+    "website": "https://www.marcusmillichap.com/about-us/offices/columbus-ohio",
+    "scraped_at": "2025-12-22T23:23:49.053329",
+    "main_phone": "(614) 360-9810",
+    "main_email": "grant.fitzgerald@marcusmillichap.com",
+    "headquarters_address": "1031 Exchange",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Consulting",
+      "Development",
+      "Investment Sales",
+      "Research"
+    ],
+    "specialties": [
+      "Apartment",
+      "Flex",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Mixed-Use",
+      "Multifamily",
+      "Net Lease",
+      "Office",
+      "Retail",
+      "Self-Storage",
+      "Senior Housing"
+    ],
+    "office_locations": [
+      "1031 Exchange"
+    ],
+    "pages_scraped": [
+      "https://www.marcusmillichap.com/about-us/offices/columbus-ohio",
+      "https://www.marcusmillichap.com/advisors",
+      "https://www.marcusmillichap.com/services",
+      "https://www.marcusmillichap.com/about-us/offices"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Newmark Columbus",
+    "website": "https://www.nmrk.com/offices/columbus",
+    "scraped_at": "2025-12-22T23:23:59.953374",
+    "main_phone": "(614) 883-1200",
+    "main_email": "",
+    "headquarters_address": "2025 Newmark | All rights reserved.",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Appraisal",
+      "Brokerage",
+      "Capital Markets",
+      "Consulting",
+      "Investment Sales",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ],
+    "office_locations": [
+      "2025 Newmark | All rights reserved."
+    ],
+    "pages_scraped": [
+      "https://www.nmrk.com/offices/columbus",
+      "https://www.nmrk.com/services/investor-solutions/valuation-and-advisory",
+      "https://www.nmrk.com/services",
+      "https://www.nmrk.com/services/property-types/office"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Lee & Associates Columbus",
+    "website": "https://www.lee-associates.com/columbus",
+    "scraped_at": "2025-12-22T23:24:09.231294",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Construction Management",
+      "Development",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Senior Housing"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.lee-associates.com/columbus",
+      "https://www.lee-associates.com/services/?tab=brokerage-services",
+      "https://www.lee-associates.com/services/",
+      "https://www.lee-associates.com/offices/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "NAI Ohio Equities",
+    "website": "https://www.ohioequities.com",
+    "scraped_at": "2025-12-22T23:24:22.461977",
+    "main_phone": "(614) 224-2400",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Consulting",
+      "Landlord Representation",
+      "Leasing",
+      "Property Management",
+      "Valuation"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Medical",
+      "Multifamily",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.ohioequities.com",
+      "https://www.ohioequities.com/services/brokerage/landlord",
+      "https://www.ohioequities.com/services/brokerage/landlord",
+      "https://www.ohioequities.com/contact"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Best Corporate Real Estate",
+    "website": "https://www.bestcorporaterealestate.com",
+    "scraped_at": "2025-12-22T23:24:31.236187",
+    "main_phone": "(614) 559-3390",
+    "main_email": "",
+    "headquarters_address": "4608 Sawmill Road",
+    "leadership": [],
+    "services": [
+      "Brokerage",
+      "Development",
+      "Leasing",
+      "Property Management"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ],
+    "office_locations": [
+      "4608 Sawmill Road",
+      "4608 Sawmill Road, Columbus, Ohio 43220 | Tel 614-559-3350 | Fax 614-559-3390"
+    ],
+    "pages_scraped": [
+      "https://www.bestcorporaterealestate.com",
+      "https://www.bestcorporaterealestate.com/staff.php",
+      "https://www.bestcorporaterealestate.com/services.php",
+      "https://www.bestcorporaterealestate.com/contactus.php"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "The Robert Weiler Company",
+    "website": "https://rweiler.com",
+    "scraped_at": "2025-12-22T23:24:39.750205",
+    "main_phone": "(614) 221-4286",
+    "main_email": "info@rweiler.com",
+    "headquarters_address": "10 N High St. Columbus, OH 43215",
+    "leadership": [],
+    "services": [
+      "Appraisal",
+      "Brokerage",
+      "Consulting",
+      "Development",
+      "Investment Sales",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Industrial",
+      "Land",
+      "Mixed-Use",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ],
+    "office_locations": [
+      "10 N High St. Columbus, OH 43215",
+      "10 N High St, Suite 401 Columbus,\u00a0OH\u00a043215",
+      "10 N High St."
+    ],
+    "pages_scraped": [
+      "https://rweiler.com",
+      "https://rweiler.com/services/commercial-real-estate-brokerage/",
+      "https://rweiler.com/services",
+      "https://rweiler.com/contact-us/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "KRG Real Estate",
+    "website": "https://krgre.com",
+    "scraped_at": "2025-12-22T23:24:49.615822",
+    "main_phone": "(614) 228-5547",
+    "main_email": "rent@krgre.com",
+    "headquarters_address": "1480 Dublin RoadColumbus,\u00a0OH\u00a043215614-228-5547FAX: 614-228-6980marketing@krgre.com",
+    "leadership": [],
+    "services": [
+      "Appraisal",
+      "Brokerage",
+      "Consulting",
+      "Development",
+      "Leasing"
+    ],
+    "specialties": [
+      "Apartment",
+      "Flex",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [
+      "1480 Dublin RoadColumbus,\u00a0OH\u00a043215614-228-5547FAX: 614-228-6980marketing@krgre.com",
+      "2244 Neil Avenue Columbus OH 43201",
+      "1480 Dublin RoadColumbus,\u00a0OH\u00a043215614-228-5547FAX: 614-228-6980marketing@krgre.com"
+    ],
+    "pages_scraped": [
+      "https://krgre.com",
+      "https://krgre.com/affiliations/",
+      "https://krgre.com/service-map-2/",
+      "https://krgre.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "DRK & Company Realty",
+    "website": "https://drk-realty.com",
+    "scraped_at": "2025-12-22T23:25:01.231296",
+    "main_phone": "(614) 540-2404",
+    "main_email": "",
+    "headquarters_address": "470 Olde Worthington Road, Suite 101 Westerville, OH 43082",
+    "leadership": [],
+    "services": [
+      "Brokerage",
+      "Development",
+      "Leasing",
+      "Property Management",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Medical",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [
+      "470 Olde Worthington Road, Suite 101 Westerville, OH 43082",
+      "470 Olde Worthington Road, Suite 101 Westerville, OH 43082"
+    ],
+    "pages_scraped": [
+      "https://drk-realty.com",
+      "https://drk-realty.com/services/brokerage",
+      "https://drk-realty.com/services",
+      "https://drk-realty.com/contact-us"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Hanna Commercial Pittsburgh",
+    "website": "https://hannacre.com",
+    "scraped_at": "2025-12-22T23:31:27.819403",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Corporate Services",
+      "Development",
+      "Investment Sales",
+      "Occupier Services",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://hannacre.com",
+      "https://hannacre.com/professionals/",
+      "https://hannacre.com/services/",
+      "https://hannacre.com/services/brokerage-services/office-agency-services/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Equity Commercial Real Estate",
+    "website": "https://equity.net",
+    "scraped_at": "2025-12-22T23:25:19.261450",
+    "main_phone": "(937) 291-1179",
+    "main_email": "info@equity.net",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Asset Management",
+      "Brokerage",
+      "Development",
+      "Investment Sales",
+      "Leasing",
+      "Project Management",
+      "Property Management"
+    ],
+    "specialties": [
+      "Flex",
+      "Healthcare",
+      "Hotel",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Mixed-Use",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://equity.net",
+      "https://www.equity.net/brokerage-advisors/",
+      "https://www.equity.net/brokerage-advisors/",
+      "https://www.equity.net/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Nationwide Realty Investors",
+    "website": "https://www.nationwiderealtyinvestors.com",
+    "scraped_at": "2025-12-22T23:25:28.408761",
+    "main_phone": "(614) 857-2330",
+    "main_email": "",
+    "headquarters_address": "375 N. Front Street, Suite 200 | Columbus, OH 43215-2220 | Phone: 614.857.2330",
+    "leadership": [],
+    "services": [
+      "Development",
+      "Leasing"
+    ],
+    "specialties": [
+      "Hospitality",
+      "Land",
+      "Mixed-Use",
+      "Office",
+      "Retail",
+      "Senior Housing"
+    ],
+    "office_locations": [
+      "375 N. Front Street, Suite 200 | Columbus, OH 43215-2220 | Phone: 614.857.2330"
+    ],
+    "pages_scraped": [
+      "https://www.nationwiderealtyinvestors.com",
+      "https://www.nationwiderealtyinvestors.com/team",
+      "https://www.nationwiderealtyinvestors.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "CASTO",
+    "website": "https://castoinfo.com",
+    "scraped_at": "2025-12-22T23:25:54.331285",
+    "main_phone": "(614) 228-5331",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Asset Management",
+      "Brokerage",
+      "Construction Management",
+      "Consulting",
+      "Development",
+      "Leasing",
+      "Property Management"
+    ],
+    "specialties": [
+      "Apartment",
+      "Flex",
+      "Healthcare",
+      "Land",
+      "Multifamily",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://castoinfo.com",
+      "https://castoinfo.com/about/casto-leadership/",
+      "https://castoinfo.com/services/",
+      "https://castoinfo.com/about/key-contacts/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Thrive Companies",
+    "website": "https://thrivecos.com",
+    "scraped_at": "2025-12-22T23:26:03.085945",
+    "main_phone": "(614) 545-9247",
+    "main_email": "info@thrivecos.com",
+    "headquarters_address": "842 North 4th Street\u2028Suite 200\u2028Columbus, OH 43215 info@thrivecos.com\u2028614.545.9247",
+    "leadership": [],
+    "services": [
+      "Development",
+      "Leasing",
+      "Property Management"
+    ],
+    "specialties": [
+      "Apartment",
+      "Industrial",
+      "Land",
+      "Mixed-Use",
+      "Office"
+    ],
+    "office_locations": [
+      "842 North 4th Street\u2028Suite 200\u2028Columbus, OH 43215 info@thrivecos.com\u2028614.545.9247"
+    ],
+    "pages_scraped": [
+      "https://thrivecos.com",
+      "https://thrivecos.com/who-we-are/",
+      "https://thrivecos.com/who-we-are/community-management/",
+      "https://thrivecos.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Kaufman Development",
+    "website": "https://www.livekaufman.com",
+    "scraped_at": "2025-12-22T23:26:11.750685",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Development",
+      "Leasing"
+    ],
+    "specialties": [
+      "Apartment"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.livekaufman.com",
+      "https://www.livekaufman.com/about"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Cushman & Wakefield Cincinnati",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/cincinnati",
+    "scraped_at": "2025-12-22T23:27:18.876710",
+    "main_phone": "(513) 421-4884",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing",
+      "Warehouse"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.cushmanwakefield.com/en/united-states/offices/cincinnati",
+      "https://www.cushmanwakefield.com/en/united-states/services/valuation-and-advisory",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Lee & Associates Cincinnati",
+    "website": "https://www.lee-cincinnati.com",
+    "scraped_at": "2025-12-22T23:27:30.987697",
+    "main_phone": "(513) 272-6800",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Facility Management",
+      "Leasing",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Office"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.lee-cincinnati.com",
+      "https://www.lee-cincinnati.com/leadership",
+      "https://www.lee-cincinnati.com/brokerage"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "NAI Bergman",
+    "website": "https://bergmancommercial.com",
+    "scraped_at": "2025-12-22T23:27:48.071889",
+    "main_phone": "(513) 769-1710",
+    "main_email": "info@bergman-group.com",
+    "headquarters_address": "4695 Lake Forest Drive,",
+    "leadership": [],
+    "services": [
+      "Asset Management",
+      "Brokerage",
+      "Construction Management",
+      "Corporate Services",
+      "Development",
+      "Facility Management",
+      "Investment Sales",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Medical",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [
+      "4695 Lake Forest Drive,",
+      "77 W Elmwood Drive,",
+      "4695 Lake Forest Drive, Suite 100                Cincinnati Ohio, 45242"
+    ],
+    "pages_scraped": [
+      "https://bergmancommercial.com",
+      "https://bergmancommercial.com/meettheteam/",
+      "https://bergmancommercial.com/services/",
+      "https://bergmancommercial.com/contactus/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "APEX Commercial Group",
+    "website": "https://apexcommercialgroup.com",
+    "scraped_at": "2025-12-22T23:27:57.630080",
+    "main_phone": "(937) 222-7884",
+    "main_email": "info@apexcommercialgroup.com",
+    "headquarters_address": "7887 Washington Village Drive",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Debt Placement",
+      "Landlord Representation",
+      "Leasing",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [
+      "7887 Washington Village Drive",
+      "7887 Washington Village DrSuite 140Dayton, OH 45459"
+    ],
+    "pages_scraped": [
+      "https://apexcommercialgroup.com",
+      "https://apexcommercialgroup.com/about",
+      "https://apexcommercialgroup.com/services/",
+      "https://apexcommercialgroup.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Cushman & Wakefield CRESCO",
+    "website": "https://crescorealestate.com",
+    "scraped_at": "2025-12-22T23:28:44.480805",
+    "main_phone": "(216) 520-1200",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Consulting",
+      "Corporate Services",
+      "Development",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://crescorealestate.com",
+      "https://crescorealestate.com/our-team/",
+      "https://crescorealestate.com/services/",
+      "https://crescorealestate.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Newmark Cleveland",
+    "website": "https://terrycoyne.com",
+    "scraped_at": "2025-12-22T23:28:53.676443",
+    "main_phone": "(614) 883-1239",
+    "main_email": "terry.coyne@nmrk.com",
+    "headquarters_address": "1300 E 9th St., Suite 105, Cleveland, OH 44114 Offie: 216.453.3001",
+    "leadership": [
+      {
+        "name": "Terry Coyne",
+        "title": "Executive Vice Chairman",
+        "email": "Terry.Coyne@nmrk.com",
+        "phone": "",
+        "linkedin": "https://www.linkedin.com/in/terrycoyne/",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Professional Affiliations",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Professional Achievements",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Personal Affiliations",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Derek Lichtfuss",
+        "title": "Executive Managing Director",
+        "email": "derek.lichtfuss@nmrk.com",
+        "phone": "",
+        "linkedin": "https://www.linkedin.com/in/dereklichtfuss/",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Claire Coyne McCoy",
+        "title": "Director",
+        "email": "claire.coyne@nmrk.com",
+        "phone": "",
+        "linkedin": "https://www.linkedin.com/in/claire-coyne-a77197127",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Connor McCoy",
+        "title": "Director",
+        "email": "connor.mccoy@nmrk.com",
+        "phone": "",
+        "linkedin": "https://www.linkedin.com/in/connor-mccoy-0a77b980",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Elizabeth Coyne",
+        "title": "Director",
+        "email": "elizabeth.coyne@nmrk.com",
+        "phone": "",
+        "linkedin": "https://www.linkedin.com/in/elizabeth-coyne-2b7003227/",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Matthew Orgovan",
+        "title": "Research Director",
+        "email": "matthew.orgovan@nmrk.com",
+        "phone": "",
+        "linkedin": "https://www.linkedin.com/in/mattorgovan/",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      },
+      {
+        "name": "Jeannine Soster",
+        "title": "Operations Director",
+        "email": "jeannine.soster@nmrk.com",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://terrycoyne.com/coyne-team/"
+      }
+    ],
+    "services": [
+      "Development",
+      "Leasing"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ],
+    "office_locations": [
+      "1300 E 9th St., Suite 105, Cleveland, OH 44114 Offie: 216.453.3001",
+      "150 Broad St., Columbus, OH 43215 Offie: 614.883.1239"
+    ],
+    "pages_scraped": [
+      "https://terrycoyne.com",
+      "https://terrycoyne.com/coyne-team/",
+      "https://terrycoyne.com/contact-us/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Cushman & Wakefield Indianapolis",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/indianapolis",
+    "scraped_at": "2025-12-22T23:29:22.243821",
+    "main_phone": "(317) 634-6363",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Distribution",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.cushmanwakefield.com/en/united-states/offices/indianapolis",
+      "https://www.cushmanwakefield.com/en/united-states/services/valuation-and-advisory",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "JLL Indianapolis",
+    "website": "https://www.us.jll.com/en/locations/midwest/indianapolis",
+    "scraped_at": "2025-12-22T23:29:34.609701",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.us.jll.com/en/locations/midwest/indianapolis",
+      "https://www.us.jll.com/team",
+      "https://www.us.jll.com/services",
+      "https://www.us.jll.com/en-us/locations"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Bradley Company",
+    "website": "https://www.bradleyco.com",
+    "scraped_at": "2025-12-22T23:29:44.578732",
+    "main_phone": "(574) 237-6000",
+    "main_email": "info@bradleyco.com",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Consulting",
+      "Corporate Services",
+      "Facility Management",
+      "Occupier Services",
+      "Project Management",
+      "Property Management",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Flex",
+      "Healthcare",
+      "Industrial",
+      "Medical",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.bradleyco.com",
+      "https://www.bradleyco.com/services/commercial-brokerage/",
+      "https://www.bradleyco.com/management-maintenance/",
+      "https://www.bradleyco.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Lee & Associates Charlotte",
+    "website": "https://www.lee-associates.com/offices",
+    "scraped_at": "2025-12-22T23:32:46.108252",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Construction Management",
+      "Development",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Senior Housing"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.lee-associates.com/offices",
+      "https://www.lee-associates.com/services/?tab=brokerage-services",
+      "https://www.lee-associates.com/services/",
+      "https://www.lee-associates.com/offices/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "NAI Hiffman",
+    "website": "https://hiffman.com",
+    "scraped_at": "2025-12-22T23:30:05.738111",
+    "main_phone": "(630) 317-0796",
+    "main_email": "pgrusecki@hiffman.com",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Facility Management",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://hiffman.com",
+      "https://hiffman.com/nai/",
+      "https://hiffman.com/nai/",
+      "https://hiffman.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "JLL Chicago",
+    "website": "https://www.us.jll.com/en/locations/midwest/chicago",
+    "scraped_at": "2025-12-22T23:30:14.851129",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Development",
+      "Investment Sales",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Industrial",
+      "Land",
+      "Manufacturing",
+      "Multifamily",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.us.jll.com/en/locations/midwest/chicago",
+      "https://www.us.jll.com/team",
+      "https://www.us.jll.com/services",
+      "https://www.us.jll.com/en-us/locations"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Cushman & Wakefield Chicago",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/chicago",
+    "scraped_at": "2025-12-22T23:30:24.376214",
+    "main_phone": "(312) 470-1800",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Asset Management",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Flex",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.cushmanwakefield.com/en/united-states/offices/chicago",
+      "https://www.cushmanwakefield.com/en/united-states/services/valuation-and-advisory",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "SVN Chicago Commercial",
+    "website": "https://svnchicago.com",
+    "scraped_at": "2025-12-22T23:30:37.298269",
+    "main_phone": "(312) 676-1866",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Corporate Services",
+      "Development",
+      "Landlord Representation",
+      "Leasing",
+      "Property Management",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Flex",
+      "Hospitality",
+      "Hotel",
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://svnchicago.com",
+      "https://svnchicago.com/chicago-advisors",
+      "https://svnchicago.com/services/",
+      "https://svnchicago.com/properties/?officeLocations=34"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Interra Realty",
+    "website": "https://interrarealty.com",
+    "scraped_at": "2025-12-22T23:30:51.020504",
+    "main_phone": "(312) 261-9970",
+    "main_email": "",
+    "headquarters_address": "350 N. Clark Street",
+    "leadership": [
+      {
+        "name": "David Goss",
+        "title": "Co-Founder, Managing Principal & Designated Managing Broker",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Jon Morgan",
+        "title": "Co-Founder, Managing Principal",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Brad Feldman",
+        "title": "Senior Managing Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Joe Smazal",
+        "title": "Senior Managing Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Lucas Fryman",
+        "title": "Managing Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Patrick Kennelly",
+        "title": "Managing Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Craig Martin",
+        "title": "Managing Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Paul Waterloo",
+        "title": "Managing Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Michael Duckler",
+        "title": "Managing Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Jeremy Morton",
+        "title": "Managing Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Harrison Pinkus",
+        "title": "Managing Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Joe Braun",
+        "title": "Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Alex Cohen",
+        "title": "Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Mark Dykstra",
+        "title": "Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Max Grossman",
+        "title": "Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Colin O'Malley",
+        "title": "Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Nathan Zito",
+        "title": "Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Doug Woodworth",
+        "title": "Marketing Director",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      },
+      {
+        "name": "Megan O'Brien",
+        "title": "Office Manager and Director of Social Media",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://interrarealty.com/team/"
+      }
+    ],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Development",
+      "Valuation"
+    ],
+    "specialties": [
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Mixed-Use",
+      "Multifamily",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [
+      "350 N. Clark Street",
+      "350 N. Clark Street"
+    ],
+    "pages_scraped": [
+      "https://interrarealty.com",
+      "https://interrarealty.com/team/",
+      "https://interrarealty.com/services/",
+      "https://interrarealty.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "JLL Pittsburgh",
+    "website": "https://www.us.jll.com/en/locations/northeast/pittsburgh",
+    "scraped_at": "2025-12-22T23:31:00.228162",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Brokerage",
+      "Capital Markets",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.us.jll.com/en/locations/northeast/pittsburgh",
+      "https://www.us.jll.com/team",
+      "https://www.us.jll.com/services",
+      "https://www.us.jll.com/en-us/contact"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Newmark Pittsburgh",
+    "website": "https://www.nmrk.com/offices/pittsburgh",
+    "scraped_at": "2025-12-22T23:31:09.852501",
+    "main_phone": "(412) 281-0100",
+    "main_email": "",
+    "headquarters_address": "2025 Newmark | All rights reserved.",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Appraisal",
+      "Brokerage",
+      "Capital Markets",
+      "Construction Management",
+      "Consulting",
+      "Development",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ],
+    "office_locations": [
+      "2025 Newmark | All rights reserved."
+    ],
+    "pages_scraped": [
+      "https://www.nmrk.com/offices/pittsburgh",
+      "https://www.nmrk.com/services/investor-solutions/valuation-and-advisory",
+      "https://www.nmrk.com/services",
+      "https://www.nmrk.com/services/property-types/office"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Pennsylvania Commercial Real Estate",
+    "website": "https://www.penncom.com",
+    "scraped_at": "2025-12-22T23:31:19.140193",
+    "main_phone": "(412) 391-3500",
+    "main_email": "emailinfo@penncom.comphone",
+    "headquarters_address": "910 Sheraton Drive, Suite 340Mars, PA 16046412.391.3500",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Development",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Flex",
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [
+      "910 Sheraton Drive, Suite 340Mars, PA 16046412.391.3500"
+    ],
+    "pages_scraped": [
+      "https://www.penncom.com",
+      "https://www.penncom.com/our-team",
+      "https://www.penncom.com/pennsylvania-commercial-real-estate-inc-services",
+      "https://www.penncom.com/contact"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "JLL Charlotte",
+    "website": "https://www.us.jll.com/en/locations/southeast/charlotte",
+    "scraped_at": "2025-12-22T23:31:36.537352",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Brokerage",
+      "Capital Markets",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.us.jll.com/en/locations/southeast/charlotte",
+      "https://www.us.jll.com/team",
+      "https://www.us.jll.com/services",
+      "https://www.us.jll.com/en-us/contact"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Cushman & Wakefield Charlotte",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/charlotte",
+    "scraped_at": "2025-12-22T23:31:46.159174",
+    "main_phone": "(704) 375-7771",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.cushmanwakefield.com/en/united-states/offices/charlotte",
+      "https://www.cushmanwakefield.com/en/united-states/services/valuation-and-advisory",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]",
+      "https://www.cushmanwakefield.com/en/united-states/properties/lease/lease-property-search#f:PropertyType=[Warehouse/Distribution,Manufacturing,Industrial,High Technology,Office Service]&f:Country=[United States]"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Trinity Partners",
+    "website": "https://www.trinity-partners.com",
+    "scraped_at": "2025-12-22T23:32:00.096009",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "",
+    "leadership": [
+      {
+        "name": "William Allen",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "David Allen",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Daniel Allson",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Mark Alviano",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Garrett Aman",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Jared Aman",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Jason Amato",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Kevin Andrews",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Will Andrews",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Tim Arnold",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Albert Asebes",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Beth Aubrey",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Esther Austin",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Laura Baccich",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "J\u00e1nos Bal\u00e1zs",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Jim Baty",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Beth Beasley",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Owen Beasley",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Haylea Beil",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      },
+      {
+        "name": "Erin Benjamin",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.trinity-partners.com/team"
+      }
+    ],
+    "services": [
+      "Investment Sales",
+      "Leasing",
+      "Occupier Services",
+      "Project Management",
+      "Property Management"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Medical",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [],
+    "pages_scraped": [
+      "https://www.trinity-partners.com",
+      "https://www.trinity-partners.com/team",
+      "https://www.trinity-partners.com/services",
+      "https://www.trinity-partners.com/locations"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Lincoln Property Company Charlotte",
+    "website": "https://lpc.com/office/charlotte",
+    "scraped_at": "2025-12-22T23:32:08.983624",
+    "main_phone": "(214) 740-3300",
+    "main_email": "",
+    "headquarters_address": "8111 Douglas Avenue, Suite 600 Dallas, TX 75225",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Development",
+      "Facility Management",
+      "Leasing",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Healthcare",
+      "Land",
+      "Life Science",
+      "Mixed-Use",
+      "Multifamily",
+      "Office"
+    ],
+    "office_locations": [
+      "8111 Douglas Avenue, Suite 600 Dallas, TX 75225"
+    ],
+    "pages_scraped": [
+      "https://lpc.com/office/charlotte",
+      "https://lpc.com/about-us/leadership/",
+      "https://lpc.com/what-we-do/",
+      "https://lpc.com/locations/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Foundry Commercial",
+    "website": "https://www.foundrycommercial.com/locations/charlotte",
+    "scraped_at": "2025-12-22T23:32:17.930740",
+    "main_phone": "",
+    "main_email": "john.ball@foundrycommercial.com",
+    "headquarters_address": "45 States of project experience",
+    "leadership": [
+      {
+        "name": "Alex Rosario",
+        "title": "",
+        "email": "alex.rosario@foundrycommercial.com",
+        "phone": "407-540-7713",
+        "linkedin": "https://www.linkedin.com/in/llgiv/",
+        "bio_snippet": "",
+        "source_url": "https://www.foundrycommercial.com/services/brokerage/"
+      },
+      {
+        "name": "Brad Chrischilles",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.foundrycommercial.com/services/brokerage/"
+      },
+      {
+        "name": "John Ball",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.foundrycommercial.com/services/brokerage/"
+      },
+      {
+        "name": "Jane C. Doggett",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.foundrycommercial.com/services/brokerage/"
+      },
+      {
+        "name": "Steve Bassett",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.foundrycommercial.com/services/brokerage/"
+      },
+      {
+        "name": "Gregg Ickes",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.foundrycommercial.com/services/brokerage/"
+      },
+      {
+        "name": "Jason Holwerda",
+        "title": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://www.foundrycommercial.com/services/brokerage/"
+      }
+    ],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Development",
+      "Investment Sales",
+      "Landlord Representation",
+      "Leasing",
+      "Project Management",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Multifamily",
+      "Office",
+      "Retail"
+    ],
+    "office_locations": [
+      "45 States of project experience",
+      "59 Countries with Maxis project origins"
+    ],
+    "pages_scraped": [
+      "https://www.foundrycommercial.com/locations/charlotte",
+      "https://www.foundrycommercial.com/services/brokerage/",
+      "https://www.foundrycommercial.com/services/brokerage/",
+      "https://www.foundrycommercial.com/services/incentives-negotiation-location-strategy/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Childress Klein",
+    "website": "https://childressklein.com",
+    "scraped_at": "2025-12-22T23:32:27.443026",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "550 S. Tryon 1,500,000 SF",
+    "leadership": [],
+    "services": [
+      "Development",
+      "Leasing",
+      "Project Management",
+      "Property Management"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Self-Storage"
+    ],
+    "office_locations": [
+      "550 S. Tryon 1,500,000 SF"
+    ],
+    "pages_scraped": [
+      "https://childressklein.com",
+      "https://childressklein.com/leadership",
+      "https://childressklein.com/",
+      "https://childressklein.com/office"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "The Keith Corporation",
+    "website": "https://thekeithcorp.com",
+    "scraped_at": "2025-12-22T23:32:37.068245",
+    "main_phone": "(704) 365-6000",
+    "main_email": "",
+    "headquarters_address": "4500 Cameron Valley ParkwaySuite 400Charlotte, North Carolina 28211",
+    "leadership": [
+      {
+        "name": "Graeme M. Keith, Jr.",
+        "title": "Chairman & Chief Executive Officer",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Kenneth R. Beuley",
+        "title": "President",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Alan Lewis",
+        "title": "Managing Partner, Industrial",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Matthew Giannuzzi",
+        "title": "Vice President, Industrial Development",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "David A. Hanby",
+        "title": "Managing Partner, Retail",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Graeme M. Keith, III",
+        "title": "Development Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "David S. Osterhus",
+        "title": "Retail Brokerage Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Alan Marshall",
+        "title": "Retail Brokerage & Development",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Knox Campbell",
+        "title": "Retail Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Cody Keith",
+        "title": "Development Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Chase Morten",
+        "title": "Vice President, Retail Brokerage & Development",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Laura Cheeseman",
+        "title": "Vice President, Retail Development",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "William Baker",
+        "title": "Development Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Jay Coleman",
+        "title": "Office Partner",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Patrick Faulkner",
+        "title": "Senior Partner, Healthcare Development",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Sam Walker",
+        "title": "Vice President, Healthcare Development",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Derek Salfia",
+        "title": "Director of Construction",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Eric Larson",
+        "title": "Development Partner & Project Executive",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Wendy Fulton",
+        "title": "Development Partner & Project Executive",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      },
+      {
+        "name": "Ed Benton",
+        "title": "Director of TKC Management Services",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "bio_snippet": "",
+        "source_url": "https://thekeithcorp.com/team/"
+      }
+    ],
+    "services": [
+      "Asset Management",
+      "Brokerage",
+      "Development",
+      "Facility Management",
+      "Project Management",
+      "Property Management"
+    ],
+    "specialties": [
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Medical",
+      "Mixed-Use",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ],
+    "office_locations": [
+      "4500 Cameron Valley ParkwaySuite 400Charlotte, North Carolina 28211"
+    ],
+    "pages_scraped": [
+      "https://thekeithcorp.com",
+      "https://thekeithcorp.com/team/",
+      "https://thekeithcorp.com/services/",
+      "https://thekeithcorp.com/contact/"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "Avison Young Savannah",
+    "website": "https://www.avisonyoung.us/web/savannah",
+    "scraped_at": "2025-12-22T23:32:59.004755",
+    "main_phone": "",
+    "main_email": "",
+    "headquarters_address": "200 Portland Street",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Asset Management",
+      "Brokerage",
+      "Capital Markets",
+      "Construction Management",
+      "Consulting",
+      "Development",
+      "Facility Management",
+      "Investment Sales",
+      "Landlord Representation",
+      "Leasing",
+      "Occupier Services",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Distribution",
+      "Flex",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Mixed-Use",
+      "Multifamily",
+      "Net Lease",
+      "Office",
+      "Retail",
+      "Self-Storage",
+      "Senior Housing",
+      "Warehouse"
+    ],
+    "office_locations": [
+      "200 Portland Street"
+    ],
+    "pages_scraped": [
+      "https://www.avisonyoung.us/web/savannah",
+      "https://www.avisonyoung.us/leadership",
+      "https://www.avisonyoung.us/managed-retail-listings",
+      "https://www.avisonyoung.us/office"
+    ],
+    "errors": []
+  },
+  {
+    "company_name": "NAI Mopper Benton",
+    "website": "https://www.naisavannah.com",
+    "scraped_at": "2025-12-22T23:33:08.080373",
+    "main_phone": "(912) 358-5600",
+    "main_email": "info@naisavannah.com",
+    "headquarters_address": "1650 E Victory Dr Suite D, Savannah, GA 31404, United States",
+    "leadership": [],
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Consulting",
+      "Corporate Services",
+      "Investment Sales",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Valuation"
+    ],
+    "specialties": [
+      "Distribution",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail",
+      "Senior Housing"
+    ],
+    "office_locations": [
+      "1650 E Victory Dr Suite D, Savannah, GA 31404, United States",
+      "1650 E Victory Dr Suite D, Savannah, GA 31404, United States"
+    ],
+    "pages_scraped": [
+      "https://www.naisavannah.com",
+      "https://www.naisavannah.com/pages/commercial-real-estate-agency-advisors-savannah",
+      "https://www.naisavannah.com/pages/services",
+      "https://www.naisavannah.com/pages/savannah-commercial-real-estate-contact"
+    ],
+    "errors": []
+  }
+]

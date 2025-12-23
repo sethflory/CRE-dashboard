@@ -1,0 +1,52 @@
+# Credentials and session data
+linkedin_cookies.json
+*.env
+.env*
+credentials*.json
+secrets*.json
+
+# Debug screenshots
+*.png
+debug_*.html
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code
+.claude/
+
+# Scraped data (keep structure, not data)
+discovered_contacts.json
+discovered_firms.json
+enriched_contacts.json
+url_cache.json
+
+# Generated dashboard data (regenerated from scraped data)
+data_contacts.js
+data_firms.js
+
+# Misc
+nul
+*.log
+.DS_Store
+Thumbs.db
