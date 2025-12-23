@@ -80,6 +80,7 @@
             bottom: 0;
             background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             opacity: 0.5;
+            pointer-events: none;
         }
 
         header h1 {
@@ -118,6 +119,212 @@
             font-weight: 600;
         }
 
+        .tab-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--primary);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 1.1fr) minmax(320px, 1fr);
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .profile-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem 1.25rem;
+        }
+
+        .profile-card h3 {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .profile-tag {
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(15, 118, 110, 0.12);
+            color: var(--secondary);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .match-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .match-card {
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem 1.25rem;
+        }
+
+        .match-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            color: var(--secondary);
+        }
+
+        .match-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.35rem 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .match-item:last-child {
+            border-bottom: none;
+        }
+
+        .match-score {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .profile-form {
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-form h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .profile-form label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.75rem 0 0.35rem;
+            color: var(--secondary);
+        }
+
+        .profile-form input[type="text"],
+        .profile-form textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 0.65rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .profile-form textarea {
+            min-height: 80px;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem 1rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--accent-light);
+            color: var(--secondary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .profile-secondary {
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem 1.25rem;
+        }
+
+        .profile-secondary h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 900px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+        }
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -1062,9 +1269,14 @@
             <span class="divider">|</span>
             <span id="badge-contacts">0 Contacts</span>
         </div>
+        <div class="tab-bar" id="tab-bar">
+            <button class="tab-btn active" data-tab="overview">Overview</button>
+            <button class="tab-btn" data-tab="profile">Profile Match</button>
+        </div>
     </header>
 
     <div class="container">
+        <div class="tab-panel active" id="tab-overview">
         <!-- Stats -->
         <div class="stats-grid" id="stats-grid"></div>
 
@@ -1158,11 +1370,48 @@
         </div>
         <div class="filters reveal" id="people-filters"></div>
         <div class="people-grid" id="people-grid"></div>
+        </div>
+
+        <div class="tab-panel" id="tab-profile">
+            <div class="section-header reveal">
+                <h2>Profile Match</h2>
+            </div>
+            <div class="profile-layout">
+                <div class="profile-column">
+                    <div class="profile-form" id="profile-form"></div>
+                    <div class="profile-card">
+                        <h3>Profile Snapshot</h3>
+                        <div id="profile-grid"></div>
+                    </div>
+                </div>
+                <div class="profile-column">
+                    <div class="profile-secondary">
+                        <h4>Match Highlights</h4>
+                        <div class="match-grid">
+                            <div class="match-card">
+                                <h4>Best-Fit Companies</h4>
+                                <div id="match-companies"></div>
+                            </div>
+                            <div class="match-card">
+                                <h4>Most Impactful Groups</h4>
+                                <div id="match-groups"></div>
+                            </div>
+                            <div class="match-card">
+                                <h4>Recommended Connections</h4>
+                                <div id="match-people"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
     </div>
 
     <script src="data_firms.js"></script>
     <script src="data_contacts.js"></script>
     <script src="data_cre_markets.js"></script>
+    <script src="config/profile.js"></script>
     <script>
         if (typeof firms !== 'undefined') {
             window.firms = firms;
@@ -1172,6 +1421,9 @@
         }
         if (typeof creMarketData !== 'undefined') {
             window.creMarketData = creMarketData;
+        }
+        if (typeof profileConfig !== 'undefined') {
+            window.profileConfig = profileConfig;
         }
     </script>
     <script>
@@ -1184,6 +1436,8 @@
         let allMarkets = [];
         let allUniversities = {};
         let allGroups = {};
+        let profileConfig = null;
+        let graphData = null;
 
         async function loadConfig() {
             try {
@@ -1192,6 +1446,16 @@
                 networkConfig = await res.json();
             } catch {
                 networkConfig = null;
+            }
+        }
+
+        async function loadProfileConfig() {
+            try {
+                const res = await fetch('config/profile.json');
+                if (!res.ok) return;
+                profileConfig = await res.json();
+            } catch {
+                profileConfig = window.profileConfig || null;
             }
         }
 
@@ -1280,8 +1544,8 @@
             try {
                 const res = await fetch('graph.json');
                 if (!res.ok) return;
-                const graph = await res.json();
-                buildDataFromGraph(graph);
+                graphData = await res.json();
+                buildDataFromGraph(graphData);
             } catch {
                 // Fall back to data_*.js globals
             }
@@ -1353,6 +1617,357 @@
                     <span>${type}</span>
                 </div>
             `).join('');
+        }
+
+        function renderProfileTab() {
+            const grid = document.getElementById('profile-grid');
+            if (!grid) return;
+
+            const profile = profileConfig?.profile || {};
+            const focus = profile.focus || {};
+            const tags = [];
+
+            (focus.services || []).forEach(s => tags.push({ label: s }));
+            (focus.markets || []).forEach(m => tags.push({ label: m }));
+            (focus.universities || []).forEach(u => tags.push({ label: u }));
+            (focus.groups || []).forEach(g => tags.push({ label: g }));
+
+            grid.innerHTML = `
+                <div class="profile-grid">
+                    <div class="profile-card">
+                        <h3>${profile.name || 'Target Profile'}</h3>
+                        <div>${profile.summary || 'Profile preferences from config.'}</div>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Focus Areas</h3>
+                        <div class="profile-tags">
+                            ${tags.map(t => `<span class="profile-tag">${t.label}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Preferences</h3>
+                        <div>Markets: ${(focus.markets || []).length}</div>
+                        <div>Services: ${(focus.services || []).length}</div>
+                        <div>Groups: ${(focus.groups || []).length}</div>
+                        <div>Universities: ${(focus.universities || []).length}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getProfileFocusSelections() {
+            const profile = profileConfig?.profile || {};
+            if (!profile.focus) {
+                profile.focus = { services: [], markets: [], universities: [], groups: [] };
+            }
+            return profile.focus;
+        }
+
+        function renderProfileForm() {
+            const form = document.getElementById('profile-form');
+            if (!form) return;
+
+            if (!profileConfig || !profileConfig.profile) {
+                profileConfig = {
+                    profile: {
+                        name: 'Target Profile',
+                        summary: '',
+                        focus: { services: [], markets: [], universities: [], groups: [] }
+                    }
+                };
+            }
+
+            const focus = getProfileFocusSelections();
+            const universities = Object.keys(allUniversities).sort();
+            const groups = Object.keys(allGroups).sort();
+
+            const buildOptions = (items, selected, name) => `
+                <div class="option-grid">
+                    ${items.map(item => `
+                        <label class="option-item">
+                            <input type="checkbox" name="${name}" value="${item}" ${selected.includes(item) ? 'checked' : ''}>
+                            <span>${item}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+
+            form.innerHTML = `
+                <h4>Update Profile</h4>
+                <label for="profile-name">Name</label>
+                <input id="profile-name" type="text" value="${profileConfig.profile.name || ''}">
+                <label for="profile-summary">Summary</label>
+                <textarea id="profile-summary">${profileConfig.profile.summary || ''}</textarea>
+
+                <label>Services</label>
+                ${buildOptions(allServices, focus.services || [], 'services')}
+
+                <label>Markets</label>
+                ${buildOptions(allMarkets, focus.markets || [], 'markets')}
+
+                <label>Universities</label>
+                ${buildOptions(universities, focus.universities || [], 'universities')}
+
+                <label>Groups</label>
+                ${buildOptions(groups, focus.groups || [], 'groups')}
+
+                <div class="profile-actions">
+                    <button class="profile-btn" id="profile-apply">Apply Changes</button>
+                    <button class="profile-btn" id="profile-export">Download profile.json</button>
+                </div>
+            `;
+
+            const applyBtn = document.getElementById('profile-apply');
+            const exportBtn = document.getElementById('profile-export');
+            if (applyBtn) {
+                applyBtn.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const nameInput = document.getElementById('profile-name');
+                    const summaryInput = document.getElementById('profile-summary');
+                    profileConfig.profile.name = nameInput ? nameInput.value.trim() : profileConfig.profile.name;
+                    profileConfig.profile.summary = summaryInput ? summaryInput.value.trim() : profileConfig.profile.summary;
+
+                    const readSelections = (field) => Array.from(form.querySelectorAll(`input[name="${field}"]:checked`)).map(i => i.value);
+                    focus.services = readSelections('services');
+                    focus.markets = readSelections('markets');
+                    focus.universities = readSelections('universities');
+                    focus.groups = readSelections('groups');
+
+                    renderProfileTab();
+                    renderMatchResults();
+                });
+            }
+
+            if (exportBtn) {
+                exportBtn.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const blob = new Blob([JSON.stringify(profileConfig, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'profile.json';
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    URL.revokeObjectURL(url);
+                });
+            }
+        }
+
+        function computeMatchScores() {
+            const focus = profileConfig?.profile?.focus || {};
+            const weights = focus.weights || { service: 2, market: 3, group: 1, distance: 2, distance_max: 4 };
+            const servicesPref = new Set(focus.services || []);
+            const marketsPref = new Set(focus.markets || []);
+            const groupsPref = new Set(focus.groups || []);
+            const universitiesPref = new Set(focus.universities || []);
+
+            const peopleList = Object.values(contacts);
+            const companiesByName = new Map(firms.map(f => [f.company_name, f]));
+
+            const companyScores = firms.map(firm => {
+                const serviceScore = (firm.services || []).filter(s => servicesPref.has(s)).length;
+                const marketScore = marketsPref.has(firm.market) ? 1 : 0;
+                const total = serviceScore * weights.service + marketScore * weights.market;
+                return { name: firm.company_name, score: total, meta: `${firm.market}` };
+            });
+
+            const matchedCompanies = new Set(
+                firms
+                    .filter(firm => (!marketsPref.size || marketsPref.has(firm.market)) &&
+                        (!servicesPref.size || (firm.services || []).some(s => servicesPref.has(s))))
+                    .map(firm => firm.company_name)
+            );
+
+            const groupScores = new Map();
+            peopleList.forEach(person => {
+                (person.groups || []).forEach(group => {
+                    const score = (groupsPref.has(group) ? weights.group * 2 : weights.group);
+                    groupScores.set(group, (groupScores.get(group) || 0) + score);
+                });
+            });
+
+            const universityScores = new Map();
+            peopleList.forEach(person => {
+                (person.education || []).forEach(edu => {
+                    const school = edu.school;
+                    const score = universitiesPref.has(school) ? weights.group * 2 : weights.group;
+                    universityScores.set(school, (universityScores.get(school) || 0) + score);
+                });
+            });
+
+            const distanceBonus = buildDistanceBonusFn(groupsPref, universitiesPref, weights);
+
+            const peopleScores = peopleList.map(person => {
+                const company = companiesByName.get(person.current_company);
+                const companyScore = company ? ((company.services || []).filter(s => servicesPref.has(s)).length * weights.service) : 0;
+                const groupScore = (person.groups || []).filter(g => groupsPref.has(g)).length * weights.group * 2;
+                const eduScore = (person.education || []).filter(e => universitiesPref.has(e.school)).length * weights.group * 2;
+                const marketScore = company && marketsPref.has(company.market) ? weights.market : 0;
+                const distanceScore = distanceBonus(person);
+                const total = companyScore + groupScore + eduScore + marketScore + distanceScore;
+                return { name: person.name, score: total, meta: person.current_company || '', link: person.linkedin_url || '' };
+            });
+
+            companyScores.sort((a, b) => b.score - a.score);
+            const topCompanies = companyScores.slice(0, 5);
+
+            const topGroups = Array.from(groupScores.entries())
+                .map(([name, score]) => ({ name, score }))
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 5);
+
+            const topPeople = peopleScores
+                .filter(p => p.score > 0 && (!matchedCompanies.size || matchedCompanies.has(p.meta)))
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 5);
+
+            return { topCompanies, topGroups, topPeople };
+        }
+
+        function renderMatchResults() {
+            const companiesEl = document.getElementById('match-companies');
+            const groupsEl = document.getElementById('match-groups');
+            const peopleEl = document.getElementById('match-people');
+            if (!companiesEl || !groupsEl || !peopleEl) return;
+
+            const { topCompanies, topGroups, topPeople } = computeMatchScores();
+
+            companiesEl.innerHTML = topCompanies.map(item => `
+                <div class="match-item">
+                    <span>${item.name}</span>
+                    <span class="match-score">${item.score}</span>
+                </div>
+            `).join('');
+
+            groupsEl.innerHTML = topGroups.map(item => `
+                <div class="match-item">
+                    <span>${item.name}</span>
+                    <span class="match-score">${item.score}</span>
+                </div>
+            `).join('');
+
+            peopleEl.innerHTML = topPeople.map(item => `
+                <div class="match-item">
+                    <span>${item.link ? `<a href=\"${item.link}\" target=\"_blank\">${item.name}</a>` : item.name}</span>
+                    <span class="match-score">${item.score}</span>
+                </div>
+            `).join('');
+        }
+
+        function buildDistanceBonusFn(groupsPref, universitiesPref, weights) {
+            const targets = new Set();
+            groupsPref.forEach(g => targets.add(`group:${slugify(g)}`));
+            universitiesPref.forEach(u => targets.add(`university:${slugify(u)}`));
+
+            const graph = graphData || buildGraphFromCurrentData();
+            const adjacency = buildAdjacency(graph);
+
+            return (person) => {
+                const personId = person.__graph_id || `person:${slugify(person.__key || person.name)}`;
+                const distance = shortestDistance(personId, targets, adjacency, weights.distance_max);
+                if (distance === null) return 0;
+                return Math.max(0, (weights.distance_max - distance)) * weights.distance;
+            };
+        }
+
+        function buildGraphFromCurrentData() {
+            const nodes = [];
+            const edges = [];
+
+            const addNode = (id, type, label) => nodes.push({ id, type, label });
+            const addEdge = (type, from, to) => edges.push({ id: `${type}:${from}->${to}`, type, from, to });
+
+            firms.forEach(firm => {
+                const companyId = `company:${slugify(firm.company_name)}`;
+                addNode(companyId, 'Company', firm.company_name);
+                const marketId = `market:${slugify(firm.market)}`;
+                addNode(marketId, 'Market', firm.market);
+                addEdge('operates_in', companyId, marketId);
+            });
+
+            Object.entries(contacts).forEach(([key, person]) => {
+                const personId = `person:${slugify(key)}`;
+                person.__graph_id = personId;
+                person.__key = key;
+                addNode(personId, 'Person', person.name);
+
+                if (person.current_company) {
+                    const companyId = `company:${slugify(person.current_company)}`;
+                    addNode(companyId, 'Company', person.current_company);
+                    addEdge('employed_by', personId, companyId);
+                }
+
+                (person.groups || []).forEach(group => {
+                    const groupId = `group:${slugify(group)}`;
+                    addNode(groupId, 'Group', group);
+                    addEdge('member_of', personId, groupId);
+                });
+
+                (person.education || []).forEach(edu => {
+                    const school = edu.school || '';
+                    if (!school) return;
+                    const uniId = `university:${slugify(school)}`;
+                    addNode(uniId, 'University', school);
+                    addEdge('educated_at', personId, uniId);
+                });
+            });
+
+            return { nodes, edges };
+        }
+
+        function buildAdjacency(graph) {
+            const adjacency = new Map();
+            (graph.edges || []).forEach(edge => {
+                if (!adjacency.has(edge.from)) adjacency.set(edge.from, new Set());
+                if (!adjacency.has(edge.to)) adjacency.set(edge.to, new Set());
+                adjacency.get(edge.from).add(edge.to);
+                adjacency.get(edge.to).add(edge.from);
+            });
+            return adjacency;
+        }
+
+        function shortestDistance(startId, targets, adjacency, maxDepth) {
+            if (!startId || !adjacency.has(startId) || targets.size === 0) return null;
+            if (targets.has(startId)) return 0;
+            const visited = new Set([startId]);
+            let frontier = [{ id: startId, depth: 0 }];
+            while (frontier.length) {
+                const { id, depth } = frontier.shift();
+                if (depth >= maxDepth) continue;
+                const neighbors = adjacency.get(id) || [];
+                for (const next of neighbors) {
+                    if (visited.has(next)) continue;
+                    if (targets.has(next)) return depth + 1;
+                    visited.add(next);
+                    frontier.push({ id: next, depth: depth + 1 });
+                }
+            }
+            return null;
+        }
+
+        function slugify(value) {
+            return (value || '')
+                .toString()
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+        }
+
+        function setupTabs() {
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const tab = btn.getAttribute('data-tab');
+                    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+                    const activePanel = document.getElementById(`tab-${tab}`);
+                    if (activePanel) activePanel.classList.add('active');
+                });
+            });
         }
 
         // Render Stats
@@ -2009,11 +2624,13 @@
 
         async function initDashboard() {
             await loadConfig();
+            await loadProfileConfig();
             await loadGraphData();
             prepareDerivedData();
             updateHeaderFromConfig();
             updateHeaderSummary();
             renderTypeLegend();
+            setupTabs();
             renderStats();
             renderConnections();
             renderNetworkView();
@@ -2021,6 +2638,9 @@
             renderMarketFilters();
             renderServicesMatrix();
             renderPeople();
+            renderProfileTab();
+            renderMatchResults();
+            renderProfileForm();
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
