@@ -1,4 +1,4 @@
-const contacts = {
+window.contacts = {
   "danwendorf": {
     "name": "Dan Wendorf",
     "linkedin_url": "https://www.linkedin.com/in/danwendorf/",

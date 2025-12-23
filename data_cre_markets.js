@@ -4,7 +4,7 @@
 // - Altus Group Q4 2024 Report: https://www.altusgroup.com/insights/us-cre-transactions-q4-2024/
 // - NAR Commercial Real Estate Dashboard: https://www.nar.realtor/research-and-statistics/research-reports/commercial-real-estate-metro-market-reports
 
-const creMarketData = [
+window.creMarketData = [
   // Top 5 (confirmed data from Terrydale Capital)
   { city: "Dallas", state: "TX", lat: 32.7767, lng: -96.7970, volume: 18.8, rank: 1 },
   { city: "Los Angeles", state: "CA", lat: 34.0522, lng: -118.2437, volume: 17.1, rank: 2 },

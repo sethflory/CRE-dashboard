@@ -1,0 +1,52 @@
+{
+  "domain": {
+    "name": "Relationship Network Builder",
+    "description": "Generalized relationship intelligence for companies, people, and shared attributes."
+  },
+  "node_types": {
+    "Company": { "color": "#0f766e", "icon": "building", "label_key": "label" },
+    "Person": { "color": "#f97316", "icon": "user", "label_key": "label" },
+    "Market": { "color": "#1f3a44", "icon": "map", "label_key": "label" },
+    "Group": { "color": "#7c3aed", "icon": "users", "label_key": "label" },
+    "University": { "color": "#b45309", "icon": "graduation-cap", "label_key": "label" }
+  },
+  "edge_types": {
+    "employed_by": { "from": "Person", "to": "Company", "directed": true },
+    "operates_in": { "from": "Company", "to": "Market", "directed": true },
+    "member_of": { "from": "Person", "to": "Group", "directed": true },
+    "educated_at": { "from": "Person", "to": "University", "directed": true }
+  },
+  "dimensions": {
+    "primary": ["Market", "Group", "University"],
+    "secondary": ["Company", "Person"]
+  },
+  "enrichers": {
+    "default": "linkedin",
+    "linkedin": {
+      "enabled": true,
+      "max_depth": 2,
+      "max_new_companies": 50,
+      "rate_limit_seconds": 2
+    }
+  },
+  "visuals": [
+    {
+      "id": "network_view",
+      "title": "Network View",
+      "description": "Expandable type-based network exploration.",
+      "inputs": ["Market", "Company", "Person"]
+    },
+    {
+      "id": "services_matrix",
+      "title": "Services by Company",
+      "description": "Compare configured attributes across companies.",
+      "inputs": ["Company"]
+    },
+    {
+      "id": "connections_by_market",
+      "title": "Connections by Market",
+      "description": "Show grouped clusters for shared attributes.",
+      "inputs": ["Market", "Group", "University", "Person"]
+    }
+  ]
+}

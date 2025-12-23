@@ -29,6 +29,7 @@ from cre_website_scraper import (
     export_to_csv, export_to_json, RESULTS_FILE
 )
 from linkedin_scraper import LinkedInScraper, DISCOVERED_FIRMS_FILE
+from enrichers.linkedin import LinkedInEnricher
 
 
 def load_discovered_firms():
@@ -226,31 +227,24 @@ def run_linkedin_enrichment(limit: int = 10):
     contacts_to_process = contacts_to_enrich[:limit]
     print(f"Processing first {len(contacts_to_process)} contacts")
 
-    # Start LinkedIn scraper
-    scraper = LinkedInScraper(headless=False)
+    # Start LinkedIn enricher
+    enricher = LinkedInEnricher(headless=False)
 
     try:
-        if not scraper.load_cookies():
-            print("\nNeed to login to LinkedIn first.")
-            import getpass
-            email = input("LinkedIn Email: ")
-            password = getpass.getpass("LinkedIn Password: ")
-            if not scraper.login(email, password):
-                print("Login failed!")
-                return
-
-        # Enrich contacts
-        scraper.run_enrichment_batch(contacts_to_process, limit=len(contacts_to_process))
+        processed = enricher.enrich_contacts(contacts_to_process, limit=len(contacts_to_process))
+        if not processed:
+            print("Login failed!")
+            return
 
         # Show discovered firms
-        discovered = list(scraper.discovered_firms.values())
+        discovered = list(enricher.scraper.discovered_firms.values())
         if discovered:
             print(f"\n=== Discovered {len(discovered)} CRE firms from work history ===")
             for firm in discovered:
                 print(f"  {firm.name} (from {firm.discovered_from})")
 
     finally:
-        scraper.quit()
+        enricher.close()
 
 
 def show_discovered_firms():

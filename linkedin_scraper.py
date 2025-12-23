@@ -578,7 +578,7 @@ class LinkedInScraper:
                 }
 
             with open('data_contacts.js', 'w', encoding='utf-8') as f:
-                f.write('const contacts = ')
+                f.write('window.contacts = ')
                 json.dump(contacts_js, f, indent=2)
                 f.write(';')
 
@@ -614,7 +614,7 @@ class LinkedInScraper:
                     })
 
                 with open('data_firms.js', 'w', encoding='utf-8') as f:
-                    f.write('const firms = ')
+                    f.write('window.firms = ')
                     json.dump(firms_js, f, indent=2)
                     f.write(';')
 

@@ -981,6 +981,31 @@
             background: var(--accent);
         }
 
+        .type-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .type-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: white;
+            border: 1px solid var(--border);
+        }
+
+        .type-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
         /* Footer */
         footer {
             background: var(--primary);
@@ -1028,14 +1053,14 @@
 </head>
 <body>
     <header>
-        <h1>CRE Career Intelligence</h1>
-        <p>Research target firms, discover networking connections, and break into commercial real estate</p>
+        <h1 id="header-title">CRE Career Intelligence</h1>
+        <p id="header-subtitle">Research target firms, discover networking connections, and break into commercial real estate</p>
         <div class="header-badge">
-            <span>44 Firms</span>
+            <span id="badge-firms">0 Firms</span>
             <span class="divider">|</span>
-            <span>8 Markets</span>
+            <span id="badge-markets">0 Markets</span>
             <span class="divider">|</span>
-            <span>149 Contacts</span>
+            <span id="badge-contacts">0 Contacts</span>
         </div>
     </header>
 
@@ -1048,6 +1073,7 @@
             <h2>Network View</h2>
         </div>
         <div class="network-card reveal">
+            <div class="type-legend" id="type-legend"></div>
             <div class="network-meta">
                 <span>Expand nodes to explore markets, firms, and contact clusters.</span>
                 <span>Future: re-cluster by service, university, or groups.</span>
@@ -1138,27 +1164,196 @@
     <script src="data_contacts.js"></script>
     <script src="data_cre_markets.js"></script>
     <script>
+        if (typeof firms !== 'undefined') {
+            window.firms = firms;
+        }
+        if (typeof contacts !== 'undefined') {
+            window.contacts = contacts;
+        }
+        if (typeof creMarketData !== 'undefined') {
+            window.creMarketData = creMarketData;
+        }
+    </script>
+    <script>
 
-        // Extract unique data
-        const allServices = [...new Set(firms.flatMap(f => f.services))].sort();
-        const allMarkets = [...new Set(firms.map(f => f.market))].sort();
-        const allUniversities = {};
-        const allGroups = {};
+        let firms = window.firms || [];
+        let contacts = window.contacts || {};
+        let creMarketData = window.creMarketData || [];
+        let networkConfig = null;
+        let allServices = [];
+        let allMarkets = [];
+        let allUniversities = {};
+        let allGroups = {};
 
-        Object.values(contacts).forEach(c => {
-            if (c.education) {
-                c.education.forEach(e => {
-                    if (!allUniversities[e.school]) allUniversities[e.school] = [];
-                    allUniversities[e.school].push(c);
-                });
+        async function loadConfig() {
+            try {
+                const res = await fetch('config/network.json');
+                if (!res.ok) return;
+                networkConfig = await res.json();
+            } catch {
+                networkConfig = null;
             }
-            if (c.groups) {
-                c.groups.forEach(g => {
-                    if (!allGroups[g]) allGroups[g] = [];
-                    allGroups[g].push(c);
-                });
+        }
+
+        function buildDataFromGraph(graph) {
+            const nodes = graph.nodes || [];
+            const edges = graph.edges || [];
+            const nodeById = new Map(nodes.map(n => [n.id, n]));
+
+            const companies = nodes.filter(n => n.type === 'Company');
+            const markets = nodes.filter(n => n.type === 'Market');
+            const groups = nodes.filter(n => n.type === 'Group');
+            const universities = nodes.filter(n => n.type === 'University');
+            const people = nodes.filter(n => n.type === 'Person');
+
+            const edgesByType = {};
+            edges.forEach(edge => {
+                if (!edgesByType[edge.type]) edgesByType[edge.type] = [];
+                edgesByType[edge.type].push(edge);
+            });
+
+            const operatesIn = edgesByType.operates_in || [];
+            const employedBy = edgesByType.employed_by || [];
+            const memberOf = edgesByType.member_of || [];
+            const educatedAt = edgesByType.educated_at || [];
+
+            const marketById = new Map(markets.map(m => [m.id, m]));
+            const groupById = new Map(groups.map(g => [g.id, g]));
+            const uniById = new Map(universities.map(u => [u.id, u]));
+
+            const marketByCompanyId = {};
+            operatesIn.forEach(edge => {
+                const market = marketById.get(edge.to);
+                if (market) {
+                    marketByCompanyId[edge.from] = market.label;
+                }
+            });
+
+            firms = companies.map(company => ({
+                company_name: company.label,
+                website: company.attributes?.website || '',
+                market: marketByCompanyId[company.id] || company.attributes?.market || 'Other / Unknown',
+                main_phone: company.attributes?.main_phone || '',
+                services: company.attributes?.services || [],
+                specialties: company.attributes?.specialties || []
+            }));
+
+            const companyById = new Map(companies.map(c => [c.id, c]));
+            const companyByPersonId = {};
+            employedBy.forEach(edge => {
+                companyByPersonId[edge.from] = edge.to;
+            });
+
+            const groupsByPersonId = {};
+            memberOf.forEach(edge => {
+                if (!groupsByPersonId[edge.from]) groupsByPersonId[edge.from] = [];
+                const group = groupById.get(edge.to);
+                if (group) groupsByPersonId[edge.from].push(group.label);
+            });
+
+            const schoolsByPersonId = {};
+            educatedAt.forEach(edge => {
+                if (!schoolsByPersonId[edge.from]) schoolsByPersonId[edge.from] = [];
+                const uni = uniById.get(edge.to);
+                if (uni) schoolsByPersonId[edge.from].push({ school: uni.label });
+            });
+
+            contacts = {};
+            people.forEach(person => {
+                const companyId = companyByPersonId[person.id];
+                const company = companyId ? companyById.get(companyId) : null;
+                contacts[person.id] = {
+                    name: person.label,
+                    linkedin_url: person.attributes?.linkedin_url || '',
+                    headline: person.attributes?.headline || '',
+                    location: person.attributes?.location || '',
+                    current_company: company ? company.label : '',
+                    education: schoolsByPersonId[person.id] || [],
+                    groups: groupsByPersonId[person.id] || [],
+                    about: person.attributes?.about || '',
+                    enriched: person.attributes?.enriched || false
+                };
+            });
+        }
+
+        async function loadGraphData() {
+            try {
+                const res = await fetch('graph.json');
+                if (!res.ok) return;
+                const graph = await res.json();
+                buildDataFromGraph(graph);
+            } catch {
+                // Fall back to data_*.js globals
             }
-        });
+        }
+
+        function prepareDerivedData() {
+            allServices = [...new Set(firms.flatMap(f => f.services || []))].sort();
+            allMarkets = [...new Set(firms.map(f => f.market))].sort();
+            allUniversities = {};
+            allGroups = {};
+
+            Object.values(contacts).forEach(c => {
+                if (c.education) {
+                    c.education.forEach(e => {
+                        if (!allUniversities[e.school]) allUniversities[e.school] = [];
+                        allUniversities[e.school].push(c);
+                    });
+                }
+                if (c.groups) {
+                    c.groups.forEach(g => {
+                        if (!allGroups[g]) allGroups[g] = [];
+                        allGroups[g].push(c);
+                    });
+                }
+            });
+        }
+
+        function updateHeaderSummary() {
+            const firmsCount = firms.length;
+            const marketsCount = allMarkets.length;
+            const contactsCount = Object.keys(contacts).length;
+
+            const firmsEl = document.getElementById('badge-firms');
+            const marketsEl = document.getElementById('badge-markets');
+            const contactsEl = document.getElementById('badge-contacts');
+
+            if (firmsEl) firmsEl.textContent = `${firmsCount} Firms`;
+            if (marketsEl) marketsEl.textContent = `${marketsCount} Markets`;
+            if (contactsEl) contactsEl.textContent = `${contactsCount} Contacts`;
+        }
+
+        function updateHeaderFromConfig() {
+            if (!networkConfig || !networkConfig.domain) {
+                return;
+            }
+            const titleEl = document.getElementById('header-title');
+            const subtitleEl = document.getElementById('header-subtitle');
+            if (titleEl && networkConfig.domain.name) {
+                titleEl.textContent = networkConfig.domain.name;
+            }
+            if (subtitleEl && networkConfig.domain.description) {
+                subtitleEl.textContent = networkConfig.domain.description;
+            }
+        }
+
+        function renderTypeLegend() {
+            const container = document.getElementById('type-legend');
+            if (!container) return;
+
+            if (!networkConfig || !networkConfig.node_types) {
+                container.innerHTML = '';
+                return;
+            }
+
+            const entries = Object.entries(networkConfig.node_types);
+            container.innerHTML = entries.map(([type, meta]) => `
+                <div class="type-pill">
+                    <span class="type-dot" style="background:${meta.color || '#94a3b8'}"></span>
+                    <span>${type}</span>
+                </div>
+            `).join('');
+        }
 
         // Render Stats
         function renderStats() {
@@ -1810,19 +2005,26 @@
             }
         }
 
-        // Initialize
-        renderStats();
-        renderConnections();
-        renderNetworkView();
-        renderMap();
-        renderMarketFilters();
-        renderServicesMatrix();
-        renderPeople();
-
-        // Initialize Lucide icons
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+        async function initDashboard() {
+            await loadConfig();
+            await loadGraphData();
+            prepareDerivedData();
+            updateHeaderFromConfig();
+            updateHeaderSummary();
+            renderTypeLegend();
+            renderStats();
+            renderConnections();
+            renderNetworkView();
+            renderMap();
+            renderMarketFilters();
+            renderServicesMatrix();
+            renderPeople();
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         }
+
+        initDashboard();
     </script>
 
     <footer>

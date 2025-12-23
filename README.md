@@ -141,6 +141,7 @@ When running this repo in Codex CLI, set `sandbox_mode = "workspace-write"` and 
 4. **Manual gap fill** - Add a workflow-assisted step to fill missing titles/companies when scraping leaves blanks
 5. **Education data quality (TODO)** - Validate education values are universities, support multiple universities per person, and compute/visualize overlap (commonality) across contacts.
 6. **Group membership counts (TODO)** - Verify professional group counts reflect clusters within the same company and cross-firm membership among target firms; add checks for missing/underlinked groups.
+7. **Contact pill counts (TODO)** - Align People section pill counts with grouped totals and ensure expanded lists match displayed counts.
 
 ## Legal Note
 

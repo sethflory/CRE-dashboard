@@ -1,4 +1,4 @@
-const firms = [
+window.firms = [
   {
     "company_name": "JLL Columbus",
     "website": "https://www.us.jll.com/en/locations/midwest/columbus",
