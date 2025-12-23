@@ -1,0 +1,62 @@
+{
+  "name": "company_website",
+  "description": "Extract company attributes from CRE firm websites",
+  "target_url_pattern": ".*/(about|team|services|company)",
+  "scroll_positions": [
+    {"name": "header", "y_offset": 0, "wait_ms": 500},
+    {"name": "services", "y_offset": 800, "wait_ms": 500},
+    {"name": "team", "y_offset": 1500, "wait_ms": 500}
+  ],
+  "fields": [
+    {
+      "name": "company_name",
+      "type": "string",
+      "screenshot_section": "header",
+      "required": true,
+      "description": "Company name"
+    },
+    {
+      "name": "headquarters",
+      "type": "string",
+      "screenshot_section": "header",
+      "required": false,
+      "description": "Headquarters location"
+    },
+    {
+      "name": "services",
+      "type": "list",
+      "screenshot_section": "services",
+      "required": true,
+      "description": "Lines of business (Brokerage, Capital Markets, Property Management, etc.)"
+    },
+    {
+      "name": "specialties",
+      "type": "list",
+      "screenshot_section": "services",
+      "required": true,
+      "description": "Asset classes (Office, Industrial, Retail, Multifamily, Healthcare, etc.)"
+    },
+    {
+      "name": "products",
+      "type": "list",
+      "screenshot_section": "services",
+      "required": false,
+      "description": "Product offerings or platforms if applicable"
+    },
+    {
+      "name": "leadership",
+      "type": "list_of_objects",
+      "screenshot_section": "team",
+      "required": false,
+      "description": "Leadership team members",
+      "nested_fields": [
+        {"name": "name", "type": "string", "required": true},
+        {"name": "title", "type": "string", "required": true},
+        {"name": "linkedin_url", "type": "string", "required": false}
+      ]
+    }
+  ],
+  "batch_extraction_threshold": 2,
+  "calibrated_from": [],
+  "confidence_score": 0.0
+}

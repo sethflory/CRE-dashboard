@@ -1,0 +1,56 @@
+{
+  "name": "linkedin_profile",
+  "description": "Extract contact profile and link to company attributes",
+  "target_url_pattern": "linkedin\\.com/in/",
+  "scroll_positions": [
+    {"name": "header", "y_offset": 0, "wait_ms": 500},
+    {"name": "experience", "y_offset": 1500, "wait_ms": 500},
+    {"name": "education_groups", "y_offset": 3000, "wait_ms": 500}
+  ],
+  "fields": [
+    {"name": "name", "type": "string", "screenshot_section": "header", "required": true, "description": "Full name"},
+    {"name": "headline", "type": "string", "screenshot_section": "header", "required": true, "description": "LinkedIn headline"},
+    {"name": "location", "type": "string", "screenshot_section": "header", "required": false, "description": "Location"},
+    {"name": "current_company", "type": "string", "screenshot_section": "header", "required": true, "description": "Current employer"},
+    {"name": "current_title", "type": "string", "screenshot_section": "header", "required": true, "description": "Current job title"},
+    {
+      "name": "work_history",
+      "type": "list_of_objects",
+      "screenshot_section": "experience",
+      "required": true,
+      "description": "Employment history",
+      "nested_fields": [
+        {"name": "company", "type": "string", "required": true},
+        {"name": "title", "type": "string", "required": true},
+        {"name": "years", "type": "string", "required": false}
+      ]
+    },
+    {
+      "name": "education",
+      "type": "list_of_objects",
+      "screenshot_section": "education_groups",
+      "required": false,
+      "description": "Education history",
+      "nested_fields": [
+        {"name": "school", "type": "string", "required": true},
+        {"name": "degree", "type": "string", "required": false},
+        {"name": "years", "type": "string", "required": false}
+      ]
+    },
+    {
+      "name": "groups",
+      "type": "list",
+      "screenshot_section": "education_groups",
+      "required": false,
+      "description": "LinkedIn groups and associations"
+    }
+  ],
+  "batch_extraction_threshold": 2,
+  "attribute_linking": {
+    "match_services": true,
+    "match_specialties": true,
+    "source": "headline,current_title,work_history"
+  },
+  "calibrated_from": [],
+  "confidence_score": 0.0
+}
