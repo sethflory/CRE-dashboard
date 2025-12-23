@@ -233,7 +233,7 @@
             background: #f6f7f9;
             border-radius: var(--radius-sm);
             margin-bottom: 0.625rem;
-            cursor: pointer;
+            cursor: default;
             transition: all 0.2s ease;
             border: 1px solid transparent;
         }
@@ -1445,7 +1445,7 @@
                 entries.forEach(([school, people]) => {
                     uniHtml += `
                         <details>
-                            <summary onclick="filterByUniversity('${school}')">
+                            <summary>
                                 <span class="network-node-content">
                                     <span class="network-node-title">${school}</span>
                                     <span class="network-badges">
@@ -1482,7 +1482,7 @@
                 entries.forEach(([group, people]) => {
                     groupHtml += `
                         <details>
-                            <summary onclick="filterByGroup('${group}')">
+                            <summary>
                                 <span class="network-node-content">
                                     <span class="network-node-title">${group}</span>
                                     <span class="network-badges">
@@ -1776,7 +1776,9 @@
                             <div class="network-people">
                                 ${people.map(p => `
                                     <div class="network-person">
-                                        <div><strong>${p.name}</strong></div>
+                                        <div>
+                                            ${p.linkedin_url ? `<a href="${p.linkedin_url}" target="_blank"><strong>${p.name}</strong></a>` : `<strong>${p.name}</strong>`}
+                                        </div>
                                         <div>${p.current_title || ''}</div>
                                     </div>
                                 `).join('')}

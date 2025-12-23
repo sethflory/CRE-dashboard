@@ -91,35 +91,13 @@ Open `cre_dashboard.html` in a browser, or deploy to GitHub Pages.
 | `data_firms.js` | Dashboard data (auto-generated) | ❌ |
 | `data_cre_markets.js` | CRE transaction volume data | ✅ |
 
-## Target Markets
+## Markets
 
-The dashboard covers 8 markets with 44 target firms:
+Markets are data-driven and come from your current dataset (real or synthetic). Configure synthetic markets in `config/synthetic.json` or supply your own firm/market data via the scraper pipeline.
 
-| Market | Firms | Example Companies |
-|--------|-------|-------------------|
-| Columbus | 17 | JLL, Cushman & Wakefield, CBRE, NAI Ohio Equities |
-| Charlotte | 9 | Trinity Partners, Foundry Commercial, Childress Klein |
-| Chicago | 6 | NAI Hiffman, SVN Chicago, Interra Realty |
-| Pittsburgh | 5 | Newmark, Hanna Commercial, PCRE |
-| Cincinnati | 4 | NAI Bergman, APEX Commercial |
-| Indianapolis | 3 | Bradley Company, JLL, Cushman & Wakefield |
-| Cleveland | 2 | CRESCO, Newmark |
-| Savannah | 2 | NAI Mopper Benton, Avison Young |
+## Market Data
 
-## CRE Market Data
-
-The heatmap visualization uses 2023 transaction volume data:
-
-| Rank | Market | Volume |
-|------|--------|--------|
-| 1 | Dallas | $18.8B |
-| 2 | Los Angeles | $17.1B |
-| 3 | New York | $12.1B |
-| 4 | Chicago | $11.9B |
-| 5 | Atlanta | $11.5B |
-| 28 | Columbus | $2.1B |
-
-Source: [Terrydale Capital](https://terrydalecapital.com/learn/top-5-cre-markets), [Altus Group](https://www.altusgroup.com/insights/us-cre-transactions-q4-2024/)
+The map heat overlay reads from `data_cre_markets.js`. Replace or remove it if you are not using CRE transaction volume data.
 
 ## Testing
 
@@ -133,6 +111,35 @@ pytest test_*.py -v
 
 When running this repo in Codex CLI, set `sandbox_mode = "workspace-write"` and restart the session to allow file edits.
 
+## Data Flow
+
+High-level overview (diagram uses Mermaid if your renderer supports it):
+
+```mermaid
+flowchart LR
+    A[config/network.json] --> D[cre_dashboard.html]
+    B[config/synthetic.json] --> C[scripts/generate_synthetic_data.py]
+    C --> E[data_firms.js]
+    C --> F[data_contacts.js]
+    C --> G[graph.json]
+    H[linkedin_scraper.py] --> E
+    H --> F
+    H --> G
+    I[data_cre_markets.js] --> D
+    E --> D
+    F --> D
+    G --> D
+```
+
+Key files:
+- `config/network.json`: Domain metadata, node/edge types, dimensions, and visual modules used by the dashboard.
+- `config/synthetic.json`: Inputs for synthetic dataset generation (markets, counts, overlap, pools).
+- `scripts/generate_synthetic_data.py`: Generates `data_firms.js`, `data_contacts.js`, and `graph.json`.
+- `linkedin_scraper.py`: Regenerates `data_firms.js`, `data_contacts.js`, and `graph.json` from real scraping.
+- `data_firms.js`: `window.firms` (company list) used in the dashboard.
+- `data_contacts.js`: `window.contacts` (people list) used in the dashboard.
+- `graph.json`: Generalized node/edge graph used by the dashboard when served.
+- `data_cre_markets.js`: Market heatmap dataset used by the map.
 ## Known Issues
 
 1. **Company field parsing** - LinkedIn scraper sometimes captures titles instead of company names
