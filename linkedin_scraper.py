@@ -71,6 +71,20 @@ TITLE_KEYWORDS = [
 # Employment types to skip when parsing work history
 EMPLOYMENT_TYPES = ['full-time', 'part-time', 'contract', 'freelance', 'self-employed']
 
+# Known non-groups (people, companies, influencers to filter out)
+NON_GROUP_NAMES = {
+    'Hubert Joly', 'Pat Gelsinger', 'Ian Bremmer', 'Scott Belsky',
+    'Intel Corporation', 'CBRE', 'GE Capital', 'Accenture',
+    'Cushman & Wakefield', 'Tony Robbins', 'Mark Cuban', 'Daymond John',
+    'Arvind Krishna', 'Diana Olick', 'Deutsche Bank', 'Spencer Rascoff',
+    'Heather Elias', 'David H. Stevens, CMB', 'Eric Partaker', 'Robert Herjavec',
+    'Prof. Jonathan A.J. Wilson PhD DLitt', 'Nationwide', 'Bill Gates',
+    'Gary Vaynerchuk', 'Grant Cardone', 'Barbara Corcoran', 'Ryan Serhant',
+    'Elon Musk', 'Jeff Bezos', 'Satya Nadella', 'Tim Cook', 'Simon Sinek',
+    'IBM', 'Oracle', 'Microsoft', 'J.P. Morgan', 'Fidelity Investments',
+    'Cardinal Health', 'L Brands', 'CoStar Group', 'Gates Notes'
+}
+
 
 @dataclass
 class LinkedInPerson:
@@ -177,6 +191,142 @@ class LinkedInScraper:
         if any(p in name_lower for p in BAD_NAME_PATTERNS):
             return False
         return True
+
+    def _looks_like_person_name(self, text: str) -> bool:
+        """Heuristic for group filtering: detect person-name style strings."""
+        if not text:
+            return False
+        text = text.strip()
+        words = text.split()
+        if len(words) < 2 or len(words) > 4:
+            return False
+        if any(ch.isdigit() for ch in text):
+            return False
+        # Allow initials but otherwise expect title-case words.
+        for word in words:
+            if len(word) == 1 and word.isupper():
+                continue
+            if not (word[0].isupper() and (len(word) == 1 or word[1:].islower())):
+                return False
+        return True
+
+    def _looks_like_company_name(self, text: str) -> bool:
+        """Heuristic for company names to avoid misclassifying as titles/groups."""
+        if not text:
+            return False
+        lowered = text.lower()
+        company_tokens = [
+            'inc', 'llc', 'corp', 'co', 'company', 'corporation', 'ltd',
+            'capital', 'partners', 'properties', 'realty', 'holdings', 'group',
+            'investments', 'bank', 'associates', 'technology'
+        ]
+        return any(tok in lowered for tok in company_tokens)
+
+    def _looks_like_title(self, text: str) -> bool:
+        """Heuristic for job titles."""
+        if not text:
+            return False
+        lowered = text.lower()
+        return any(tw in lowered for tw in TITLE_KEYWORDS)
+
+    def _is_invalid_company_name(self, text: str) -> bool:
+        """Filter out UI noise or titles captured as company names."""
+        if not text:
+            return True
+        lowered = text.lower().strip()
+        if lowered.startswith('you both worked at'):
+            return True
+        if lowered in {'private company', 'public company', 'company', 'self-employed', 'freelance'}:
+            return True
+        if self._looks_like_title(text) and not self._looks_like_company_name(text):
+            return True
+        return False
+
+    def _is_valid_group_name(self, text: str, skip_names: Optional[Set[str]] = None) -> bool:
+        """Filter for professional groups, not people/companies/newsletters."""
+        if not text:
+            return False
+        name = text.strip()
+        lowered = name.lower()
+
+        if skip_names and name in skip_names:
+            return False
+
+        # Reject obvious non-groups.
+        if self._looks_like_person_name(name):
+            return False
+
+        if self._looks_like_company_name(name):
+            group_keywords = [
+                'association', 'society', 'council', 'institute', 'network',
+                'chapter', 'roundtable', 'forum', 'club', 'community', 'chamber',
+                'professionals', 'executives', 'leaders', 'investors',
+                'real estate', 'commercial', 'proptech', 'prop tech', 'cre',
+                'alumni'
+            ]
+            if not any(kw in lowered for kw in group_keywords):
+                return False
+
+        newsletter_keywords = ['newsletter', 'edition', 'digest', 'report', 'insider']
+        if any(kw in lowered for kw in newsletter_keywords):
+            return False
+
+        return len(name) > 2
+
+    def _clean_person_record(self, person: LinkedInPerson):
+        """Normalize fields for consistent contact records."""
+        # Normalize groups to professional groups only.
+        if person.groups:
+            cleaned_groups = []
+            seen = set()
+            for group in person.groups:
+                if not self._is_valid_group_name(group, skip_names=NON_GROUP_NAMES):
+                    continue
+                if group not in seen:
+                    cleaned_groups.append(group)
+                    seen.add(group)
+            person.groups = cleaned_groups
+
+        # Clear invalid or title-like company values and try to promote to title if needed.
+        if person.current_company and self._is_invalid_company_name(person.current_company):
+            if not person.current_title and self._looks_like_title(person.current_company):
+                person.current_title = person.current_company
+            person.current_company = ""
+
+        # Fix company using work history or headline.
+        if not person.current_company:
+            if person.work_history:
+                first = person.work_history[0]
+                company = first.get('company', '')
+                if company and not self._is_invalid_company_name(company):
+                    person.current_company = company
+                    if first.get('company_linkedin'):
+                        person.company_linkedin_url = first.get('company_linkedin', '')
+            elif person.headline and (' at ' in person.headline or ' @ ' in person.headline):
+                split_token = ' at ' if ' at ' in person.headline else ' @ '
+                _, company_part = person.headline.split(split_token, 1)
+                company_part = company_part.split('|')[0].strip()
+                if company_part and not self._is_invalid_company_name(company_part):
+                    person.current_company = company_part
+
+        # Remove titles that are actually company names or duplicates of company.
+        if person.current_title and person.current_company and person.current_title.strip() == person.current_company.strip():
+            person.current_title = ""
+
+        if (not person.current_title) or self._looks_like_company_name(person.current_title):
+            # Try headline parsing if available.
+            if person.headline and (' at ' in person.headline or ' @ ' in person.headline):
+                split_token = ' at ' if ' at ' in person.headline else ' @ '
+                title_part, _ = person.headline.split(split_token, 1)
+                title_part = title_part.split('|')[0].strip()
+                if title_part and self._looks_like_title(title_part):
+                    person.current_title = title_part
+
+            # Fallback to first work history title.
+            if not person.current_title and person.work_history:
+                title = person.work_history[0].get('title', '')
+                if title and self._looks_like_title(title):
+                    person.current_title = title
 
     def _find_section_by_id_or_text(self, section_id: str, header_text: str):
         """Find a section by ID or header text"""
@@ -338,6 +488,13 @@ class LinkedInScraper:
 
     def _save_data(self):
         """Save discovered data"""
+        # Normalize all contact records before persisting.
+        for contact in self.discovered_contacts.values():
+            try:
+                self._clean_person_record(contact)
+            except Exception:
+                continue
+
         # Save firms
         firms_data = {k: asdict(v) for k, v in self.discovered_firms.items()}
         with open(DISCOVERED_FIRMS_FILE, 'w', encoding='utf-8') as f:
@@ -356,29 +513,19 @@ class LinkedInScraper:
     def _regenerate_dashboard_data(self):
         """Regenerate JS data files for the HTML dashboard"""
         # Known non-groups (people, companies, influencers to filter out)
-        skip_groups = {
-            'Hubert Joly', 'Pat Gelsinger', 'Ian Bremmer', 'Scott Belsky',
-            'Intel Corporation', 'CBRE', 'GE Capital', 'Accenture',
-            'Cushman & Wakefield', 'Tony Robbins', 'Mark Cuban', 'Daymond John',
-            'Arvind Krishna', 'Diana Olick', 'Deutsche Bank', 'Spencer Rascoff',
-            'Heather Elias', 'David H. Stevens, CMB', 'Eric Partaker', 'Robert Herjavec',
-            'Prof. Jonathan A.J. Wilson PhD DLitt', 'Nationwide', 'Bill Gates',
-            'Gary Vaynerchuk', 'Grant Cardone', 'Barbara Corcoran', 'Ryan Serhant',
-            'Elon Musk', 'Jeff Bezos', 'Satya Nadella', 'Tim Cook', 'Simon Sinek'
-        }
+        skip_groups = NON_GROUP_NAMES
 
         group_keywords = ['council', 'association', 'chamber', 'roundtable', 'insights',
                           'innovation', 'technology', 'administration', 'investors',
-                          'newsletter', 'real estate', 'data center', 'machine learning']
+                          'newsletter', 'real estate', 'data center', 'machine learning',
+                          'alumni']
 
         def is_likely_group(name):
             if name in skip_groups:
                 return False
+            if not self._is_valid_group_name(name, skip_names=skip_groups):
+                return False
             name_lower = name.lower()
-            words = name.split()
-            if len(words) <= 3 and all(w[0].isupper() and (len(w) <= 1 or w[1:].islower()) for w in words if len(w) > 0):
-                if not any(kw in name_lower for kw in group_keywords):
-                    return False
             if any(kw in name_lower for kw in group_keywords):
                 return True
             if '|' in name or '&' in name:
@@ -676,7 +823,7 @@ class LinkedInScraper:
                 company_elem = self.page.query_selector(sel)
                 if company_elem:
                     text = company_elem.inner_text().strip()
-                    if text and len(text) > 1:
+                    if text and len(text) > 1 and not self._is_invalid_company_name(text):
                         person.current_company = text
                         self._log(f"  Found company: {person.current_company}")
                         break
@@ -709,6 +856,18 @@ class LinkedInScraper:
             # Extract work history (need to scroll)
             self._extract_work_history(person)
 
+            # If headline has a clean "Title at Company" format, use it as fallback.
+            if person.headline and (' at ' in person.headline or ' @ ' in person.headline):
+                split_token = ' at ' if ' at ' in person.headline else ' @ '
+                title_part, company_part = person.headline.split(split_token, 1)
+                title_part = title_part.split('|')[0].strip()
+                company_part = company_part.split('|')[0].strip()
+                if not person.current_title and title_part and self._looks_like_title(title_part):
+                    person.current_title = title_part
+                if (not person.current_company or self._is_invalid_company_name(person.current_company)) and company_part:
+                    if not self._is_invalid_company_name(company_part):
+                        person.current_company = company_part
+
             # Extract education
             self._extract_education(person)
 
@@ -728,6 +887,9 @@ class LinkedInScraper:
 
             # Process work history for CRE firms
             self._process_work_history(person)
+
+            # Normalize fields for consistent data
+            self._clean_person_record(person)
 
             # Save person
             key = self._extract_profile_key(profile_url)
@@ -826,7 +988,7 @@ class LinkedInScraper:
                         # This is likely a job title
                         if len(text) > 3 and len(text) < 80:
                             # Check if it looks like a title (contains typical title words or is capitalized)
-                            is_title = any(tw in text.lower() for tw in TITLE_KEYWORDS) or (text[0].isupper() and ' ' in text)
+                            is_title = self._looks_like_title(text) or (text[0].isupper() and ' ' in text and not self._looks_like_company_name(text))
 
                             if is_title and current_company:
                                 position = {
@@ -847,6 +1009,10 @@ class LinkedInScraper:
                                     # Set current company/title from first position
                                     if not person.current_title and position.get('title'):
                                         person.current_title = position['title']
+                                    if not person.current_company or self._is_invalid_company_name(person.current_company):
+                                        person.current_company = position['company']
+                                        if position.get('company_linkedin'):
+                                            person.company_linkedin_url = position['company_linkedin']
 
                 except Exception as e:
                     continue
@@ -1006,7 +1172,7 @@ class LinkedInScraper:
                         school_keywords = ['university', 'college', 'school', 'institute', 'academy']
                         is_school = any(kw in group_name.lower() for kw in school_keywords)
 
-                        if group_name and len(group_name) > 2 and group_name not in person.groups and not is_school:
+                        if group_name and group_name not in person.groups and not is_school and self._is_valid_group_name(group_name, skip_names=NON_GROUP_NAMES):
                             person.groups.append(group_name)
                             self._log(f"  Group: {group_name}")
                 except:
