@@ -1,0 +1,656 @@
+{
+  "https://www.terrydalecapital.com": {
+    "url": "https://www.terrydalecapital.com",
+    "intent_name": "company_website",
+    "fields": {
+      "_error": {
+        "field_name": "_error",
+        "template_type": "STRING",
+        "template_required": false,
+        "extracted_value": "'FieldDefinition' object has no attribute 'field_type'",
+        "tier": "error",
+        "source_url": "https://www.terrydalecapital.com",
+        "confidence": 0.0,
+        "raw_context": null,
+        "timestamp": "2025-12-27T11:54:53.379366"
+      }
+    },
+    "tier_progression": [
+      "site_mapping",
+      "dom"
+    ],
+    "total_cost": 0.0,
+    "started_at": "2025-12-27T11:54:28.258465",
+    "completed_at": "2025-12-27T11:54:53.379373"
+  },
+  "https://example-cre.com": {
+    "url": "https://example-cre.com",
+    "intent_name": "company_website",
+    "fields": {},
+    "tier_progression": [
+      "site_mapping",
+      "dom"
+    ],
+    "total_cost": 0.0,
+    "started_at": "2025-12-27T12:18:22.769597",
+    "completed_at": "2025-12-27T12:18:39.955007"
+  },
+  "https://www.ngkf.com": {
+    "url": "https://www.ngkf.com",
+    "intent_name": "company_website",
+    "fields": {
+      "company_name": {
+        "field_name": "company_name",
+        "template_type": "string",
+        "template_required": true,
+        "extracted_value": "Newmark",
+        "tier": "dom",
+        "source_url": "https://www.ngkf.com",
+        "confidence": 0.9,
+        "raw_context": "<meta content=\"Newmark\" property=\"og:site_name\"/>",
+        "timestamp": "2025-12-27T12:55:19.204761"
+      },
+      "headquarters": {
+        "field_name": "headquarters",
+        "template_type": "string",
+        "template_required": false,
+        "extracted_value": "2025 Newmark | All rights reserved.",
+        "tier": "dom",
+        "source_url": "https://www.ngkf.com/contact",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T12:55:19.204776"
+      },
+      "services": {
+        "field_name": "services",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Advisory",
+          "Appraisal",
+          "Brokerage",
+          "Capital Markets",
+          "Consulting",
+          "Leasing",
+          "Project Management",
+          "Property Management",
+          "Tenant Representation",
+          "Valuation"
+        ],
+        "tier": "dom",
+        "source_url": "https://www.ngkf.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T12:55:19.204781"
+      },
+      "specialties": {
+        "field_name": "specialties",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Data Center",
+          "Healthcare",
+          "Hospitality",
+          "Industrial",
+          "Land",
+          "Life Science",
+          "Multifamily",
+          "Office",
+          "Retail",
+          "Student Housing"
+        ],
+        "tier": "dom",
+        "source_url": "https://www.ngkf.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T12:55:19.204785"
+      }
+    },
+    "tier_progression": [
+      "site_mapping",
+      "dom"
+    ],
+    "total_cost": 0.0,
+    "started_at": "2025-12-27T12:53:47.326053",
+    "completed_at": "2025-12-27T12:55:19.204796"
+  },
+  "https://nmrk.com": {
+    "url": "https://nmrk.com",
+    "intent_name": "company_website",
+    "fields": {
+      "company_name": {
+        "field_name": "company_name",
+        "template_type": "string",
+        "template_required": true,
+        "extracted_value": "Newmark",
+        "tier": "dom",
+        "source_url": "https://nmrk.com",
+        "confidence": 0.9,
+        "raw_context": "<meta content=\"Newmark\" property=\"og:site_name\"/>",
+        "timestamp": "2025-12-27T12:49:28.059314"
+      },
+      "headquarters": {
+        "field_name": "headquarters",
+        "template_type": "string",
+        "template_required": false,
+        "extracted_value": "2025 Newmark | All rights reserved.",
+        "tier": "dom",
+        "source_url": "https://nmrk.com/contact",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T12:49:28.059348"
+      },
+      "services": {
+        "field_name": "services",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Advisory",
+          "Appraisal",
+          "Brokerage",
+          "Capital Markets",
+          "Consulting",
+          "Leasing",
+          "Project Management",
+          "Property Management",
+          "Tenant Representation",
+          "Valuation"
+        ],
+        "tier": "dom",
+        "source_url": "https://nmrk.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T12:49:28.059369"
+      },
+      "specialties": {
+        "field_name": "specialties",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Data Center",
+          "Healthcare",
+          "Hospitality",
+          "Industrial",
+          "Land",
+          "Life Science",
+          "Multifamily",
+          "Office",
+          "Retail",
+          "Student Housing"
+        ],
+        "tier": "dom",
+        "source_url": "https://nmrk.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T12:49:28.059388"
+      }
+    },
+    "tier_progression": [
+      "site_mapping",
+      "dom"
+    ],
+    "total_cost": 0.0,
+    "started_at": "2025-12-27T12:47:57.509058",
+    "completed_at": "2025-12-27T12:49:28.059426"
+  },
+  "http://localhost:5000": {
+    "url": "http://localhost:5000",
+    "intent_name": "company_website",
+    "fields": {
+      "company_name": {
+        "field_name": "company_name",
+        "template_type": "string",
+        "template_required": true,
+        "extracted_value": "Acme Commercial Real Estate",
+        "tier": "dom",
+        "source_url": "http://localhost:5000/about",
+        "confidence": 0.9,
+        "raw_context": "<meta content=\"Acme Commercial Real Estate\" property=\"og:site_name\"/>",
+        "timestamp": "2025-12-27T17:21:30.278509"
+      },
+      "headquarters": {
+        "field_name": "headquarters",
+        "template_type": "string",
+        "template_required": false,
+        "extracted_value": "123 Main Street",
+        "tier": "dom",
+        "source_url": "http://localhost:5000/contact",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:21:30.278528"
+      },
+      "services": {
+        "field_name": "services",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Advisory",
+          "Brokerage",
+          "Capital Markets",
+          "Investment Sales",
+          "Landlord Representation",
+          "Property Management",
+          "Tenant Representation",
+          "Valuation"
+        ],
+        "tier": "dom",
+        "source_url": "http://localhost:5000/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:21:30.278536"
+      },
+      "specialties": {
+        "field_name": "specialties",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Healthcare",
+          "Industrial",
+          "Land",
+          "Mixed-Use",
+          "Multifamily",
+          "Office",
+          "Retail"
+        ],
+        "tier": "dom",
+        "source_url": "http://localhost:5000/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:21:30.278545"
+      },
+      "_error": {
+        "field_name": "_error",
+        "template_type": "STRING",
+        "template_required": false,
+        "extracted_value": "EOF when reading a line",
+        "tier": "error",
+        "source_url": "http://localhost:5000",
+        "confidence": 0.0,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:21:30.278610"
+      }
+    },
+    "tier_progression": [
+      "site_mapping",
+      "dom"
+    ],
+    "total_cost": 0.0,
+    "started_at": "2025-12-27T17:20:05.500508",
+    "completed_at": "2025-12-27T17:21:30.278613"
+  },
+  "https://hiffman.com": {
+    "url": "https://hiffman.com",
+    "intent_name": "company_website",
+    "fields": {
+      "company_name": {
+        "field_name": "company_name",
+        "template_type": "string",
+        "template_required": true,
+        "extracted_value": "Hiffman",
+        "tier": "dom",
+        "source_url": "https://hiffman.com/about-us",
+        "confidence": 0.9,
+        "raw_context": "<meta content=\"Hiffman\" property=\"og:site_name\"/>",
+        "timestamp": "2025-12-27T16:55:54.239921"
+      },
+      "services": {
+        "field_name": "services",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Advisory",
+          "Brokerage",
+          "Capital Markets",
+          "Facility Management",
+          "Leasing",
+          "Property Management",
+          "Research",
+          "Tenant Representation"
+        ],
+        "tier": "dom",
+        "source_url": "https://hiffman.com",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T16:55:54.239976"
+      },
+      "specialties": {
+        "field_name": "specialties",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Industrial",
+          "Office",
+          "Retail"
+        ],
+        "tier": "dom",
+        "source_url": "https://hiffman.com",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T16:55:54.240002"
+      },
+      "leadership": {
+        "field_name": "leadership",
+        "template_type": "list_of_objects",
+        "template_required": false,
+        "extracted_value": [
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "John Heiberger"
+          },
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "Michael Flynn"
+          },
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "Ann Wallin"
+          },
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "Carrie Szarzynski"
+          },
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "Paul Grusecki"
+          },
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "Sarah Cannella"
+          },
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "Gail L. Vermejan"
+          },
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "Dennis Hiffman"
+          },
+          {
+            "source_url": "https://hiffman.com/about-us/leadership",
+            "name": "Dave Petersen"
+          }
+        ],
+        "tier": "dom",
+        "source_url": "https://hiffman.com/about-us/leadership",
+        "confidence": 0.75,
+        "raw_context": null,
+        "timestamp": "2025-12-27T16:55:54.240147"
+      },
+      "headquarters": {
+        "field_name": "headquarters",
+        "template_type": "string",
+        "template_required": false,
+        "extracted_value": "One Oakbrook Terrace, Suite 400, Oakbrook Terrace, IL 60181",
+        "tier": "browser",
+        "source_url": "https://hiffman.com",
+        "confidence": 0.75,
+        "raw_context": "Successfully extracted contact information from hiffman.com. Here is the data in JSON format:\n\n```json\n{\n  \"headquarters\": \"One Oakbrook Terrace, Suite 400, Oakbrook Terrace, IL 60181\",\n  \"phone_numbers\": [\n    {\n      \"type\": \"main\",\n      \"number\": \"630-932-1234\"\n    },\n    {\n      \"type\": \"fax\",\n      \"number\": \"630-932-7258\"\n    }\n  ],\n  \"email_addresses\": [\n    \"info@hiffman.com\"\n  ],\n  \"physical_addresses\": [\n    {\n      \"type\": \"headquarters\",\n      \"address\": \"One Oakbrook Terrace, Suite",
+        "timestamp": "2025-12-27T16:59:41.010175"
+      },
+      "products": {
+        "field_name": "products",
+        "template_type": "list",
+        "template_required": false,
+        "extracted_value": [
+          "Brokerage (NAI Hiffman)",
+          "Management (Hiffman National)",
+          "Advisory"
+        ],
+        "tier": "browser",
+        "source_url": "https://hiffman.com",
+        "confidence": 0.75,
+        "raw_context": "{\n  \"products\": [\n    \"Brokerage (NAI Hiffman)\",\n    \"Management (Hiffman National)\",\n    \"Advisory\"\n  ]\n}",
+        "timestamp": "2025-12-27T16:59:41.010305"
+      }
+    },
+    "tier_progression": [
+      "site_mapping",
+      "dom",
+      "browser"
+    ],
+    "total_cost": 0.06,
+    "started_at": "2025-12-27T16:55:11.219228",
+    "completed_at": "2025-12-27T16:59:41.010399"
+  },
+  "https://www.us.jll.com/": {
+    "url": "https://www.us.jll.com/",
+    "intent_name": "company_website",
+    "fields": {
+      "company_name": {
+        "field_name": "company_name",
+        "template_type": "string",
+        "template_required": true,
+        "extracted_value": "Commercial Real Estate and Property Investment",
+        "tier": "dom",
+        "source_url": "https://www.us.jll.com/en-us/about-jll",
+        "confidence": 0.6,
+        "raw_context": "<title>JLL | Commercial Real Estate and Property Investment</title>",
+        "timestamp": "2025-12-27T17:17:12.676837"
+      },
+      "services": {
+        "field_name": "services",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Brokerage",
+          "Capital Markets",
+          "Leasing",
+          "Project Management",
+          "Property Management",
+          "Research"
+        ],
+        "tier": "dom",
+        "source_url": "https://www.us.jll.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:17:12.677031"
+      },
+      "specialties": {
+        "field_name": "specialties",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Data Center",
+          "Flex",
+          "Hotel",
+          "Land",
+          "Manufacturing",
+          "Office",
+          "Retail"
+        ],
+        "tier": "dom",
+        "source_url": "https://www.us.jll.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:17:12.677118"
+      },
+      "_error": {
+        "field_name": "_error",
+        "template_type": "STRING",
+        "template_required": false,
+        "extracted_value": "",
+        "tier": "error",
+        "source_url": "https://www.us.jll.com/",
+        "confidence": 0.0,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:17:23.296060"
+      }
+    },
+    "tier_progression": [
+      "site_mapping",
+      "dom",
+      "browser",
+      "vision"
+    ],
+    "total_cost": 0.0,
+    "started_at": "2025-12-27T17:16:30.485192",
+    "completed_at": "2025-12-27T17:17:23.296065"
+  },
+  "https://www.marcusmillichap.com": {
+    "url": "https://www.marcusmillichap.com",
+    "intent_name": "company_website",
+    "fields": {
+      "company_name": {
+        "field_name": "company_name",
+        "template_type": "string",
+        "template_required": true,
+        "extracted_value": "About Us",
+        "tier": "dom",
+        "source_url": "https://www.marcusmillichap.com/about-us",
+        "confidence": 0.85,
+        "raw_context": "<h1>\r\n            About Us\r\n\r\n        </h1>",
+        "timestamp": "2025-12-27T17:18:12.684531"
+      },
+      "headquarters": {
+        "field_name": "headquarters",
+        "template_type": "string",
+        "template_required": false,
+        "extracted_value": "1031 Exchange",
+        "tier": "dom",
+        "source_url": "https://www.marcusmillichap.com/about-us/offices",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:18:12.684564"
+      },
+      "services": {
+        "field_name": "services",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Advisory",
+          "Brokerage",
+          "Capital Markets",
+          "Consulting",
+          "Development",
+          "Investment Sales",
+          "Research"
+        ],
+        "tier": "dom",
+        "source_url": "https://www.marcusmillichap.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:18:12.684586"
+      },
+      "specialties": {
+        "field_name": "specialties",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Office"
+        ],
+        "tier": "dom",
+        "source_url": "https://www.marcusmillichap.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:18:12.684612"
+      },
+      "_error": {
+        "field_name": "_error",
+        "template_type": "STRING",
+        "template_required": false,
+        "extracted_value": "",
+        "tier": "error",
+        "source_url": "https://www.marcusmillichap.com",
+        "confidence": 0.0,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:18:13.773141"
+      }
+    },
+    "tier_progression": [
+      "site_mapping",
+      "dom",
+      "browser",
+      "vision"
+    ],
+    "total_cost": 0.0,
+    "started_at": "2025-12-27T17:17:23.313212",
+    "completed_at": "2025-12-27T17:18:13.773146"
+  },
+  "https://bergmancommercial.com": {
+    "url": "https://bergmancommercial.com",
+    "intent_name": "company_website",
+    "fields": {
+      "company_name": {
+        "field_name": "company_name",
+        "template_type": "string",
+        "template_required": true,
+        "extracted_value": "NAI Bergman",
+        "tier": "dom",
+        "source_url": "https://bergmancommercial.com/aboutus",
+        "confidence": 0.9,
+        "raw_context": "<meta content=\"NAI Bergman\" property=\"og:site_name\"/>",
+        "timestamp": "2025-12-27T17:18:52.173174"
+      },
+      "headquarters": {
+        "field_name": "headquarters",
+        "template_type": "string",
+        "template_required": false,
+        "extracted_value": "4695 Lake Forest Drive,",
+        "tier": "dom",
+        "source_url": "https://bergmancommercial.com/contactus",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:18:52.173296"
+      },
+      "services": {
+        "field_name": "services",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Asset Management",
+          "Brokerage",
+          "Construction Management",
+          "Corporate Services",
+          "Development",
+          "Facility Management",
+          "Investment Sales",
+          "Leasing",
+          "Property Management",
+          "Research",
+          "Tenant Representation"
+        ],
+        "tier": "dom",
+        "source_url": "https://bergmancommercial.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:18:52.173454"
+      },
+      "specialties": {
+        "field_name": "specialties",
+        "template_type": "list",
+        "template_required": true,
+        "extracted_value": [
+          "Industrial",
+          "Land",
+          "Office",
+          "Retail"
+        ],
+        "tier": "dom",
+        "source_url": "https://bergmancommercial.com/services",
+        "confidence": 0.7,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:18:52.173611"
+      },
+      "_error": {
+        "field_name": "_error",
+        "template_type": "STRING",
+        "template_required": false,
+        "extracted_value": "",
+        "tier": "error",
+        "source_url": "https://bergmancommercial.com",
+        "confidence": 0.0,
+        "raw_context": null,
+        "timestamp": "2025-12-27T17:18:53.197804"
+      }
+    },
+    "tier_progression": [
+      "site_mapping",
+      "dom",
+      "browser",
+      "vision"
+    ],
+    "total_cost": 0.0,
+    "started_at": "2025-12-27T17:18:13.789379",
+    "completed_at": "2025-12-27T17:18:53.197808"
+  }
+}

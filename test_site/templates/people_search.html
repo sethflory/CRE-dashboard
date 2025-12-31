@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Find a Professional - Acme CRE{% endblock %}
+
+{% block content %}
+<h1>Find a Professional</h1>
+<p>Search our team of experienced commercial real estate professionals.</p>
+
+<!-- EXTRACTION CHALLENGE: Dropdown/search interface that needs interaction -->
+<div class="search-container">
+    <form class="search-form" id="people-search-form">
+        <input type="text" id="name-search" placeholder="Search by name...">
+        <select id="title-filter">
+            <option value="">All Titles</option>
+            <option value="ceo">CEO</option>
+            <option value="president">President</option>
+            <option value="cfo">CFO</option>
+            <option value="managing-director">Managing Director</option>
+            <option value="svp">Senior Vice President</option>
+        </select>
+        <select id="specialty-filter">
+            <option value="">All Specialties</option>
+            <option value="office">Office</option>
+            <option value="industrial">Industrial</option>
+            <option value="retail">Retail</option>
+            <option value="multifamily">Multifamily</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<section>
+    <h2>Our Professionals</h2>
+    <!-- EXTRACTION CHALLENGE: Results loaded via JavaScript -->
+    <div id="search-results" class="team-grid">
+        <div class="loading">Loading professionals...</div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Load all professionals on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadProfessionals();
+});
+
+function loadProfessionals(filters = {}) {
+    const container = document.getElementById('search-results');
+    container.innerHTML = '<div class="loading">Searching...</div>';
+
+    // Simulate API delay
+    setTimeout(function() {
+        fetch('/api/team')
+            .then(response => response.json())
+            .then(data => {
+                let professionals = data.leadership;
+
+                // Apply filters (simplified)
+                if (filters.name) {
+                    professionals = professionals.filter(p =>
+                        p.name.toLowerCase().includes(filters.name.toLowerCase())
+                    );
+                }
+                if (filters.title) {
+                    professionals = professionals.filter(p =>
+                        p.title.toLowerCase().includes(filters.title.toLowerCase())
+                    );
+                }
+
+                renderResults(professionals);
+            })
+            .catch(error => {
+                container.innerHTML = '<p class="error">Error loading results.</p>';
+            });
+    }, 300);
+}
+
+function renderResults(professionals) {
+    const container = document.getElementById('search-results');
+
+    if (professionals.length === 0) {
+        container.innerHTML = '<p>No professionals found matching your criteria.</p>';
+        return;
+    }
+
+    container.innerHTML = '';
+
+    professionals.forEach((person, index) => {
+        const card = document.createElement('div');
+        card.className = 'team-card';
+        card.dataset.personId = index + 1;
+
+        card.innerHTML = `
+            <div class="name">${person.name}</div>
+            <div class="title">${person.title}</div>
+            <div class="contact-info">
+                <p><a href="mailto:${person.email}">${person.email}</a></p>
+                ${person.linkedin ? `<p><a href="${person.linkedin}" target="_blank">LinkedIn Profile</a></p>` : ''}
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+// Handle search form
+document.getElementById('people-search-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const filters = {
+        name: document.getElementById('name-search').value,
+        title: document.getElementById('title-filter').value,
+        specialty: document.getElementById('specialty-filter').value
+    };
+
+    loadProfessionals(filters);
+});
+</script>
+{% endblock %}

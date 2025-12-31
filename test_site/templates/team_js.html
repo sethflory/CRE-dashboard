@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Our Leadership Team - Acme CRE{% endblock %}
+
+{% block content %}
+<h1>Leadership Team</h1>
+<p>Meet the experienced professionals who lead Acme Commercial Real Estate.</p>
+
+<section>
+    <h2>Executive Leadership</h2>
+    <!-- EXTRACTION CHALLENGE: This content is loaded via JavaScript -->
+    <div id="team-container" class="team-grid">
+        <div class="loading">Loading team members...</div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Simulate delayed loading (extraction challenge for JS-rendered content)
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        fetch('/api/team')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('team-container');
+                container.innerHTML = '';
+
+                data.leadership.forEach((person, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'team-card';
+                    card.dataset.personId = index + 1;
+
+                    card.innerHTML = `
+                        <div class="name">${person.name}</div>
+                        <div class="title">${person.title}</div>
+                        <div class="contact-info">
+                            <p><a href="mailto:${person.email}">${person.email}</a></p>
+                            ${person.linkedin ? `<p><a href="${person.linkedin}" target="_blank">LinkedIn Profile</a></p>` : ''}
+                        </div>
+                    `;
+
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                document.getElementById('team-container').innerHTML =
+                    '<p class="error">Error loading team members.</p>';
+            });
+    }, 500); // 500ms delay to simulate real-world loading
+});
+</script>
+{% endblock %}

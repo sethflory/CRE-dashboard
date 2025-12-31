@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:site_name" content="Acme Commercial Real Estate">
+    <meta name="description" content="Acme CRE is a leading commercial real estate firm specializing in office, industrial, and retail properties across the Midwest.">
+    <title>{% block title %}Acme Commercial Real Estate{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="/" class="logo">Acme CRE</a>
+            <ul class="nav-links">
+                <li><a href="/about">About</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">People</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/team">Leadership Team</a></li>
+                        <li><a href="/people">Find a Professional</a></li>
+                    </ul>
+                </li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Acme Commercial Real Estate</h4>
+                <p>{{ company.headquarters if company else '123 Main Street, Columbus, OH 43215' }}</p>
+                <p>Phone: {{ company.main_phone if company else '(614) 555-1234' }}</p>
+                <p>Email: <a href="mailto:{{ company.main_email if company else 'info@acme-cre.com' }}">{{ company.main_email if company else 'info@acme-cre.com' }}</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/team">Our Team</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Acme Commercial Real Estate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

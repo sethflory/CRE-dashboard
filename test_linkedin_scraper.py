@@ -553,5 +553,227 @@ class TestSkipNames:
         assert self.should_skip_name("John Smith") is False
 
 
+class TestValidationMethods:
+    """Tests for Claude validation and correction methods"""
+
+    @pytest.fixture
+    def scraper(self):
+        """Create scraper with mocked browser"""
+        with patch.object(LinkedInScraper, '_load_data'):
+            scraper = LinkedInScraper(headless=True)
+            scraper.claude_api_key = "test-key"
+            return scraper
+
+    def test_get_screenshot_for_field_header_fields(self, scraper):
+        """Header fields should map to header screenshot"""
+        assert scraper._get_screenshot_for_field("name") == "header"
+        assert scraper._get_screenshot_for_field("headline") == "header"
+        assert scraper._get_screenshot_for_field("location") == "header"
+        assert scraper._get_screenshot_for_field("current_company") == "header"
+        assert scraper._get_screenshot_for_field("current_title") == "header"
+        assert scraper._get_screenshot_for_field("about") == "header"
+
+    def test_get_screenshot_for_field_experience(self, scraper):
+        """Work history should map to experience screenshot"""
+        assert scraper._get_screenshot_for_field("work_history") == "experience"
+
+    def test_get_screenshot_for_field_education_groups(self, scraper):
+        """Education and groups should map to education_groups screenshot"""
+        assert scraper._get_screenshot_for_field("education") == "education_groups"
+        assert scraper._get_screenshot_for_field("groups") == "education_groups"
+
+    def test_get_screenshot_for_field_unknown(self, scraper):
+        """Unknown fields should default to header"""
+        assert scraper._get_screenshot_for_field("unknown_field") == "header"
+
+    @patch('anthropic.Anthropic')
+    def test_validate_with_claude_no_issues(self, mock_anthropic, scraper):
+        """Validation with no issues should return empty flagged_fields"""
+        # Mock Claude API response
+        mock_client = MagicMock()
+        mock_anthropic.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.content = [MagicMock(text='{"flagged_fields": [], "confidence": 0.95}')]
+        mock_client.messages.create.return_value = mock_response
+
+        person = LinkedInPerson(
+            name="Test User",
+            headline="VP at Company",
+            location="New York, NY",
+            current_company="Test Corp",
+            current_title="Vice President"
+        )
+        screenshots = {
+            'header': b'fake_image_data',
+            'experience': b'fake_image_data',
+            'education_groups': b'fake_image_data'
+        }
+
+        result = scraper.validate_with_claude(person, screenshots)
+
+        assert result['flagged_fields'] == []
+        assert result['confidence'] == 0.95
+
+    @patch('anthropic.Anthropic')
+    def test_validate_with_claude_with_issues(self, mock_anthropic, scraper):
+        """Validation with issues should return flagged fields"""
+        mock_client = MagicMock()
+        mock_anthropic.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.content = [MagicMock(text='''{"flagged_fields": [{"field": "education", "issue": "missing_entry", "details": "Screenshot shows Harvard but not in parsed data"}], "confidence": 0.85}''')]
+        mock_client.messages.create.return_value = mock_response
+
+        person = LinkedInPerson(name="Test User", education=[])
+        screenshots = {
+            'header': b'fake_image_data',
+            'experience': b'fake_image_data',
+            'education_groups': b'fake_image_data'
+        }
+
+        result = scraper.validate_with_claude(person, screenshots)
+
+        assert len(result['flagged_fields']) == 1
+        assert result['flagged_fields'][0]['field'] == 'education'
+
+    @patch('anthropic.Anthropic')
+    def test_correct_field_with_claude_education(self, mock_anthropic, scraper):
+        """Correction should return corrected value for education"""
+        mock_client = MagicMock()
+        mock_anthropic.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.content = [MagicMock(text='[{"school": "Harvard University", "degree": "MBA", "years": "2010-2012"}]')]
+        mock_client.messages.create.return_value = mock_response
+
+        result = scraper.correct_field_with_claude(
+            field="education",
+            screenshot=b'fake_image_data',
+            current_value=[]
+        )
+
+        assert len(result) == 1
+        assert result[0]['school'] == 'Harvard University'
+
+    @patch('anthropic.Anthropic')
+    def test_correct_field_with_claude_groups(self, mock_anthropic, scraper):
+        """Correction should return corrected value for groups"""
+        mock_client = MagicMock()
+        mock_anthropic.return_value = mock_client
+        mock_response = MagicMock()
+        mock_response.content = [MagicMock(text='["ULI", "NAIOP", "CCIM Institute"]')]
+        mock_client.messages.create.return_value = mock_response
+
+        result = scraper.correct_field_with_claude(
+            field="groups",
+            screenshot=b'fake_image_data',
+            current_value=[]
+        )
+
+        assert len(result) == 3
+        assert "ULI" in result
+
+
+class TestCaptureScreenshots:
+    """Tests for screenshot capture functionality"""
+
+    @pytest.fixture
+    def scraper(self):
+        """Create scraper with mocked browser and page"""
+        with patch.object(LinkedInScraper, '_load_data'):
+            scraper = LinkedInScraper(headless=True)
+            # Mock the page object
+            scraper.page = MagicMock()
+            scraper.page.screenshot.return_value = b'fake_screenshot_data'
+            scraper.page.evaluate = MagicMock()
+            return scraper
+
+    def test_capture_profile_screenshots_returns_dict(self, scraper):
+        """Should return dict with three screenshots"""
+        with patch.object(scraper, '_random_delay'):
+            screenshots = scraper._capture_profile_screenshots()
+
+        assert isinstance(screenshots, dict)
+        assert 'header' in screenshots
+        assert 'experience' in screenshots
+        assert 'education_groups' in screenshots
+
+    def test_capture_profile_screenshots_scrolls(self, scraper):
+        """Should scroll to different positions"""
+        with patch.object(scraper, '_random_delay'):
+            scraper._capture_profile_screenshots()
+
+        # Verify scroll calls were made
+        scroll_calls = [call[0][0] for call in scraper.page.evaluate.call_args_list]
+        assert 'window.scrollTo(0, 0)' in scroll_calls
+        assert 'window.scrollTo(0, 1500)' in scroll_calls
+        assert 'window.scrollTo(0, 3000)' in scroll_calls
+
+    def test_capture_profile_screenshots_takes_three_screenshots(self, scraper):
+        """Should take exactly 3 screenshots"""
+        with patch.object(scraper, '_random_delay'):
+            scraper._capture_profile_screenshots()
+
+        assert scraper.page.screenshot.call_count == 3
+
+
+class TestScrapeAndValidate:
+    """Tests for the full scrape_and_validate workflow"""
+
+    @pytest.fixture
+    def scraper(self):
+        """Create scraper with mocked dependencies"""
+        with patch.object(LinkedInScraper, '_load_data'):
+            scraper = LinkedInScraper(headless=True)
+            scraper.claude_api_key = "test-key"
+            scraper.page = MagicMock()
+            return scraper
+
+    @patch.object(LinkedInScraper, 'scrape_person_profile')
+    @patch.object(LinkedInScraper, '_capture_profile_screenshots')
+    @patch.object(LinkedInScraper, 'validate_with_claude')
+    def test_scrape_and_validate_no_flags(self, mock_validate, mock_screenshots, mock_scrape, scraper):
+        """Should return person unchanged when no fields flagged"""
+        # Setup mocks
+        person = LinkedInPerson(name="Test User", headline="VP", current_company="TestCo")
+        mock_scrape.return_value = person
+        mock_screenshots.return_value = {'header': b'img', 'experience': b'img', 'education_groups': b'img'}
+        mock_validate.return_value = {'flagged_fields': [], 'confidence': 0.95}
+
+        result = scraper.scrape_and_validate("https://linkedin.com/in/testuser/")
+
+        assert result.name == "Test User"
+        mock_scrape.assert_called_once()
+        mock_validate.assert_called_once()
+
+    @patch.object(LinkedInScraper, 'scrape_person_profile')
+    @patch.object(LinkedInScraper, '_capture_profile_screenshots')
+    @patch.object(LinkedInScraper, 'validate_with_claude')
+    @patch.object(LinkedInScraper, 'correct_field_with_claude')
+    def test_scrape_and_validate_with_corrections(self, mock_correct, mock_validate, mock_screenshots, mock_scrape, scraper):
+        """Should correct flagged fields"""
+        person = LinkedInPerson(name="Test User", education=[])
+        mock_scrape.return_value = person
+        mock_screenshots.return_value = {'header': b'img', 'experience': b'img', 'education_groups': b'img'}
+        mock_validate.return_value = {
+            'flagged_fields': [{'field': 'education', 'issue': 'missing', 'details': 'test'}],
+            'confidence': 0.85
+        }
+        mock_correct.return_value = [{'school': 'Harvard', 'degree': 'MBA'}]
+
+        result = scraper.scrape_and_validate("https://linkedin.com/in/testuser/")
+
+        mock_correct.assert_called_once()
+        assert len(result.education) == 1
+        assert result.education[0]['school'] == 'Harvard'
+
+    @patch.object(LinkedInScraper, 'scrape_person_profile')
+    def test_scrape_and_validate_scrape_fails(self, mock_scrape, scraper):
+        """Should return None when scrape fails"""
+        mock_scrape.return_value = None
+
+        result = scraper.scrape_and_validate("https://linkedin.com/in/testuser/")
+
+        assert result is None
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

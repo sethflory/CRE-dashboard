@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - {{ company.name }}{% endblock %}
+
+{% block content %}
+<h1>About {{ company.name }}</h1>
+
+<section>
+    <h2>Our Story</h2>
+    <p>{{ company.about }}</p>
+    <p>Founded in 1995, Acme Commercial Real Estate has grown to become one of the most trusted names in commercial real estate across the Midwest. Our commitment to excellence and client satisfaction has earned us a reputation as industry leaders.</p>
+</section>
+
+<section>
+    <h2>Our Mission</h2>
+    <p>To provide exceptional commercial real estate services that create lasting value for our clients, partners, and communities.</p>
+</section>
+
+<section>
+    <h2>Headquarters</h2>
+    <address>
+        {{ company.headquarters }}<br>
+        Phone: {{ company.main_phone }}<br>
+        Email: <a href="mailto:{{ company.main_email }}">{{ company.main_email }}</a>
+    </address>
+</section>
+
+<section>
+    <h2>Meet Our Team</h2>
+    <p>Our experienced professionals bring decades of combined expertise to every transaction.</p>
+    <p><a href="/team">View our leadership team &rarr;</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Our Services - Acme CRE{% endblock %}
+
+{% block content %}
+<h1>Our Services</h1>
+<p>Comprehensive commercial real estate solutions for every need.</p>
+
+<section>
+    <h2>Service Lines</h2>
+    <div class="services-list">
+        {% for service in services %}
+        <div class="service-item">
+            <h3>{{ service }}</h3>
+            <p>Expert {{ service.lower() }} services tailored to your commercial real estate needs. Our team of specialists brings deep market knowledge and proven strategies to every engagement.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <h2>Property Specialties</h2>
+    <p>We have deep expertise across all major commercial property types:</p>
+    <div class="specialties">
+        {% for specialty in specialties %}
+        <span class="specialty-tag">{{ specialty }}</span>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <h2>Why Choose Acme CRE?</h2>
+    <ul>
+        <li>25+ years of market experience</li>
+        <li>Full-service capabilities</li>
+        <li>Regional expertise with national reach</li>
+        <li>Client-focused approach</li>
+    </ul>
+</section>
+{% endblock %}

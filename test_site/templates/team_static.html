@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Our Leadership Team - Acme CRE{% endblock %}
+
+{% block content %}
+<h1>Leadership Team</h1>
+<p>Meet the experienced professionals who lead Acme Commercial Real Estate.</p>
+
+<section>
+    <h2>Executive Leadership</h2>
+    <div class="team-grid">
+        {% for person in leadership %}
+        <div class="team-card" data-person-id="{{ loop.index }}">
+            <div class="name">{{ person.name }}</div>
+            <div class="title">{{ person.title }}</div>
+            <div class="contact-info">
+                <p><a href="mailto:{{ person.email }}">{{ person.email }}</a></p>
+                {% if person.linkedin %}
+                <p><a href="{{ person.linkedin }}" target="_blank">LinkedIn Profile</a></p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

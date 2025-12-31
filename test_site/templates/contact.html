@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Acme CRE{% endblock %}
+
+{% block content %}
+<h1>Contact Us</h1>
+<p>Get in touch with our team.</p>
+
+<section>
+    <h2>Headquarters</h2>
+    <div class="office-card">
+        <h3>{{ company.name }}</h3>
+        <address>
+            <p><strong>Address:</strong> {{ company.headquarters }}</p>
+            <p><strong>Phone:</strong> {{ company.main_phone }}</p>
+            <p><strong>Email:</strong> <a href="mailto:{{ company.main_email }}">{{ company.main_email }}</a></p>
+        </address>
+    </div>
+</section>
+
+<section>
+    <h2>Regional Offices</h2>
+    <div class="offices-grid">
+        {% for office in offices %}
+        <div class="office-card">
+            <h3>{{ office.city }}, {{ office.state }}</h3>
+            <address>
+                <p>{{ office.address }}</p>
+                <p>{{ office.city }}, {{ office.state }}</p>
+                <p>Phone: {{ office.phone }}</p>
+            </address>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <h2>Send Us a Message</h2>
+    <form class="contact-form" action="#" method="post">
+        <p><label>Name: <input type="text" name="name" required></label></p>
+        <p><label>Email: <input type="email" name="email" required></label></p>
+        <p><label>Phone: <input type="tel" name="phone"></label></p>
+        <p><label>Message:<br><textarea name="message" rows="5" required></textarea></label></p>
+        <p><button type="submit">Send Message</button></p>
+    </form>
+</section>
+{% endblock %}

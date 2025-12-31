@@ -1,0 +1,86 @@
+{
+  "company_website": {
+    "sample_count": 29,
+    "avg_success_rate": 0.9310344827586206,
+    "fields": {
+      "_error": {
+        "sample_count": 11,
+        "success_count": 11,
+        "tier_counts": {
+          "dom": 0,
+          "browser": 0,
+          "vision": 0,
+          "none": 11
+        },
+        "avg_confidence": 0.0
+      },
+      "company_name": {
+        "sample_count": 26,
+        "success_count": 26,
+        "tier_counts": {
+          "dom": 26,
+          "browser": 0,
+          "vision": 0,
+          "none": 0
+        },
+        "avg_confidence": 0.8615384615384616
+      },
+      "headquarters": {
+        "sample_count": 24,
+        "success_count": 24,
+        "tier_counts": {
+          "dom": 23,
+          "browser": 1,
+          "vision": 0,
+          "none": 0
+        },
+        "avg_confidence": 0.7020833333333334
+      },
+      "services": {
+        "sample_count": 26,
+        "success_count": 26,
+        "tier_counts": {
+          "dom": 26,
+          "browser": 0,
+          "vision": 0,
+          "none": 0
+        },
+        "avg_confidence": 0.7
+      },
+      "specialties": {
+        "sample_count": 26,
+        "success_count": 26,
+        "tier_counts": {
+          "dom": 26,
+          "browser": 0,
+          "vision": 0,
+          "none": 0
+        },
+        "avg_confidence": 0.7
+      },
+      "leadership": {
+        "sample_count": 6,
+        "success_count": 6,
+        "tier_counts": {
+          "dom": 5,
+          "browser": 1,
+          "vision": 0,
+          "none": 0
+        },
+        "avg_confidence": 0.75
+      },
+      "products": {
+        "sample_count": 2,
+        "success_count": 2,
+        "tier_counts": {
+          "dom": 0,
+          "browser": 2,
+          "vision": 0,
+          "none": 0
+        },
+        "avg_confidence": 0.75
+      }
+    },
+    "last_updated": "2025-12-27T17:21:30.293064"
+  }
+}

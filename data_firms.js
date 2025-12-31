@@ -1,682 +1,1119 @@
 window.firms = [
   {
-    "company_name": "Summit Columbus Realty",
-    "website": "https://www.summit-columbus-realty.com",
+    "company_name": "JLL Columbus",
+    "website": "https://www.us.jll.com/en/locations/midwest/columbus",
     "market": "Columbus",
-    "main_phone": "(555) 000-1000",
+    "main_phone": "",
     "services": [
-      "Capital Markets",
       "Brokerage",
+      "Capital Markets",
       "Development",
-      "Research"
-    ],
-    "specialties": [
-      "Multifamily",
-      "Retail",
-      "Hospitality"
-    ]
-  },
-  {
-    "company_name": "Crescent Columbus Commercial",
-    "website": "https://www.crescent-columbus-commercial.com",
-    "market": "Columbus",
-    "main_phone": "(555) 010-1001",
-    "services": [
-      "Capital Markets",
-      "Valuation",
-      "Research",
-      "Development"
-    ],
-    "specialties": [
-      "Student Housing",
-      "Office",
-      "Data Center"
-    ]
-  },
-  {
-    "company_name": "Ironwood Columbus Advisors",
-    "website": "https://www.ironwood-columbus-advisors.com",
-    "market": "Columbus",
-    "main_phone": "(555) 020-1002",
-    "services": [
-      "Capital Markets",
-      "Property Management",
-      "Valuation",
-      "Development"
-    ],
-    "specialties": [
-      "Office",
-      "Multifamily",
-      "Hospitality"
-    ]
-  },
-  {
-    "company_name": "Rivergate Columbus Partners",
-    "website": "https://www.rivergate-columbus-partners.com",
-    "market": "Columbus",
-    "main_phone": "(555) 030-1003",
-    "services": [
-      "Valuation",
-      "Advisory",
-      "Property Management",
-      "Investment Sales"
-    ],
-    "specialties": [
-      "Healthcare",
-      "Office",
-      "Student Housing"
-    ]
-  },
-  {
-    "company_name": "Pioneer Columbus Properties",
-    "website": "https://www.pioneer-columbus-properties.com",
-    "market": "Columbus",
-    "main_phone": "(555) 040-1004",
-    "services": [
       "Leasing",
-      "Advisory",
-      "Tenant Representation",
-      "Research"
-    ],
-    "specialties": [
-      "Retail",
-      "Multifamily",
-      "Student Housing"
-    ]
-  },
-  {
-    "company_name": "Summit Cincinnati Realty",
-    "website": "https://www.summit-cincinnati-realty.com",
-    "market": "Cincinnati",
-    "main_phone": "(555) 100-1000",
-    "services": [
-      "Tenant Representation",
-      "Capital Markets",
-      "Valuation",
-      "Property Management"
-    ],
-    "specialties": [
-      "Industrial",
-      "Hospitality",
-      "Student Housing"
-    ]
-  },
-  {
-    "company_name": "Crescent Cincinnati Commercial",
-    "website": "https://www.crescent-cincinnati-commercial.com",
-    "market": "Cincinnati",
-    "main_phone": "(555) 110-1001",
-    "services": [
-      "Tenant Representation",
-      "Development",
-      "Brokerage",
-      "Research"
-    ],
-    "specialties": [
-      "Data Center",
-      "Industrial",
-      "Multifamily"
-    ]
-  },
-  {
-    "company_name": "Ironwood Cincinnati Advisors",
-    "website": "https://www.ironwood-cincinnati-advisors.com",
-    "market": "Cincinnati",
-    "main_phone": "(555) 120-1002",
-    "services": [
-      "Capital Markets",
-      "Valuation",
-      "Development",
-      "Advisory"
-    ],
-    "specialties": [
-      "Hospitality",
-      "Multifamily",
-      "Mixed-Use"
-    ]
-  },
-  {
-    "company_name": "Rivergate Cincinnati Partners",
-    "website": "https://www.rivergate-cincinnati-partners.com",
-    "market": "Cincinnati",
-    "main_phone": "(555) 130-1003",
-    "services": [
-      "Capital Markets",
-      "Brokerage",
+      "Project Management",
       "Property Management",
-      "Advisory"
-    ],
-    "specialties": [
-      "Healthcare",
-      "Industrial",
-      "Student Housing"
-    ]
-  },
-  {
-    "company_name": "Pioneer Cincinnati Properties",
-    "website": "https://www.pioneer-cincinnati-properties.com",
-    "market": "Cincinnati",
-    "main_phone": "(555) 140-1004",
-    "services": [
-      "Property Management",
-      "Capital Markets",
-      "Advisory",
-      "Leasing"
-    ],
-    "specialties": [
-      "Data Center",
-      "Hospitality",
-      "Industrial"
-    ]
-  },
-  {
-    "company_name": "Summit Cleveland Realty",
-    "website": "https://www.summit-cleveland-realty.com",
-    "market": "Cleveland",
-    "main_phone": "(555) 200-1000",
-    "services": [
-      "Tenant Representation",
       "Research",
-      "Property Management",
-      "Valuation"
-    ],
-    "specialties": [
-      "Healthcare",
-      "Industrial",
-      "Mixed-Use"
-    ]
-  },
-  {
-    "company_name": "Crescent Cleveland Commercial",
-    "website": "https://www.crescent-cleveland-commercial.com",
-    "market": "Cleveland",
-    "main_phone": "(555) 210-1001",
-    "services": [
-      "Leasing",
-      "Valuation",
-      "Property Management",
-      "Capital Markets"
+      "Tenant Representation"
     ],
     "specialties": [
       "Data Center",
-      "Student Housing",
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
       "Retail"
     ]
   },
   {
-    "company_name": "Ironwood Cleveland Advisors",
-    "website": "https://www.ironwood-cleveland-advisors.com",
-    "market": "Cleveland",
-    "main_phone": "(555) 220-1002",
+    "company_name": "Cushman & Wakefield Columbus",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/columbus",
+    "market": "Columbus",
+    "main_phone": "(952) 544-1117",
     "services": [
-      "Valuation",
+      "Advisory",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
       "Property Management",
+      "Research",
       "Tenant Representation",
-      "Advisory"
+      "Valuation"
     ],
     "specialties": [
-      "Office",
+      "Apartment",
+      "Data Center",
+      "Flex",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
       "Multifamily",
+      "Office",
+      "Retail",
       "Student Housing"
     ]
   },
   {
-    "company_name": "Rivergate Cleveland Partners",
-    "website": "https://www.rivergate-cleveland-partners.com",
-    "market": "Cleveland",
-    "main_phone": "(555) 230-1003",
+    "company_name": "Avison Young Columbus",
+    "website": "https://www.avisonyoung.us/web/columbus",
+    "market": "Columbus",
+    "main_phone": "",
     "services": [
-      "Brokerage",
-      "Tenant Representation",
       "Advisory",
-      "Leasing"
-    ],
-    "specialties": [
-      "Industrial",
-      "Multifamily",
-      "Healthcare"
-    ]
-  },
-  {
-    "company_name": "Pioneer Cleveland Properties",
-    "website": "https://www.pioneer-cleveland-properties.com",
-    "market": "Cleveland",
-    "main_phone": "(555) 240-1004",
-    "services": [
-      "Tenant Representation",
-      "Property Management",
+      "Asset Management",
+      "Brokerage",
+      "Capital Markets",
+      "Construction Management",
+      "Consulting",
+      "Development",
+      "Facility Management",
       "Investment Sales",
+      "Landlord Representation",
+      "Leasing",
+      "Occupier Services",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
       "Valuation"
     ],
     "specialties": [
       "Data Center",
+      "Flex",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Mixed-Use",
+      "Multifamily",
+      "Net Lease",
+      "Office",
       "Retail",
-      "Mixed-Use"
+      "Self-Storage",
+      "Senior Housing",
+      "Warehouse"
     ]
   },
   {
-    "company_name": "Summit Indianapolis Realty",
-    "website": "https://www.summit-indianapolis-realty.com",
-    "market": "Indianapolis",
-    "main_phone": "(555) 300-1000",
+    "company_name": "Marcus & Millichap Columbus",
+    "website": "https://www.marcusmillichap.com/about-us/offices/columbus-ohio",
+    "market": "Columbus",
+    "main_phone": "(614) 360-9810",
     "services": [
-      "Leasing",
-      "Property Management",
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Consulting",
       "Development",
-      "Tenant Representation"
+      "Investment Sales",
+      "Research"
     ],
     "specialties": [
-      "Student Housing",
+      "Apartment",
+      "Flex",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Medical",
       "Mixed-Use",
+      "Multifamily",
+      "Net Lease",
+      "Office",
+      "Retail",
+      "Self-Storage",
+      "Senior Housing"
+    ]
+  },
+  {
+    "company_name": "Newmark Columbus",
+    "website": "https://www.nmrk.com/offices/columbus",
+    "market": "Columbus",
+    "main_phone": "(614) 883-1200",
+    "services": [
+      "Advisory",
+      "Appraisal",
+      "Brokerage",
+      "Capital Markets",
+      "Consulting",
+      "Investment Sales",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ]
+  },
+  {
+    "company_name": "Lee & Associates Columbus",
+    "website": "https://www.lee-associates.com/columbus",
+    "market": "Columbus",
+    "main_phone": "",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Construction Management",
+      "Development",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Senior Housing"
+    ]
+  },
+  {
+    "company_name": "NAI Ohio Equities",
+    "website": "https://www.ohioequities.com",
+    "market": "Columbus",
+    "main_phone": "(614) 224-2400",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Consulting",
+      "Landlord Representation",
+      "Leasing",
+      "Property Management",
+      "Valuation"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Medical",
+      "Multifamily",
+      "Office",
       "Retail"
     ]
   },
   {
-    "company_name": "Crescent Indianapolis Commercial",
-    "website": "https://www.crescent-indianapolis-commercial.com",
-    "market": "Indianapolis",
-    "main_phone": "(555) 310-1001",
+    "company_name": "Best Corporate Real Estate",
+    "website": "https://www.bestcorporaterealestate.com",
+    "market": "Columbus",
+    "main_phone": "(614) 559-3390",
     "services": [
-      "Property Management",
+      "Brokerage",
+      "Development",
       "Leasing",
-      "Investment Sales",
-      "Brokerage"
-    ],
-    "specialties": [
-      "Office",
-      "Industrial",
-      "Data Center"
-    ]
-  },
-  {
-    "company_name": "Ironwood Indianapolis Advisors",
-    "website": "https://www.ironwood-indianapolis-advisors.com",
-    "market": "Indianapolis",
-    "main_phone": "(555) 320-1002",
-    "services": [
-      "Leasing",
-      "Advisory",
-      "Capital Markets",
       "Property Management"
     ],
     "specialties": [
-      "Student Housing",
-      "Data Center",
-      "Healthcare"
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail",
+      "Warehouse"
     ]
   },
   {
-    "company_name": "Rivergate Indianapolis Partners",
-    "website": "https://www.rivergate-indianapolis-partners.com",
-    "market": "Indianapolis",
-    "main_phone": "(555) 330-1003",
+    "company_name": "The Robert Weiler Company",
+    "website": "https://rweiler.com",
+    "market": "Columbus",
+    "main_phone": "(614) 221-4286",
     "services": [
-      "Development",
-      "Valuation",
+      "Appraisal",
       "Brokerage",
+      "Consulting",
+      "Development",
+      "Investment Sales",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Industrial",
+      "Land",
+      "Mixed-Use",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ]
+  },
+  {
+    "company_name": "KRG Real Estate",
+    "website": "https://krgre.com",
+    "market": "Columbus",
+    "main_phone": "(614) 228-5547",
+    "services": [
+      "Appraisal",
+      "Brokerage",
+      "Consulting",
+      "Development",
+      "Leasing"
+    ],
+    "specialties": [
+      "Apartment",
+      "Flex",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "DRK & Company Realty",
+    "website": "https://drk-realty.com",
+    "market": "Columbus",
+    "main_phone": "(614) 540-2404",
+    "services": [
+      "Brokerage",
+      "Development",
+      "Leasing",
+      "Property Management",
       "Tenant Representation"
     ],
     "specialties": [
       "Industrial",
-      "Healthcare",
-      "Student Housing"
-    ]
-  },
-  {
-    "company_name": "Pioneer Indianapolis Properties",
-    "website": "https://www.pioneer-indianapolis-properties.com",
-    "market": "Indianapolis",
-    "main_phone": "(555) 340-1004",
-    "services": [
-      "Tenant Representation",
-      "Capital Markets",
-      "Development",
-      "Property Management"
-    ],
-    "specialties": [
-      "Retail",
-      "Data Center",
-      "Office"
-    ]
-  },
-  {
-    "company_name": "Summit Chicago Realty",
-    "website": "https://www.summit-chicago-realty.com",
-    "market": "Chicago",
-    "main_phone": "(555) 400-1000",
-    "services": [
-      "Development",
-      "Valuation",
-      "Leasing",
-      "Research"
-    ],
-    "specialties": [
-      "Industrial",
-      "Healthcare",
-      "Student Housing"
-    ]
-  },
-  {
-    "company_name": "Crescent Chicago Commercial",
-    "website": "https://www.crescent-chicago-commercial.com",
-    "market": "Chicago",
-    "main_phone": "(555) 410-1001",
-    "services": [
-      "Valuation",
-      "Property Management",
-      "Leasing",
-      "Investment Sales"
-    ],
-    "specialties": [
-      "Retail",
+      "Land",
+      "Medical",
       "Office",
-      "Healthcare"
+      "Retail"
     ]
   },
   {
-    "company_name": "Ironwood Chicago Advisors",
-    "website": "https://www.ironwood-chicago-advisors.com",
-    "market": "Chicago",
-    "main_phone": "(555) 420-1002",
+    "company_name": "Hanna Commercial Pittsburgh",
+    "website": "https://hannacre.com",
+    "market": "Pittsburgh",
+    "main_phone": "",
     "services": [
-      "Tenant Representation",
-      "Investment Sales",
+      "Advisory",
       "Brokerage",
+      "Corporate Services",
+      "Development",
+      "Investment Sales",
+      "Occupier Services",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
       "Valuation"
     ],
     "specialties": [
       "Hospitality",
-      "Healthcare",
-      "Industrial"
+      "Industrial",
+      "Land",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Warehouse"
     ]
   },
   {
-    "company_name": "Rivergate Chicago Partners",
-    "website": "https://www.rivergate-chicago-partners.com",
-    "market": "Chicago",
-    "main_phone": "(555) 430-1003",
+    "company_name": "Equity Commercial Real Estate",
+    "website": "https://equity.net",
+    "market": "Columbus",
+    "main_phone": "(937) 291-1179",
     "services": [
+      "Asset Management",
       "Brokerage",
-      "Property Management",
+      "Development",
+      "Investment Sales",
+      "Leasing",
+      "Project Management",
+      "Property Management"
+    ],
+    "specialties": [
+      "Flex",
+      "Healthcare",
+      "Hotel",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Mixed-Use",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Nationwide Realty Investors",
+    "website": "https://www.nationwiderealtyinvestors.com",
+    "market": "Columbus",
+    "main_phone": "(614) 857-2330",
+    "services": [
+      "Development",
+      "Leasing"
+    ],
+    "specialties": [
+      "Hospitality",
+      "Land",
+      "Mixed-Use",
+      "Office",
+      "Retail",
+      "Senior Housing"
+    ]
+  },
+  {
+    "company_name": "CASTO",
+    "website": "https://castoinfo.com",
+    "market": "Columbus",
+    "main_phone": "(614) 228-5331",
+    "services": [
+      "Asset Management",
+      "Brokerage",
+      "Construction Management",
+      "Consulting",
+      "Development",
+      "Leasing",
+      "Property Management"
+    ],
+    "specialties": [
+      "Apartment",
+      "Flex",
+      "Healthcare",
+      "Land",
+      "Multifamily",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Thrive Companies",
+    "website": "https://thrivecos.com",
+    "market": "Columbus",
+    "main_phone": "(614) 545-9247",
+    "services": [
+      "Development",
+      "Leasing",
+      "Property Management"
+    ],
+    "specialties": [
+      "Apartment",
+      "Industrial",
+      "Land",
+      "Mixed-Use",
+      "Office"
+    ]
+  },
+  {
+    "company_name": "Kaufman Development",
+    "website": "https://www.livekaufman.com",
+    "market": "Columbus",
+    "main_phone": "",
+    "services": [
+      "Development",
+      "Leasing"
+    ],
+    "specialties": [
+      "Apartment"
+    ]
+  },
+  {
+    "company_name": "Cushman & Wakefield Cincinnati",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/cincinnati",
+    "market": "Cincinnati",
+    "main_phone": "(513) 421-4884",
+    "services": [
+      "Advisory",
       "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing",
+      "Warehouse"
+    ]
+  },
+  {
+    "company_name": "Lee & Associates Cincinnati",
+    "website": "https://www.lee-cincinnati.com",
+    "market": "Cincinnati",
+    "main_phone": "(513) 272-6800",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Facility Management",
+      "Leasing",
+      "Property Management",
       "Research"
     ],
     "specialties": [
-      "Data Center",
+      "Office"
+    ]
+  },
+  {
+    "company_name": "NAI Bergman",
+    "website": "https://bergmancommercial.com",
+    "market": "Cincinnati",
+    "main_phone": "(513) 769-1710",
+    "services": [
+      "Asset Management",
+      "Brokerage",
+      "Construction Management",
+      "Corporate Services",
+      "Development",
+      "Facility Management",
+      "Investment Sales",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Tenant Representation"
+    ],
+    "specialties": [
       "Industrial",
+      "Land",
+      "Medical",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "APEX Commercial Group",
+    "website": "https://apexcommercialgroup.com",
+    "market": "Cincinnati",
+    "main_phone": "(937) 222-7884",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Debt Placement",
+      "Landlord Representation",
+      "Leasing",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Cushman & Wakefield CRESCO",
+    "website": "https://crescorealestate.com",
+    "market": "Cleveland",
+    "main_phone": "(216) 520-1200",
+    "services": [
+      "Advisory",
+      "Consulting",
+      "Corporate Services",
+      "Development",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ]
+  },
+  {
+    "company_name": "Newmark Cleveland",
+    "website": "https://terrycoyne.com",
+    "market": "Cleveland",
+    "main_phone": "(614) 883-1239",
+    "services": [
+      "Development",
+      "Leasing"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ]
+  },
+  {
+    "company_name": "Cushman & Wakefield Indianapolis",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/indianapolis",
+    "market": "Indianapolis",
+    "main_phone": "(317) 634-6363",
+    "services": [
+      "Advisory",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Distribution",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
       "Student Housing"
     ]
   },
   {
-    "company_name": "Pioneer Chicago Properties",
-    "website": "https://www.pioneer-chicago-properties.com",
-    "market": "Chicago",
-    "main_phone": "(555) 440-1004",
+    "company_name": "JLL Indianapolis",
+    "website": "https://www.us.jll.com/en/locations/midwest/indianapolis",
+    "market": "Indianapolis",
+    "main_phone": "",
     "services": [
-      "Valuation",
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
       "Leasing",
+      "Project Management",
+      "Property Management",
       "Research",
       "Tenant Representation"
     ],
     "specialties": [
       "Data Center",
-      "Retail",
-      "Mixed-Use"
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
+      "Retail"
     ]
   },
   {
-    "company_name": "Summit Pittsburgh Realty",
-    "website": "https://www.summit-pittsburgh-realty.com",
-    "market": "Pittsburgh",
-    "main_phone": "(555) 500-1000",
+    "company_name": "Bradley Company",
+    "website": "https://www.bradleyco.com",
+    "market": "Indianapolis",
+    "main_phone": "(574) 237-6000",
     "services": [
-      "Valuation",
       "Advisory",
-      "Property Management",
-      "Development"
-    ],
-    "specialties": [
-      "Multifamily",
-      "Healthcare",
-      "Mixed-Use"
-    ]
-  },
-  {
-    "company_name": "Crescent Pittsburgh Commercial",
-    "website": "https://www.crescent-pittsburgh-commercial.com",
-    "market": "Pittsburgh",
-    "main_phone": "(555) 510-1001",
-    "services": [
-      "Tenant Representation",
-      "Investment Sales",
-      "Valuation",
-      "Brokerage"
-    ],
-    "specialties": [
-      "Multifamily",
-      "Mixed-Use",
-      "Office"
-    ]
-  },
-  {
-    "company_name": "Ironwood Pittsburgh Advisors",
-    "website": "https://www.ironwood-pittsburgh-advisors.com",
-    "market": "Pittsburgh",
-    "main_phone": "(555) 520-1002",
-    "services": [
-      "Tenant Representation",
       "Brokerage",
+      "Consulting",
+      "Corporate Services",
+      "Facility Management",
+      "Occupier Services",
+      "Project Management",
       "Property Management",
-      "Development"
+      "Tenant Representation"
     ],
     "specialties": [
+      "Flex",
+      "Healthcare",
+      "Industrial",
+      "Medical",
       "Multifamily",
       "Office",
-      "Data Center"
+      "Retail",
+      "Student Housing"
     ]
   },
   {
-    "company_name": "Rivergate Pittsburgh Partners",
-    "website": "https://www.rivergate-pittsburgh-partners.com",
-    "market": "Pittsburgh",
-    "main_phone": "(555) 530-1003",
+    "company_name": "Lee & Associates Charlotte",
+    "website": "https://www.lee-associates.com/offices",
+    "market": "Charlotte",
+    "main_phone": "",
     "services": [
+      "Advisory",
       "Brokerage",
+      "Construction Management",
+      "Development",
+      "Leasing",
+      "Project Management",
       "Property Management",
-      "Capital Markets",
       "Research"
     ],
     "specialties": [
-      "Hospitality",
-      "Industrial",
-      "Healthcare"
-    ]
-  },
-  {
-    "company_name": "Pioneer Pittsburgh Properties",
-    "website": "https://www.pioneer-pittsburgh-properties.com",
-    "market": "Pittsburgh",
-    "main_phone": "(555) 540-1004",
-    "services": [
-      "Property Management",
-      "Development",
-      "Investment Sales",
-      "Capital Markets"
-    ],
-    "specialties": [
-      "Mixed-Use",
-      "Retail",
-      "Hospitality"
-    ]
-  },
-  {
-    "company_name": "Summit Charlotte Realty",
-    "website": "https://www.summit-charlotte-realty.com",
-    "market": "Charlotte",
-    "main_phone": "(555) 600-1000",
-    "services": [
-      "Research",
-      "Investment Sales",
-      "Property Management",
-      "Advisory"
-    ],
-    "specialties": [
       "Data Center",
-      "Student Housing",
-      "Industrial"
-    ]
-  },
-  {
-    "company_name": "Crescent Charlotte Commercial",
-    "website": "https://www.crescent-charlotte-commercial.com",
-    "market": "Charlotte",
-    "main_phone": "(555) 610-1001",
-    "services": [
-      "Capital Markets",
-      "Research",
-      "Advisory",
-      "Leasing"
-    ],
-    "specialties": [
-      "Student Housing",
-      "Mixed-Use",
-      "Multifamily"
-    ]
-  },
-  {
-    "company_name": "Ironwood Charlotte Advisors",
-    "website": "https://www.ironwood-charlotte-advisors.com",
-    "market": "Charlotte",
-    "main_phone": "(555) 620-1002",
-    "services": [
-      "Brokerage",
-      "Capital Markets",
-      "Research",
-      "Property Management"
-    ],
-    "specialties": [
-      "Hospitality",
+      "Healthcare",
       "Industrial",
-      "Data Center"
-    ]
-  },
-  {
-    "company_name": "Rivergate Charlotte Partners",
-    "website": "https://www.rivergate-charlotte-partners.com",
-    "market": "Charlotte",
-    "main_phone": "(555) 630-1003",
-    "services": [
-      "Property Management",
-      "Research",
-      "Investment Sales",
-      "Capital Markets"
-    ],
-    "specialties": [
-      "Student Housing",
-      "Retail",
-      "Data Center"
-    ]
-  },
-  {
-    "company_name": "Pioneer Charlotte Properties",
-    "website": "https://www.pioneer-charlotte-properties.com",
-    "market": "Charlotte",
-    "main_phone": "(555) 640-1004",
-    "services": [
-      "Investment Sales",
-      "Property Management",
-      "Capital Markets",
-      "Valuation"
-    ],
-    "specialties": [
-      "Mixed-Use",
-      "Industrial",
-      "Office"
-    ]
-  },
-  {
-    "company_name": "Summit Savannah Realty",
-    "website": "https://www.summit-savannah-realty.com",
-    "market": "Savannah",
-    "main_phone": "(555) 700-1000",
-    "services": [
-      "Valuation",
-      "Brokerage",
-      "Capital Markets",
-      "Advisory"
-    ],
-    "specialties": [
+      "Land",
       "Multifamily",
-      "Retail",
-      "Mixed-Use"
-    ]
-  },
-  {
-    "company_name": "Crescent Savannah Commercial",
-    "website": "https://www.crescent-savannah-commercial.com",
-    "market": "Savannah",
-    "main_phone": "(555) 710-1001",
-    "services": [
-      "Investment Sales",
-      "Research",
-      "Property Management",
-      "Advisory"
-    ],
-    "specialties": [
-      "Student Housing",
       "Office",
-      "Industrial"
+      "Retail",
+      "Senior Housing"
     ]
   },
   {
-    "company_name": "Ironwood Savannah Advisors",
-    "website": "https://www.ironwood-savannah-advisors.com",
-    "market": "Savannah",
-    "main_phone": "(555) 720-1002",
+    "company_name": "NAI Hiffman",
+    "website": "https://hiffman.com",
+    "market": "Chicago",
+    "main_phone": "(630) 317-0796",
     "services": [
       "Advisory",
       "Brokerage",
-      "Research",
-      "Leasing"
-    ],
-    "specialties": [
-      "Data Center",
-      "Healthcare",
-      "Multifamily"
-    ]
-  },
-  {
-    "company_name": "Rivergate Savannah Partners",
-    "website": "https://www.rivergate-savannah-partners.com",
-    "market": "Savannah",
-    "main_phone": "(555) 730-1003",
-    "services": [
-      "Valuation",
-      "Investment Sales",
+      "Capital Markets",
+      "Facility Management",
       "Leasing",
-      "Capital Markets"
-    ],
-    "specialties": [
-      "Healthcare",
-      "Multifamily",
-      "Office"
-    ]
-  },
-  {
-    "company_name": "Pioneer Savannah Properties",
-    "website": "https://www.pioneer-savannah-properties.com",
-    "market": "Savannah",
-    "main_phone": "(555) 740-1004",
-    "services": [
+      "Property Management",
       "Research",
-      "Valuation",
-      "Brokerage",
       "Tenant Representation"
     ],
     "specialties": [
-      "Hospitality",
+      "Industrial",
+      "Land",
       "Office",
-      "Data Center"
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "JLL Chicago",
+    "website": "https://www.us.jll.com/en/locations/midwest/chicago",
+    "market": "Chicago",
+    "main_phone": "",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Development",
+      "Investment Sales",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Industrial",
+      "Land",
+      "Manufacturing",
+      "Multifamily",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Cushman & Wakefield Chicago",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/chicago",
+    "market": "Chicago",
+    "main_phone": "(312) 470-1800",
+    "services": [
+      "Advisory",
+      "Asset Management",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Flex",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ]
+  },
+  {
+    "company_name": "SVN Chicago Commercial",
+    "website": "https://svnchicago.com",
+    "market": "Chicago",
+    "main_phone": "(312) 676-1866",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Corporate Services",
+      "Development",
+      "Landlord Representation",
+      "Leasing",
+      "Property Management",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Flex",
+      "Hospitality",
+      "Hotel",
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Interra Realty",
+    "website": "https://interrarealty.com",
+    "market": "Chicago",
+    "main_phone": "(312) 261-9970",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Development",
+      "Valuation"
+    ],
+    "specialties": [
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Mixed-Use",
+      "Multifamily",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "JLL Pittsburgh",
+    "website": "https://www.us.jll.com/en/locations/northeast/pittsburgh",
+    "market": "Pittsburgh",
+    "main_phone": "",
+    "services": [
+      "Brokerage",
+      "Capital Markets",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Newmark Pittsburgh",
+    "website": "https://www.nmrk.com/offices/pittsburgh",
+    "market": "Pittsburgh",
+    "main_phone": "(412) 281-0100",
+    "services": [
+      "Advisory",
+      "Appraisal",
+      "Brokerage",
+      "Capital Markets",
+      "Construction Management",
+      "Consulting",
+      "Development",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ]
+  },
+  {
+    "company_name": "Pennsylvania Commercial Real Estate",
+    "website": "https://www.penncom.com",
+    "market": "Pittsburgh",
+    "main_phone": "(412) 391-3500",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Development",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Flex",
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "JLL Charlotte",
+    "website": "https://www.us.jll.com/en/locations/southeast/charlotte",
+    "market": "Charlotte",
+    "main_phone": "",
+    "services": [
+      "Brokerage",
+      "Capital Markets",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Cushman & Wakefield Charlotte",
+    "website": "https://www.cushmanwakefield.com/en/united-states/offices/charlotte",
+    "market": "Charlotte",
+    "main_phone": "(704) 375-7771",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Development",
+      "Leasing",
+      "Occupier Services",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Apartment",
+      "Data Center",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Student Housing"
+    ]
+  },
+  {
+    "company_name": "Trinity Partners",
+    "website": "https://www.trinity-partners.com",
+    "market": "Charlotte",
+    "main_phone": "",
+    "services": [
+      "Investment Sales",
+      "Leasing",
+      "Occupier Services",
+      "Project Management",
+      "Property Management"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Medical",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Lincoln Property Company Charlotte",
+    "website": "https://lpc.com/office/charlotte",
+    "market": "Charlotte",
+    "main_phone": "(214) 740-3300",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Development",
+      "Facility Management",
+      "Leasing",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Healthcare",
+      "Land",
+      "Life Science",
+      "Mixed-Use",
+      "Multifamily",
+      "Office"
+    ]
+  },
+  {
+    "company_name": "Foundry Commercial",
+    "website": "https://www.foundrycommercial.com/locations/charlotte",
+    "market": "Charlotte",
+    "main_phone": "",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Development",
+      "Investment Sales",
+      "Landlord Representation",
+      "Leasing",
+      "Project Management",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Medical",
+      "Multifamily",
+      "Office",
+      "Retail"
+    ]
+  },
+  {
+    "company_name": "Childress Klein",
+    "website": "https://childressklein.com",
+    "market": "Charlotte",
+    "main_phone": "",
+    "services": [
+      "Development",
+      "Leasing",
+      "Project Management",
+      "Property Management"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Multifamily",
+      "Office",
+      "Retail",
+      "Self-Storage"
+    ]
+  },
+  {
+    "company_name": "The Keith Corporation",
+    "website": "https://thekeithcorp.com",
+    "market": "Charlotte",
+    "main_phone": "(704) 365-6000",
+    "services": [
+      "Asset Management",
+      "Brokerage",
+      "Development",
+      "Facility Management",
+      "Project Management",
+      "Property Management"
+    ],
+    "specialties": [
+      "Healthcare",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Medical",
+      "Mixed-Use",
+      "Office",
+      "Retail",
+      "Warehouse"
+    ]
+  },
+  {
+    "company_name": "Avison Young Savannah",
+    "website": "https://www.avisonyoung.us/web/savannah",
+    "market": "Savannah",
+    "main_phone": "",
+    "services": [
+      "Advisory",
+      "Asset Management",
+      "Brokerage",
+      "Capital Markets",
+      "Construction Management",
+      "Consulting",
+      "Development",
+      "Facility Management",
+      "Investment Sales",
+      "Landlord Representation",
+      "Leasing",
+      "Occupier Services",
+      "Project Management",
+      "Property Management",
+      "Research",
+      "Tenant Representation",
+      "Valuation"
+    ],
+    "specialties": [
+      "Data Center",
+      "Distribution",
+      "Flex",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Life Science",
+      "Mixed-Use",
+      "Multifamily",
+      "Net Lease",
+      "Office",
+      "Retail",
+      "Self-Storage",
+      "Senior Housing",
+      "Warehouse"
+    ]
+  },
+  {
+    "company_name": "NAI Mopper Benton",
+    "website": "https://www.naisavannah.com",
+    "market": "Savannah",
+    "main_phone": "(912) 358-5600",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Consulting",
+      "Corporate Services",
+      "Investment Sales",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Valuation"
+    ],
+    "specialties": [
+      "Distribution",
+      "Hospitality",
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail",
+      "Senior Housing"
     ]
   }
 ];

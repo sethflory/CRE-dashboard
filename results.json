@@ -1,0 +1,229 @@
+[
+  {
+    "company_name": "Commercial Real Estate and Property Investment",
+    "services": [
+      "Brokerage",
+      "Capital Markets",
+      "Leasing",
+      "Project Management",
+      "Property Management",
+      "Research"
+    ],
+    "specialties": [
+      "Data Center",
+      "Flex",
+      "Hotel",
+      "Land",
+      "Manufacturing",
+      "Office",
+      "Retail"
+    ],
+    "_extraction_metadata": {
+      "url": "https://www.us.jll.com/",
+      "intent": "company_website",
+      "final_tier": "error",
+      "tiers_used": [
+        "site_mapping",
+        "dom",
+        "browser",
+        "vision"
+      ],
+      "total_cost": 0.0,
+      "cost_breakdown": {
+        "browser": 0.0
+      },
+      "success_rate": 0.5,
+      "field_summary": {
+        "company_name": {
+          "status": "low_conf",
+          "confidence": 0.6,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "headquarters": {
+          "status": "missing",
+          "confidence": 0.0,
+          "source_tier": null,
+          "has_value": false
+        },
+        "services": {
+          "status": "extracted",
+          "confidence": 0.7,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "specialties": {
+          "status": "extracted",
+          "confidence": 0.7,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "products": {
+          "status": "missing",
+          "confidence": 0.0,
+          "source_tier": null,
+          "has_value": false
+        },
+        "leadership": {
+          "status": "missing",
+          "confidence": 0.0,
+          "source_tier": null,
+          "has_value": false
+        }
+      },
+      "completed_at": "2025-12-27T17:17:23.296064"
+    },
+    "_url": "https://www.us.jll.com/"
+  },
+  {
+    "company_name": "About Us",
+    "headquarters": "1031 Exchange",
+    "services": [
+      "Advisory",
+      "Brokerage",
+      "Capital Markets",
+      "Consulting",
+      "Development",
+      "Investment Sales",
+      "Research"
+    ],
+    "specialties": [
+      "Office"
+    ],
+    "_extraction_metadata": {
+      "url": "https://www.marcusmillichap.com",
+      "intent": "company_website",
+      "final_tier": "error",
+      "tiers_used": [
+        "site_mapping",
+        "dom",
+        "browser",
+        "vision"
+      ],
+      "total_cost": 0.0,
+      "cost_breakdown": {
+        "browser": 0.0
+      },
+      "success_rate": 0.6666666666666666,
+      "field_summary": {
+        "company_name": {
+          "status": "extracted",
+          "confidence": 0.85,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "headquarters": {
+          "status": "extracted",
+          "confidence": 0.7,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "services": {
+          "status": "extracted",
+          "confidence": 0.7,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "specialties": {
+          "status": "extracted",
+          "confidence": 0.7,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "products": {
+          "status": "missing",
+          "confidence": 0.0,
+          "source_tier": null,
+          "has_value": false
+        },
+        "leadership": {
+          "status": "missing",
+          "confidence": 0.0,
+          "source_tier": null,
+          "has_value": false
+        }
+      },
+      "completed_at": "2025-12-27T17:18:13.773145"
+    },
+    "_url": "https://www.marcusmillichap.com"
+  },
+  {
+    "company_name": "NAI Bergman",
+    "headquarters": "4695 Lake Forest Drive,",
+    "services": [
+      "Asset Management",
+      "Brokerage",
+      "Construction Management",
+      "Corporate Services",
+      "Development",
+      "Facility Management",
+      "Investment Sales",
+      "Leasing",
+      "Property Management",
+      "Research",
+      "Tenant Representation"
+    ],
+    "specialties": [
+      "Industrial",
+      "Land",
+      "Office",
+      "Retail"
+    ],
+    "_extraction_metadata": {
+      "url": "https://bergmancommercial.com",
+      "intent": "company_website",
+      "final_tier": "error",
+      "tiers_used": [
+        "site_mapping",
+        "dom",
+        "browser",
+        "vision"
+      ],
+      "total_cost": 0.0,
+      "cost_breakdown": {
+        "browser": 0.0
+      },
+      "success_rate": 0.6666666666666666,
+      "field_summary": {
+        "company_name": {
+          "status": "extracted",
+          "confidence": 0.9,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "headquarters": {
+          "status": "extracted",
+          "confidence": 0.7,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "services": {
+          "status": "extracted",
+          "confidence": 0.7,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "specialties": {
+          "status": "extracted",
+          "confidence": 0.7,
+          "source_tier": "dom",
+          "has_value": true
+        },
+        "products": {
+          "status": "missing",
+          "confidence": 0.0,
+          "source_tier": null,
+          "has_value": false
+        },
+        "leadership": {
+          "status": "missing",
+          "confidence": 0.0,
+          "source_tier": null,
+          "has_value": false
+        }
+      },
+      "completed_at": "2025-12-27T17:18:53.197807"
+    },
+    "_url": "https://bergmancommercial.com"
+  }
+]

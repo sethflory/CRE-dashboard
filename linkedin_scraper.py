@@ -20,11 +20,19 @@ import json
 import os
 import time
 import random
-from typing import Optional, List, Dict, Set
+import base64
+from typing import Optional, List, Dict, Set, Any
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 
 from playwright.sync_api import sync_playwright, Page, Browser
+
+# Optional: Claude API for vision-based extraction
+try:
+    import anthropic
+    ANTHROPIC_AVAILABLE = True
+except ImportError:
+    ANTHROPIC_AVAILABLE = False
 
 # File paths
 COOKIES_FILE = 'linkedin_cookies.json'
@@ -64,8 +72,28 @@ BAD_NAME_PATTERNS = [
 
 # Words that indicate job titles
 TITLE_KEYWORDS = [
+    # Executive titles
     'president', 'chairman', 'director', 'manager', 'associate', 'analyst',
-    'broker', 'agent', 'executive', 'officer', 'partner', 'principal', 'vp', 'svp', 'evp'
+    'broker', 'agent', 'executive', 'officer', 'partner', 'principal',
+    'vp', 'svp', 'evp', 'ceo', 'cfo', 'coo', 'cmo', 'cto', 'cio',
+    # Senior/leadership prefixes
+    'senior', 'vice', 'chief', 'head', 'lead', 'managing',
+    # CRE-specific titles
+    'advisor', 'adviser', 'consultant', 'specialist', 'coordinator',
+    'representative', 'sales', 'leasing', 'acquisitions', 'dispositions',
+    'underwriter', 'originator', 'closer', 'processor',
+    # Common role types
+    'founder', 'owner', 'member', 'assistant', 'intern', 'trainee',
+    'supervisor', 'superintendent', 'foreman',
+    # Department indicators (often in titles)
+    'marketing', 'operations', 'finance', 'accounting', 'human resources',
+    'investment', 'development', 'research'
+]
+
+# Words that strongly indicate NOT a title (company-only terms)
+COMPANY_ONLY_TERMS = [
+    'inc', 'llc', 'llp', 'corp', 'corporation', 'company', 'co.', 'ltd',
+    'limited', 'incorporated', 'pllc', 'lp', 'gmbh', 'plc'
 ]
 
 # Employment types to skip when parsing work history
@@ -84,6 +112,43 @@ NON_GROUP_NAMES = {
     'IBM', 'Oracle', 'Microsoft', 'J.P. Morgan', 'Fidelity Investments',
     'Cardinal Health', 'L Brands', 'CoStar Group', 'Gates Notes'
 }
+
+# Patterns that indicate non-school education entries (to filter out)
+EDUCATION_SKIP_PREFIXES = [
+    'activities and societies:',
+    'grade:',
+    'minor in ',
+    'minor:',
+    'gpa:',
+    'honors:',
+    'thesis:',
+    'dissertation:',
+    'investigating ',
+    'research:',
+    'during my time',
+    'i grew up',
+    'very active',
+    'investment analysis',
+]
+
+# Keywords that indicate a valid educational institution
+SCHOOL_KEYWORDS = [
+    'university', 'college', 'institute', 'school', 'academy',
+    'polytechnic', 'conservatory', 'seminary', 'state', 'tech',
+    'community college', 'law school', 'business school',
+    'medical school', 'graduate school'
+]
+
+# Patterns that indicate NOT a school (even if captured from education section)
+NOT_SCHOOL_PATTERNS = [
+    'degree', 'bachelor', 'master', 'mba', 'phd', 'associates',
+    'certification', 'certificate', 'license', 'diploma',
+    'sorority', 'fraternity', 'club', 'team', 'varsity',
+    'scholarship', 'honor roll', 'letterman', 'captain',
+    'magna cum laude', 'cum laude', 'summa cum laude',
+    'junior', 'senior', 'sophomore', 'freshman',
+    'intern', 'internship', 'fellowship'
+]
 
 
 @dataclass
@@ -122,12 +187,23 @@ class LinkedInCompany:
 class LinkedInScraper:
     """LinkedIn scraper for CRE intelligence gathering"""
 
-    def __init__(self, headless: bool = False):
+    def __init__(self, headless: bool = False, use_claude_vision: bool = False, claude_api_key: str = None):
         self.playwright = None
         self.browser: Browser = None
         self.page: Page = None
         self.headless = headless
         self.logged_in = False
+
+        # Claude vision extraction settings
+        self.use_claude_vision = use_claude_vision
+        self.claude_api_key = claude_api_key or os.getenv('ANTHROPIC_API_KEY')
+
+        # Validate Claude vision requirements
+        if self.use_claude_vision:
+            if not ANTHROPIC_AVAILABLE:
+                raise ImportError("anthropic package required for Claude vision. Install with: pip install anthropic")
+            if not self.claude_api_key:
+                raise ValueError("Claude API key required for vision extraction. Set ANTHROPIC_API_KEY env var or pass --claude-api-key")
 
         # Data stores
         self.discovered_firms: Dict[str, LinkedInCompany] = {}
@@ -215,19 +291,101 @@ class LinkedInScraper:
         if not text:
             return False
         lowered = text.lower()
+
+        # Strong company indicators (legal suffixes)
+        legal_suffixes = ['inc', 'inc.', 'llc', 'llp', 'corp', 'corp.', 'corporation',
+                          'ltd', 'ltd.', 'limited', 'pllc', 'lp', 'gmbh', 'plc', 'co.', 'co,']
+        for suffix in legal_suffixes:
+            if lowered.endswith(suffix) or f' {suffix}' in lowered or f',{suffix}' in lowered:
+                return True
+
+        # Company name patterns
         company_tokens = [
-            'inc', 'llc', 'corp', 'co', 'company', 'corporation', 'ltd',
-            'capital', 'partners', 'properties', 'realty', 'holdings', 'group',
-            'investments', 'bank', 'associates', 'technology'
+            # Business structure words
+            'company', 'companies', 'enterprises', 'ventures', 'solutions',
+            # Finance/investment
+            'capital', 'partners', 'investments', 'bank', 'financial', 'advisors',
+            # Real estate specific
+            'properties', 'realty', 'real estate', 'holdings', 'development',
+            'brokerage', 'commercial', 'residential',
+            # Organization types
+            'group', 'associates', 'services', 'management', 'consulting',
+            'agency', 'firm', 'team', 'network',
+            # Tech/other
+            'technology', 'technologies', 'systems', 'labs', 'studio', 'media'
         ]
-        return any(tok in lowered for tok in company_tokens)
+
+        # Check if any company token appears as a distinct word
+        words = lowered.split()
+        for tok in company_tokens:
+            if tok in words or tok in lowered:
+                return True
+
+        return False
 
     def _looks_like_title(self, text: str) -> bool:
         """Heuristic for job titles."""
         if not text:
             return False
         lowered = text.lower()
+
+        # If it has company legal suffixes, it's NOT a title
+        for term in COMPANY_ONLY_TERMS:
+            if term in lowered:
+                return False
+
         return any(tw in lowered for tw in TITLE_KEYWORDS)
+
+    def _is_definitely_company(self, text: str) -> bool:
+        """Check if text contains definite company indicators (legal suffixes)."""
+        if not text:
+            return False
+        lowered = text.lower()
+        for term in COMPANY_ONLY_TERMS:
+            if lowered.endswith(term) or lowered.endswith(f'{term}.') or f' {term}' in lowered:
+                return True
+        return False
+
+    def _classify_text(self, text: str) -> str:
+        """
+        Classify text as 'title', 'company', or 'unknown'.
+        Returns the most likely classification.
+        """
+        if not text or len(text.strip()) < 2:
+            return 'unknown'
+
+        text = text.strip()
+        lowered = text.lower()
+
+        # Definite company (has legal suffixes)
+        if self._is_definitely_company(text):
+            return 'company'
+
+        # Check for title keywords
+        has_title_keyword = any(tw in lowered for tw in TITLE_KEYWORDS)
+
+        # Check for company patterns
+        has_company_pattern = self._looks_like_company_name(text)
+
+        # If it has title keywords but no company patterns, it's a title
+        if has_title_keyword and not has_company_pattern:
+            return 'title'
+
+        # If it has company patterns but no title keywords, it's a company
+        if has_company_pattern and not has_title_keyword:
+            return 'company'
+
+        # Both or neither - use additional heuristics
+        if has_title_keyword and has_company_pattern:
+            # Titles with "at" or "of" followed by company name
+            if ' at ' in lowered or ' of ' in lowered:
+                return 'title'
+            # Short text more likely title
+            if len(text) < 30:
+                return 'title'
+            return 'company'
+
+        return 'unknown'
 
     def _is_invalid_company_name(self, text: str) -> bool:
         """Filter out UI noise or titles captured as company names."""
@@ -273,6 +431,172 @@ class LinkedInScraper:
 
         return len(name) > 2
 
+    def _is_valid_school_name(self, text: str) -> bool:
+        """
+        Validate that a string looks like a real school/university name.
+        Filters out activities, grades, descriptions, and other noise.
+        """
+        if not text:
+            return False
+
+        text = text.strip()
+        lowered = text.lower()
+
+        # Skip if too short or too long
+        if len(text) < 3 or len(text) > 150:
+            return False
+
+        # Skip entries that start with known non-school prefixes
+        for prefix in EDUCATION_SKIP_PREFIXES:
+            if lowered.startswith(prefix):
+                return False
+
+        # Skip entries that contain NOT_SCHOOL_PATTERNS (activities, grades, etc.)
+        for pattern in NOT_SCHOOL_PATTERNS:
+            if pattern in lowered:
+                return False
+
+        # Skip if it looks like a location only (city, country without school name)
+        # Short entries without school keywords are likely locations
+        if len(text) < 30 and not any(kw in lowered for kw in SCHOOL_KEYWORDS):
+            # Check if it looks like just a location (City, State/Country format)
+            if ',' in text and len(text.split(',')) == 2:
+                parts = [p.strip() for p in text.split(',')]
+                # If both parts are short and titlecase, likely a location
+                if all(len(p) < 20 and p[0].isupper() for p in parts if p):
+                    return False
+
+        # Skip if it looks like a degree name (starts with degree patterns)
+        degree_starters = ['a.a.', 'a.s.', 'b.a.', 'b.s.', 'b.b.a.', 'm.a.', 'm.s.', 'm.b.a.']
+        if any(lowered.startswith(d) for d in degree_starters):
+            return False
+
+        # Skip if it's mostly a description/narrative (too many words, lowercase starts)
+        words = text.split()
+        if len(words) > 15:
+            return False
+
+        # Validate: should either contain a school keyword OR be a well-known abbreviation
+        has_school_keyword = any(kw in lowered for kw in SCHOOL_KEYWORDS)
+
+        # Known abbreviations and short names that are valid schools
+        known_abbrevs = ['mit', 'usc', 'ucla', 'nyu', 'uic', 'osu', 'unc', 'lsu', 'fsu']
+        is_known_abbrev = lowered in known_abbrevs
+
+        # If it has a school keyword, it's likely valid
+        if has_school_keyword:
+            return True
+
+        # If it's a known abbreviation, it's valid
+        if is_known_abbrev:
+            return True
+
+        # For entries without school keywords, apply stricter validation
+        # Must be titlecase and reasonable length
+        if len(words) >= 2 and len(words) <= 6:
+            # Check if it looks like a proper name (mostly capitalized words)
+            capitalized = sum(1 for w in words if w[0].isupper())
+            if capitalized >= len(words) * 0.7:
+                return True
+
+        return False
+
+    def _clean_education(self, person):
+        """Clean and validate education entries for a person."""
+        if not person.education:
+            return
+
+        cleaned = []
+        seen_schools = set()
+
+        for edu in person.education:
+            school = edu.get('school', '').strip()
+
+            # Skip invalid school names
+            if not self._is_valid_school_name(school):
+                continue
+
+            # Normalize school name for deduplication
+            school_key = school.lower()
+
+            # Skip duplicates
+            if school_key in seen_schools:
+                continue
+
+            seen_schools.add(school_key)
+            cleaned.append(edu)
+
+        person.education = cleaned
+
+    def _parse_headline(self, headline: str) -> dict:
+        """
+        Parse a LinkedIn headline to extract title and company.
+        Handles various formats:
+        - "VP of Sales at CBRE"
+        - "Director | Newmark | Columbus, OH"
+        - "Senior Broker @ JLL"
+        - "CEO, ABC Company"
+        """
+        result = {'title': '', 'company': ''}
+        if not headline:
+            return result
+
+        headline = headline.strip()
+
+        # Try splitting on common separators: " at ", " @ ", " | ", ", "
+        separators = [' at ', ' @ ']
+        for sep in separators:
+            if sep in headline.lower():
+                # Case-insensitive split
+                idx = headline.lower().find(sep)
+                title_part = headline[:idx].strip()
+                company_part = headline[idx + len(sep):].strip()
+
+                # Clean up parts - remove trailing pipe sections (often location)
+                if '|' in company_part:
+                    company_part = company_part.split('|')[0].strip()
+                if '|' in title_part:
+                    # Take the last part before "at" as title, earlier parts might be company/specialty
+                    parts = [p.strip() for p in title_part.split('|')]
+                    # Find the part that looks most like a title
+                    for part in reversed(parts):
+                        if self._classify_text(part) == 'title':
+                            title_part = part
+                            break
+                    else:
+                        title_part = parts[-1]  # Default to last part
+
+                # Validate
+                if title_part and self._classify_text(title_part) == 'title':
+                    result['title'] = title_part
+                if company_part and self._classify_text(company_part) != 'title':
+                    result['company'] = company_part
+
+                return result
+
+        # No "at" separator - try pipe separator
+        if '|' in headline:
+            parts = [p.strip() for p in headline.split('|')]
+            for part in parts:
+                classification = self._classify_text(part)
+                if classification == 'title' and not result['title']:
+                    result['title'] = part
+                elif classification == 'company' and not result['company']:
+                    result['company'] = part
+
+        # Try comma separator for "Title, Company" format
+        elif ',' in headline:
+            parts = [p.strip() for p in headline.split(',', 1)]
+            if len(parts) == 2:
+                first_class = self._classify_text(parts[0])
+                second_class = self._classify_text(parts[1])
+                if first_class == 'title':
+                    result['title'] = parts[0]
+                    if second_class != 'title':
+                        result['company'] = parts[1]
+
+        return result
+
     def _clean_person_record(self, person: LinkedInPerson):
         """Normalize fields for consistent contact records."""
         # Normalize groups to professional groups only.
@@ -288,10 +612,12 @@ class LinkedInScraper:
             person.groups = cleaned_groups
 
         # Clear invalid or title-like company values and try to promote to title if needed.
-        if person.current_company and self._is_invalid_company_name(person.current_company):
-            if not person.current_title and self._looks_like_title(person.current_company):
-                person.current_title = person.current_company
-            person.current_company = ""
+        if person.current_company:
+            company_class = self._classify_text(person.current_company)
+            if company_class == 'title' or self._is_invalid_company_name(person.current_company):
+                if not person.current_title and company_class == 'title':
+                    person.current_title = person.current_company
+                person.current_company = ""
 
         # Fix company using work history or headline.
         if not person.current_company:
@@ -302,31 +628,32 @@ class LinkedInScraper:
                     person.current_company = company
                     if first.get('company_linkedin'):
                         person.company_linkedin_url = first.get('company_linkedin', '')
-            elif person.headline and (' at ' in person.headline or ' @ ' in person.headline):
-                split_token = ' at ' if ' at ' in person.headline else ' @ '
-                _, company_part = person.headline.split(split_token, 1)
-                company_part = company_part.split('|')[0].strip()
-                if company_part and not self._is_invalid_company_name(company_part):
-                    person.current_company = company_part
+            elif person.headline:
+                parsed = self._parse_headline(person.headline)
+                if parsed['company'] and not self._is_invalid_company_name(parsed['company']):
+                    person.current_company = parsed['company']
 
         # Remove titles that are actually company names or duplicates of company.
-        if person.current_title and person.current_company and person.current_title.strip() == person.current_company.strip():
-            person.current_title = ""
+        if person.current_title and person.current_company:
+            if person.current_title.strip().lower() == person.current_company.strip().lower():
+                person.current_title = ""
 
-        if (not person.current_title) or self._looks_like_company_name(person.current_title):
-            # Try headline parsing if available.
-            if person.headline and (' at ' in person.headline or ' @ ' in person.headline):
-                split_token = ' at ' if ' at ' in person.headline else ' @ '
-                title_part, _ = person.headline.split(split_token, 1)
-                title_part = title_part.split('|')[0].strip()
-                if title_part and self._looks_like_title(title_part):
-                    person.current_title = title_part
+        # Fix title if missing or looks like company
+        if not person.current_title or self._classify_text(person.current_title) == 'company':
+            # Try headline parsing if available
+            if person.headline:
+                parsed = self._parse_headline(person.headline)
+                if parsed['title']:
+                    person.current_title = parsed['title']
 
-            # Fallback to first work history title.
+            # Fallback to first work history title
             if not person.current_title and person.work_history:
                 title = person.work_history[0].get('title', '')
-                if title and self._looks_like_title(title):
+                if title and self._classify_text(title) != 'company':
                     person.current_title = title
+
+        # Clean education entries
+        self._clean_education(person)
 
     def _find_section_by_id_or_text(self, section_id: str, header_text: str):
         """Find a section by ID or header text"""
@@ -933,40 +1260,52 @@ class LinkedInScraper:
                         person.about = about_text[:1000]  # Increased limit for full bio
                         break
 
-            # Extract work history (need to scroll)
-            self._extract_work_history(person)
+            # Extraction mode: Claude Vision vs Traditional DOM
+            if self.use_claude_vision:
+                # Claude Vision mode - ONLY extract education via Claude API
+                self._log("  [Claude Vision Mode] Using Claude API for extraction")
+                self._extract_education_with_claude(person)
+                self._log("  [Claude Vision Mode] Skipping DOM extraction for work history, groups, posts")
 
-            # If headline has a clean "Title at Company" format, use it as fallback.
-            if person.headline and (' at ' in person.headline or ' @ ' in person.headline):
-                split_token = ' at ' if ' at ' in person.headline else ' @ '
-                title_part, company_part = person.headline.split(split_token, 1)
-                title_part = title_part.split('|')[0].strip()
-                company_part = company_part.split('|')[0].strip()
-                if not person.current_title and title_part and self._looks_like_title(title_part):
-                    person.current_title = title_part
-                if (not person.current_company or self._is_invalid_company_name(person.current_company)) and company_part:
-                    if not self._is_invalid_company_name(company_part):
-                        person.current_company = company_part
+                self._log(f"  Name: {person.name}")
+                self._log(f"  Headline: {person.headline[:60]}..." if len(person.headline) > 60 else f"  Headline: {person.headline}")
+                self._log(f"  Education: {len(person.education)} schools (via Claude)")
+            else:
+                # Traditional DOM extraction mode - run all extractors
+                # Extract work history (need to scroll)
+                self._extract_work_history(person)
 
-            # Extract education
-            self._extract_education(person)
+                # If headline has a clean "Title at Company" format, use it as fallback.
+                if person.headline and (' at ' in person.headline or ' @ ' in person.headline):
+                    split_token = ' at ' if ' at ' in person.headline else ' @ '
+                    title_part, company_part = person.headline.split(split_token, 1)
+                    title_part = title_part.split('|')[0].strip()
+                    company_part = company_part.split('|')[0].strip()
+                    if not person.current_title and title_part and self._looks_like_title(title_part):
+                        person.current_title = title_part
+                    if (not person.current_company or self._is_invalid_company_name(person.current_company)) and company_part:
+                        if not self._is_invalid_company_name(company_part):
+                            person.current_company = company_part
 
-            # Extract groups (under Interests)
-            self._extract_groups(person)
+                # Extract education
+                self._extract_education(person)
 
-            # Extract recent posts from Activity section
-            self._extract_recent_posts(person)
+                # Extract groups (under Interests)
+                self._extract_groups(person)
 
-            self._log(f"  Name: {person.name}")
-            self._log(f"  Headline: {person.headline[:60]}..." if len(person.headline) > 60 else f"  Headline: {person.headline}")
-            self._log(f"  About: {len(person.about)} chars" if person.about else "  About: not found")
-            self._log(f"  Work history: {len(person.work_history)} positions")
-            self._log(f"  Education: {len(person.education)} schools")
-            self._log(f"  Groups: {len(person.groups)} groups")
-            self._log(f"  Recent posts: {len(person.recent_posts)} posts")
+                # Extract recent posts from Activity section
+                self._extract_recent_posts(person)
 
-            # Process work history for CRE firms
-            self._process_work_history(person)
+                self._log(f"  Name: {person.name}")
+                self._log(f"  Headline: {person.headline[:60]}..." if len(person.headline) > 60 else f"  Headline: {person.headline}")
+                self._log(f"  About: {len(person.about)} chars" if person.about else "  About: not found")
+                self._log(f"  Work history: {len(person.work_history)} positions")
+                self._log(f"  Education: {len(person.education)} schools")
+                self._log(f"  Groups: {len(person.groups)} groups")
+                self._log(f"  Recent posts: {len(person.recent_posts)} posts")
+
+                # Process work history for CRE firms
+                self._process_work_history(person)
 
             # Normalize fields for consistent data
             self._clean_person_record(person)
@@ -1049,50 +1388,73 @@ class LinkedInScraper:
 
                     # Extract all text spans to find titles
                     all_spans = entry.query_selector_all('span[aria-hidden="true"]')
+                    pending_texts = []  # Collect texts for classification
 
                     for span in all_spans:
                         text = span.inner_text().strip()
                         if not text:
                             continue
 
-                        # Skip duration patterns
-                        if 'yrs' in text or 'mos' in text or text.startswith('Apr') or text.startswith('Aug') or text.startswith('Jan') or ' - ' in text:
+                        # Skip duration patterns (dates and time ranges)
+                        if 'yrs' in text or 'mos' in text or ' - ' in text:
                             continue
-                        # Skip company name (already captured)
+                        # Skip month prefixes that indicate dates
+                        month_prefixes = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        if any(text.startswith(m) for m in month_prefixes):
+                            continue
+                        # Skip company name (already captured from company link)
                         if text == current_company:
                             continue
                         # Skip "Full-time", "Part-time" etc
                         if text.lower() in EMPLOYMENT_TYPES:
                             continue
+                        # Skip very short or very long text
+                        if len(text) < 3 or len(text) > 100:
+                            continue
 
-                        # This is likely a job title
-                        if len(text) > 3 and len(text) < 80:
-                            # Check if it looks like a title (contains typical title words or is capitalized)
-                            is_title = self._looks_like_title(text) or (text[0].isupper() and ' ' in text and not self._looks_like_company_name(text))
+                        pending_texts.append(text)
 
-                            if is_title and current_company:
-                                position = {
-                                    'company': current_company,
-                                    'title': text,
-                                    'company_linkedin': current_company_linkedin
-                                }
+                    # Process collected texts - classify each one
+                    for text in pending_texts:
+                        classification = self._classify_text(text)
 
-                                # Avoid duplicates
-                                is_dup = any(
-                                    p.get('company') == position['company'] and p.get('title') == position['title']
-                                    for p in person.work_history
-                                )
-                                if not is_dup:
-                                    person.work_history.append(position)
-                                    self._log(f"  Position: {text} at {current_company}")
+                        # If we don't have a company yet and this looks like a company, use it
+                        if not current_company and classification == 'company':
+                            current_company = text
+                            continue
 
-                                    # Set current company/title from first position
-                                    if not person.current_title and position.get('title'):
-                                        person.current_title = position['title']
-                                    if not person.current_company or self._is_invalid_company_name(person.current_company):
-                                        person.current_company = position['company']
-                                        if position.get('company_linkedin'):
-                                            person.company_linkedin_url = position['company_linkedin']
+                        # Check if it looks like a title
+                        is_title = classification == 'title' or (
+                            classification == 'unknown' and
+                            text[0].isupper() and
+                            ' ' in text and
+                            not self._is_definitely_company(text)
+                        )
+
+                        if is_title and current_company:
+                            position = {
+                                'company': current_company,
+                                'title': text,
+                                'company_linkedin': current_company_linkedin
+                            }
+
+                            # Avoid duplicates
+                            is_dup = any(
+                                p.get('company') == position['company'] and p.get('title') == position['title']
+                                for p in person.work_history
+                            )
+                            if not is_dup:
+                                person.work_history.append(position)
+                                self._log(f"  Position: {text} at {current_company}")
+
+                                # Set current company/title from first position
+                                if not person.current_title and position.get('title'):
+                                    person.current_title = position['title']
+                                if not person.current_company or self._is_invalid_company_name(person.current_company):
+                                    person.current_company = position['company']
+                                    if position.get('company_linkedin'):
+                                        person.company_linkedin_url = position['company_linkedin']
 
                 except Exception as e:
                     continue
@@ -1158,7 +1520,10 @@ class LinkedInScraper:
                     if school_link:
                         school_name_elem = school_link.query_selector('span[aria-hidden="true"]')
                         if school_name_elem:
-                            edu['school'] = school_name_elem.inner_text().strip()
+                            school_text = school_name_elem.inner_text().strip()
+                            # Validate even from school links (sometimes captures wrong element)
+                            if self._is_valid_school_name(school_text):
+                                edu['school'] = school_text
 
                     # If no school link, look for bold/prominent text
                     if not edu.get('school'):
@@ -1172,8 +1537,8 @@ class LinkedInScraper:
                             elem = entry.query_selector(sel)
                             if elem:
                                 text = elem.inner_text().strip()
-                                # Check if it looks like a school name
-                                if text and len(text) > 3 and ('university' in text.lower() or 'college' in text.lower() or 'school' in text.lower() or text[0].isupper()):
+                                # Validate using the new school name validator
+                                if text and self._is_valid_school_name(text):
                                     edu['school'] = text
                                     break
 
@@ -1184,9 +1549,15 @@ class LinkedInScraper:
                         if not text or text == edu.get('school'):
                             continue
 
+                        lowered = text.lower()
+
+                        # Skip known non-education patterns
+                        if any(lowered.startswith(p) for p in EDUCATION_SKIP_PREFIXES):
+                            continue
+
                         # Look for degree patterns
                         degree_keywords = ['degree', 'bachelor', 'master', 'mba', 'phd', 'bs', 'ba', 'ms', 'ma', 'jd', 'md', 'political science', 'business', 'engineering', 'science', 'arts']
-                        if any(kw in text.lower() for kw in degree_keywords):
+                        if any(kw in lowered for kw in degree_keywords):
                             edu['degree'] = text
                         # Look for year patterns
                         elif ' - ' in text and any(c.isdigit() for c in text):
@@ -1195,9 +1566,11 @@ class LinkedInScraper:
                             if not edu.get('years'):
                                 edu['years'] = text
 
-                    if edu.get('school'):
-                        # Avoid duplicates
-                        is_dup = any(e.get('school') == edu['school'] for e in person.education)
+                    # Validate school name before adding
+                    school = edu.get('school', '')
+                    if school and self._is_valid_school_name(school):
+                        # Avoid duplicates (case-insensitive)
+                        is_dup = any(e.get('school', '').lower() == school.lower() for e in person.education)
                         if not is_dup:
                             person.education.append(edu)
                             self._log(f"  Education: {edu.get('school')} - {edu.get('degree', 'N/A')}")
@@ -1207,6 +1580,531 @@ class LinkedInScraper:
 
         except Exception as e:
             self._log(f"Error extracting education: {e}")
+
+    def _extract_education_with_claude(self, person: LinkedInPerson):
+        """Extract education using Claude vision API from profile screenshot."""
+        self._log("  [Claude Vision] Extracting education from screenshot...")
+
+        try:
+            # Scroll to education section
+            self.page.evaluate("window.scrollTo(0, 1500)")
+            self._random_delay(1, 2)
+
+            # Try to find and screenshot just the education section (cost optimization)
+            screenshot_bytes = None
+            education_section = None
+
+            # Method 1: Look for section with education id
+            education_section = self.page.query_selector('section:has(#education)')
+
+            # Method 2: Look for div with education id
+            if not education_section:
+                edu_header = self.page.query_selector('#education')
+                if edu_header:
+                    education_section = self.page.evaluate_handle(
+                        'el => el.closest("section")', edu_header
+                    ).as_element()
+
+            # Method 3: Search sections for "Education" text
+            if not education_section:
+                sections = self.page.query_selector_all('section')
+                for section in sections:
+                    try:
+                        header = section.query_selector('h2 span, div[class*="title"] span')
+                        if header and header.inner_text().strip() == 'Education':
+                            education_section = section
+                            break
+                    except:
+                        continue
+
+            # Take screenshot of education section only, or fallback to viewport
+            if education_section:
+                screenshot_bytes = education_section.screenshot()
+                self._log("  [Claude Vision] Captured education section only (optimized)")
+            else:
+                # Fallback: take viewport screenshot (not full page)
+                screenshot_bytes = self.page.screenshot(full_page=False)
+                self._log("  [Claude Vision] Education section not found, using viewport")
+
+            screenshot_b64 = base64.standard_b64encode(screenshot_bytes).decode('utf-8')
+
+            # Save screenshot for debugging
+            with open('claude_vision_input.png', 'wb') as f:
+                f.write(screenshot_bytes)
+            self._log("  [Claude Vision] Screenshot saved to claude_vision_input.png")
+
+            # Call Claude API (using Haiku for cost efficiency)
+            client = anthropic.Anthropic(api_key=self.claude_api_key)
+
+            prompt = """Analyze this LinkedIn profile screenshot and extract education information.
+
+Return a JSON array of education entries. Each entry should have:
+- "school": The name of the educational institution (university, college, etc.)
+- "degree": The degree earned (if visible), e.g., "Bachelor of Science in Business"
+- "years": The years attended (if visible), e.g., "2015 - 2019"
+
+Only include actual educational institutions. Do NOT include:
+- Activities and societies
+- Grades or GPA
+- Honors or awards
+- High schools (only universities/colleges)
+- Certifications (unless from accredited institutions)
+
+Return ONLY the JSON array, no other text. If no education is visible, return [].
+
+Example output:
+[
+  {"school": "Ohio State University", "degree": "Bachelor of Science in Finance", "years": "2010 - 2014"},
+  {"school": "Harvard Business School", "degree": "MBA"}
+]"""
+
+            self._log("  [Claude Vision] Sending to Claude Haiku API...")
+            response = client.messages.create(
+                model="claude-3-5-haiku-20241022",
+                max_tokens=1024,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "image",
+                                "source": {
+                                    "type": "base64",
+                                    "media_type": "image/png",
+                                    "data": screenshot_b64
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "text": prompt
+                            }
+                        ]
+                    }
+                ]
+            )
+
+            # Parse response
+            response_text = response.content[0].text.strip()
+            self._log(f"  [Claude Vision] Response: {response_text[:200]}...")
+
+            # Handle potential markdown code blocks
+            if response_text.startswith('```'):
+                # Remove markdown code block markers
+                lines = response_text.split('\n')
+                response_text = '\n'.join(lines[1:-1] if lines[-1] == '```' else lines[1:])
+
+            education_data = json.loads(response_text)
+            self._log(f"  [Claude Vision] Found {len(education_data)} education entries")
+
+            for edu in education_data:
+                school = edu.get('school', '')
+                if school and self._is_valid_school_name(school):
+                    # Avoid duplicates (case-insensitive)
+                    is_dup = any(e.get('school', '').lower() == school.lower() for e in person.education)
+                    if not is_dup:
+                        person.education.append(edu)
+                        self._log(f"  [Claude Vision] Education: {school} - {edu.get('degree', 'N/A')}")
+                else:
+                    self._log(f"  [Claude Vision] Skipped invalid school: {school}")
+
+        except json.JSONDecodeError as e:
+            self._log(f"  [Claude Vision] Failed to parse education response: {e}")
+        except Exception as e:
+            self._log(f"  [Claude Vision] Error: {e}")
+
+    # ==================== CLAUDE VALIDATION & CORRECTION ====================
+
+    def _capture_profile_screenshots(self) -> Dict[str, bytes]:
+        """Capture screenshots at different scroll positions for validation."""
+        screenshots = {}
+
+        try:
+            # Header section (name, headline, about)
+            self.page.evaluate("window.scrollTo(0, 0)")
+            self._random_delay(0.5, 1)
+            screenshots['header'] = self.page.screenshot()
+            self._log("  [Screenshots] Captured header section")
+
+            # Experience section
+            self.page.evaluate("window.scrollTo(0, 1500)")
+            self._random_delay(0.5, 1)
+            screenshots['experience'] = self.page.screenshot()
+            self._log("  [Screenshots] Captured experience section")
+
+            # Education & Groups section
+            self.page.evaluate("window.scrollTo(0, 3000)")
+            self._random_delay(0.5, 1)
+            screenshots['education_groups'] = self.page.screenshot()
+            self._log("  [Screenshots] Captured education/groups section")
+
+            # Save screenshots for debugging
+            for name, data in screenshots.items():
+                with open(f'screenshot_{name}.png', 'wb') as f:
+                    f.write(data)
+
+        except Exception as e:
+            self._log(f"  [Screenshots] Error capturing: {e}")
+
+        return screenshots
+
+    def _get_screenshot_for_field(self, field: str) -> str:
+        """Map a field name to the relevant screenshot key."""
+        field_to_screenshot = {
+            'name': 'header',
+            'headline': 'header',
+            'location': 'header',
+            'current_company': 'header',
+            'current_title': 'header',
+            'about': 'header',
+            'work_history': 'experience',
+            'education': 'education_groups',
+            'groups': 'education_groups',
+        }
+        return field_to_screenshot.get(field, 'header')
+
+    def validate_with_claude(self, person: LinkedInPerson, screenshots: Dict[str, bytes]) -> Dict:
+        """
+        Send parsed data + screenshots to Claude to identify likely mismatches.
+        Returns dict with flagged fields and confidence scores.
+        """
+        if not self.claude_api_key:
+            self._log("  [Validation] No Claude API key, skipping validation")
+            return {"flagged_fields": [], "confidence": 0}
+
+        try:
+            # Encode screenshots as base64
+            images = []
+            for name, img_data in screenshots.items():
+                images.append({
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "image/png",
+                        "data": base64.standard_b64encode(img_data).decode('utf-8')
+                    }
+                })
+
+            # Build validation prompt
+            prompt = f"""Compare this parsed LinkedIn profile data against the screenshots provided.
+
+PARSED DATA:
+- Name: {person.name}
+- Headline: {person.headline}
+- Location: {person.location}
+- Current Company: {person.current_company}
+- Current Title: {person.current_title}
+- About: {person.about[:200] if person.about else 'N/A'}...
+- Education: {json.dumps(person.education, indent=2)}
+- Work History: {json.dumps(person.work_history[:5], indent=2)}
+- Groups: {person.groups}
+
+Review the screenshots and identify fields that appear INCORRECT or MISSING.
+Common issues to check:
+- Missing education entries visible in screenshot
+- Incorrect company/title parsing
+- Missing or swapped work history entries
+- Groups not captured
+
+Return JSON with this exact format:
+{{
+  "flagged_fields": [
+    {{"field": "field_name", "issue": "missing_entry|incorrect|empty", "details": "explanation"}}
+  ],
+  "confidence": 0.85
+}}
+
+If all data looks correct, return: {{"flagged_fields": [], "confidence": 0.95}}
+
+Return ONLY valid JSON, no other text."""
+
+            self._log("  [Validation] Sending to Claude for validation...")
+            client = anthropic.Anthropic(api_key=self.claude_api_key)
+
+            response = client.messages.create(
+                model="claude-3-5-haiku-20241022",
+                max_tokens=1024,
+                messages=[{
+                    "role": "user",
+                    "content": images + [{"type": "text", "text": prompt}]
+                }]
+            )
+
+            response_text = response.content[0].text.strip()
+            self._log(f"  [Validation] Response: {response_text[:200]}...")
+
+            # Handle markdown code blocks
+            if response_text.startswith('```'):
+                lines = response_text.split('\n')
+                response_text = '\n'.join(lines[1:-1] if lines[-1].startswith('```') else lines[1:])
+
+            result = json.loads(response_text)
+            flagged_count = len(result.get('flagged_fields', []))
+            self._log(f"  [Validation] Found {flagged_count} issues, confidence: {result.get('confidence', 'N/A')}")
+
+            return result
+
+        except json.JSONDecodeError as e:
+            self._log(f"  [Validation] Failed to parse response: {e}")
+            return {"flagged_fields": [], "confidence": 0, "error": str(e)}
+        except Exception as e:
+            self._log(f"  [Validation] Error: {e}")
+            return {"flagged_fields": [], "confidence": 0, "error": str(e)}
+
+    def correct_field_with_claude(self, field: str, screenshot: bytes, current_value) -> Any:
+        """
+        Use Claude to correct a specific field using the relevant screenshot.
+        """
+        if not self.claude_api_key:
+            return current_value
+
+        # Field-specific prompts
+        prompts = {
+            "education": """Extract ALL education entries visible in this LinkedIn screenshot.
+Return a JSON array where each entry has: school, degree (if visible), years (if visible).
+Example: [{"school": "Ohio State University", "degree": "BS Finance", "years": "2010-2014"}]""",
+
+            "work_history": """Extract ALL work history entries visible in this LinkedIn screenshot.
+Return a JSON array where each entry has: company, title, company_linkedin (if visible).
+Example: [{"company": "CBRE", "title": "Senior VP", "company_linkedin": ""}]""",
+
+            "current_title": """What is this person's CURRENT job title shown in the LinkedIn screenshot?
+Return just the title as a string, or empty string if not visible.""",
+
+            "current_company": """What company does this person CURRENTLY work at according to the LinkedIn screenshot?
+Return just the company name as a string, or empty string if not visible.""",
+
+            "groups": """List ALL LinkedIn groups this person is a member of, visible in the screenshot.
+Return a JSON array of group names.
+Example: ["NAIOP", "ULI", "CCIM Institute"]""",
+
+            "headline": """What is this person's LinkedIn headline (the text below their name)?
+Return just the headline as a string.""",
+
+            "location": """What is this person's location shown on their LinkedIn profile?
+Return just the location as a string."""
+        }
+
+        prompt = prompts.get(field, f"Extract the {field} from this LinkedIn screenshot.")
+        prompt += f"\n\nCurrent parsed value: {json.dumps(current_value)}\n"
+        prompt += "\nReturn the CORRECTED value. If current value appears correct, return it unchanged."
+        prompt += "\nReturn ONLY the value (JSON for arrays/objects, plain string for text fields), no explanation."
+
+        try:
+            client = anthropic.Anthropic(api_key=self.claude_api_key)
+
+            response = client.messages.create(
+                model="claude-3-5-haiku-20241022",
+                max_tokens=1024,
+                messages=[{
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": "image/png",
+                                "data": base64.standard_b64encode(screenshot).decode('utf-8')
+                            }
+                        },
+                        {"type": "text", "text": prompt}
+                    ]
+                }]
+            )
+
+            response_text = response.content[0].text.strip()
+
+            # Handle markdown code blocks
+            if response_text.startswith('```'):
+                lines = response_text.split('\n')
+                response_text = '\n'.join(lines[1:-1] if lines[-1].startswith('```') else lines[1:])
+
+            # Try to parse as JSON for complex fields
+            if field in ['education', 'work_history', 'groups']:
+                return json.loads(response_text)
+            else:
+                # For string fields, try JSON first, fall back to raw string
+                try:
+                    return json.loads(response_text)
+                except json.JSONDecodeError:
+                    return response_text.strip('"\'')
+
+        except Exception as e:
+            self._log(f"  [Correction] Error correcting {field}: {e}")
+            return current_value
+
+    def _extract_all_with_claude(self, person: LinkedInPerson, screenshots: Dict[str, bytes]) -> LinkedInPerson:
+        """
+        Extract all profile data directly from screenshots using Claude.
+        More efficient than multiple correction calls when DOM parsing has many errors.
+        """
+        import anthropic
+
+        self._log("  [Direct Extract] Using Claude to extract all data from screenshots...")
+
+        # Encode all screenshots
+        images = []
+        for key in ['header', 'experience', 'education_groups']:
+            if key in screenshots:
+                images.append({
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "image/png",
+                        "data": base64.b64encode(screenshots[key]).decode()
+                    }
+                })
+
+        prompt = """Extract all profile information from these LinkedIn profile screenshots.
+
+Return a JSON object with these fields:
+{
+  "name": "Full Name",
+  "headline": "Professional headline",
+  "location": "City, State, Country",
+  "current_company": "Current employer name",
+  "current_title": "Current job title",
+  "about": "About/summary text (first 500 chars if long)",
+  "work_history": [
+    {"company": "Company Name", "title": "Job Title"},
+    ...
+  ],
+  "education": [
+    {"school": "University Name", "degree": "Degree Type, Field", "years": "Start - End"},
+    ...
+  ],
+  "groups": ["Group Name 1", "Group Name 2", ...]
+}
+
+IMPORTANT:
+- Extract work_history in chronological order (most recent first)
+- Include ALL visible work history entries
+- For education, include school name, degree, and years if visible
+- Only include groups if clearly visible in screenshots
+- Return ONLY the JSON, no other text"""
+
+        try:
+            client = anthropic.Anthropic(api_key=self.claude_api_key)
+            response = client.messages.create(
+                model="claude-3-5-haiku-20241022",
+                max_tokens=2048,
+                messages=[{
+                    "role": "user",
+                    "content": images + [{"type": "text", "text": prompt}]
+                }]
+            )
+
+            response_text = response.content[0].text.strip()
+
+            # Handle markdown code blocks
+            if response_text.startswith('```'):
+                lines = response_text.split('\n')
+                response_text = '\n'.join(lines[1:-1] if lines[-1] == '```' else lines[1:])
+
+            data = json.loads(response_text)
+            self._log(f"  [Direct Extract] Successfully extracted profile data")
+
+            # Update person with extracted data
+            person.name = data.get('name', person.name)
+            person.headline = data.get('headline', person.headline)
+            person.location = data.get('location', person.location)
+            person.current_company = data.get('current_company', person.current_company)
+            person.current_title = data.get('current_title', person.current_title)
+            person.about = data.get('about', person.about)
+            person.work_history = data.get('work_history', person.work_history)
+            person.education = data.get('education', person.education)
+            person.groups = data.get('groups', person.groups)
+
+            return person
+
+        except Exception as e:
+            self._log(f"  [Direct Extract] Error: {e}")
+            return person
+
+    def scrape_and_validate(self, profile_url: str, discovered_from: str = "") -> Optional[LinkedInPerson]:
+        """Full scrape + validation + correction workflow."""
+        self._log(f"[Validate Mode] Starting scrape and validate for: {profile_url}")
+
+        # Step 1: Standard DOM scraping
+        person = self.scrape_person_profile(profile_url, discovered_from)
+        if not person:
+            return None
+
+        # Step 2: Capture screenshots (scroll back to capture all sections)
+        self._log("  [Validate Mode] Capturing screenshots for validation...")
+        self.page.goto(profile_url)
+        self._random_delay(2, 3)
+        screenshots = self._capture_profile_screenshots()
+
+        if not screenshots:
+            self._log("  [Validate Mode] No screenshots captured, skipping validation")
+            return person
+
+        # Step 3: Validate with Claude
+        validation = self.validate_with_claude(person, screenshots)
+
+        # Step 4: Correct flagged fields (hybrid approach)
+        flagged = validation.get('flagged_fields', [])
+        if flagged:
+            self._log(f"  [Validate Mode] Found {len(flagged)} issues")
+
+            # HYBRID LOGIC: If >2 issues, use direct extraction (more efficient)
+            if len(flagged) > 2:
+                self._log(f"  [Validate Mode] Many issues detected - switching to direct Claude extraction (more efficient)")
+                person = self._extract_all_with_claude(person, screenshots)
+            else:
+                # Few issues - correct individually
+                self._log(f"  [Validate Mode] Correcting {len(flagged)} fields individually...")
+
+                # Mapping from Claude's field names to actual attribute names
+                field_name_map = {
+                    'work history': 'work_history',
+                    'work_history': 'work_history',
+                    'current title': 'current_title',
+                    'current_title': 'current_title',
+                    'current company': 'current_company',
+                    'current_company': 'current_company',
+                    'education': 'education',
+                    'groups': 'groups',
+                    'headline': 'headline',
+                    'location': 'location',
+                    'about': 'about',
+                    'name': 'name',
+                    'skills': 'skills',  # Note: not a standard field, will skip
+                }
+
+                for flag in flagged:
+                    raw_field = flag.get('field', '')
+                    issue = flag.get('issue')
+                    details = flag.get('details', '')
+
+                    # Normalize field name
+                    field = field_name_map.get(raw_field.lower(), raw_field.lower().replace(' ', '_'))
+
+                    self._log(f"  [Validate Mode] Correcting '{raw_field}' -> '{field}': {issue} - {details}")
+
+                    # Get the relevant screenshot
+                    screenshot_key = self._get_screenshot_for_field(field)
+                    screenshot = screenshots.get(screenshot_key)
+
+                    if screenshot and hasattr(person, field):
+                        current_value = getattr(person, field)
+                        corrected = self.correct_field_with_claude(field, screenshot, current_value)
+
+                        if corrected != current_value:
+                            setattr(person, field, corrected)
+                            self._log(f"  [Validate Mode] Corrected {field}")
+                        else:
+                            self._log(f"  [Validate Mode] {field} unchanged after correction")
+                    else:
+                        self._log(f"  [Validate Mode] Skipping '{field}' - not a valid person attribute")
+        else:
+            self._log("  [Validate Mode] No issues found, data looks accurate")
+
+        # Update stored data
+        key = self._extract_profile_key(profile_url)
+        self.discovered_contacts[key] = person
+
+        return person
 
     def _extract_groups(self, person: LinkedInPerson):
         """Extract groups from Interests section"""
@@ -1793,6 +2691,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='LinkedIn CRE Intelligence Scraper')
     parser.add_argument('--login', action='store_true', help='Login to LinkedIn')
+    parser.add_argument('--profile-url', type=str, help='Scrape a specific LinkedIn profile URL')
     parser.add_argument('--search', type=str, help='Search and enrich a person')
     parser.add_argument('--company', type=str, default='', help='Company filter for search')
     parser.add_argument('--enrich-company', type=str, help='Enrich by company name')
@@ -1801,15 +2700,69 @@ if __name__ == "__main__":
     parser.add_argument('--limit', type=int, default=10, help='Limit for batch processing')
     parser.add_argument('--summary', action='store_true', help='Show discovery summary')
     parser.add_argument('--new-firms', action='store_true', help='Show new firms for scraping')
+    # Claude Vision extraction options
+    parser.add_argument('--claude-vision', action='store_true',
+                        help='Use Claude vision API for education extraction (skips DOM extraction)')
+    parser.add_argument('--claude-api-key', type=str,
+                        help='Claude API key (or set ANTHROPIC_API_KEY env var)')
+    parser.add_argument('--validate', action='store_true',
+                        help='Enable Claude validation after DOM scraping (use with --profile-url)')
     args = parser.parse_args()
 
-    scraper = LinkedInScraper(headless=False)
+    scraper = LinkedInScraper(
+        headless=False,
+        use_claude_vision=args.claude_vision,
+        claude_api_key=args.claude_api_key
+    )
 
     try:
         if args.login:
             email = input("LinkedIn Email: ")
             password = getpass.getpass("LinkedIn Password: ")
             scraper.login(email, password)
+
+        elif args.profile_url:
+            if scraper.load_cookies():
+                if args.validate:
+                    # Use validation workflow: DOM scraping + Claude validation/correction
+                    if not scraper.claude_api_key:
+                        print("Error: --validate requires Claude API key. Set ANTHROPIC_API_KEY or use --claude-api-key")
+                    else:
+                        print(f"[Validate Mode] Scraping with Claude validation...")
+                        person = scraper.scrape_and_validate(args.profile_url, "Direct URL")
+                        if person:
+                            print(f"\n=== Validated Profile: {person.name} ===")
+                            print(f"Headline: {person.headline}")
+                            print(f"Location: {person.location}")
+                            print(f"Company: {person.current_company}")
+                            print(f"Title: {person.current_title}")
+                            print(f"Education: {len(person.education)} entries")
+                            for edu in person.education:
+                                print(f"  - {edu.get('school', 'N/A')} | {edu.get('degree', 'N/A')} | {edu.get('years', 'N/A')}")
+                            print(f"Work History: {len(person.work_history)} positions")
+                            print(f"Groups: {len(person.groups)}")
+                            scraper._save_data()
+                        else:
+                            print("Failed to scrape/validate profile")
+                else:
+                    # Standard DOM scraping
+                    person = scraper.scrape_person_profile(args.profile_url, "Direct URL")
+                    if person:
+                        print(f"\n=== Profile: {person.name} ===")
+                        print(f"Headline: {person.headline}")
+                        print(f"Location: {person.location}")
+                        print(f"Company: {person.current_company}")
+                        print(f"Title: {person.current_title}")
+                        print(f"Education: {len(person.education)} entries")
+                        for edu in person.education:
+                            print(f"  - {edu.get('school', 'N/A')} | {edu.get('degree', 'N/A')} | {edu.get('years', 'N/A')}")
+                        print(f"Work History: {len(person.work_history)} positions")
+                        print(f"Groups: {len(person.groups)}")
+                        scraper._save_data()
+                    else:
+                        print("Failed to scrape profile")
+            else:
+                print("Please login first with --login")
 
         elif args.search:
             if scraper.load_cookies():
